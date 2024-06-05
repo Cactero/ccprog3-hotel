@@ -36,6 +36,7 @@ public class Hotel {
 
     public void addRoom(Room room){
         rooms[numOfRooms] = room;
+        rooms[numOfRooms].setHotelName(this.name);
         numOfRooms++;
     }
 
@@ -48,6 +49,6 @@ public class Hotel {
     }
 
     public void setRoomName(String name) {
-        rooms[numOfRooms].setName(name);
+        rooms[numOfRooms].setRoomName(name);
     }
 }

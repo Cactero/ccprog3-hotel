@@ -6,11 +6,8 @@ public class Driver {
         ryan.addRoom(room1);
 
 
-        DisplayManager display = new DisplayManager();
         ManageHotel manageHotel = new ManageHotel();
 
-        display.viewHotel(ryan);
-        manageHotel.addRooms(ryan);
-        display.viewHotel(ryan);
+        DisplayManager.mainMenuOptions();
     }
 }

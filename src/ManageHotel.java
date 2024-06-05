@@ -18,7 +18,7 @@ public class ManageHotel {
                 roomName = floor + number;
 
                 for(int i = 0; i < hotel.getNumOfRooms(); i++){
-                    if(hasNameConflict(roomName, hotel.getRoom(i).getName())){
+                    if(hasNameConflict(roomName, hotel.getRoom(i).getRoomName())){
                         System.out.println("There is already a room with this name!");
                         hasConflict = true;
                     }
