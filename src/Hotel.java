@@ -4,10 +4,11 @@ public class Hotel {
     private Room[] rooms;
     private float basePrice;
 
-    public Hotel(String name, int numOfRooms, Room[] rooms){
+    public Hotel(String name, int numOfRooms, float basePrice, Room[] rooms){
         this.name = name;
         this.numOfRooms = numOfRooms;
-        this.rooms = new Room[50];
+        this.basePrice = basePrice;
+        this.rooms = rooms;
     }
 
     public String getName() {
@@ -22,7 +23,7 @@ public class Hotel {
         return rooms[option];
     }
 
-    public float getBasePrice() {
+    public float getBasePrice(float basePrice) {
         return basePrice;
     }
 
@@ -48,7 +49,4 @@ public class Hotel {
         this.basePrice = basePrice;
     }
 
-    public void setRoomName(String name) {
-        rooms[numOfRooms].setRoomName(name);
-    }
 }
