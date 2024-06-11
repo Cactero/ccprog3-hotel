@@ -1,23 +1,22 @@
 import java.util.Scanner;
 
 public class ManageHotel {
-    
-    static Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-    static public void addRooms(Hotel hotel){
-        String roomName;
-        boolean hasConflict = false;
+    public void addRooms(Hotel hotel){
+        String floor = new String();
+        int number = 0;
+        boolean hasConflict;
         do {
             hasConflict = false;
-            if (hotel.getNumOfRooms() < 49) {
+            if (hotel.getRoomCount() < 49) {
                 System.out.println("What floor will the room be? ");
-                String floor = sc.nextLine();
+                floor = sc.nextLine();
                 System.out.println("What room number will the room be? ");
-                String number = sc.nextLine();
-                roomName = floor + number;
+                number = Integer.parseInt(sc.nextLine());
 
-                for(int i = 0; i < hotel.getNumOfRooms(); i++){
-                    if(hasNameConflict(roomName, hotel.getRoom(i).getRoomName())){
+                for(int i = 0; i < hotel.getRoomCount(); i++){
+                    if(hasNameConflict(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
                         System.out.println("There is already a room with this name!");
                         hasConflict = true;
                     }
@@ -25,14 +24,17 @@ public class ManageHotel {
 
             }
         } while(hasConflict);
+        
+        Room newRoom = new Room(floor, number);
+        hotel.addRoom(newRoom);
     }
 
-    static private boolean hasNameConflict(String name1, String name2){
-        return name1.equals(name2); // Duplicate found
+    public boolean hasNameConflict(String roomFloorA, int roomNumberA, String roomFloorB, int roomNumberB){
+        return roomFloorA.equals(roomFloorB) && roomNumberA == roomNumberB; // Duplicate found
     }
 
-    static public void changeHotelName(Hotel hotel, String newName){
-        if(hotel.getName() == newName){
+    public void changeHotelName(Hotel hotel, String newName){
+        if(hotel.getName().equals(newName)){
             System.out.println("This is already the hotel's name!");
         }
         else{

@@ -53,7 +53,7 @@ public class Client {
         this.checkOutDay = checkOutDay;
     }
 
-    public int getNoOfDaysBooked(){
+    public int getDaysBooked(){
         return checkOutDay - checkInDay + 1;
     }
 }

@@ -1,25 +1,49 @@
+import java.util.Scanner;
+
 public class Driver {
+    static int hotelCount = 0;
+
+    static private Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Hotel[] hotels = new Hotel[50];
+        boolean programStatus = true;
+        Hotel hotels[] = new Hotel[100];
 
+        ManageHotel manageHotel = new ManageHotel();
 
-        switch (DisplayManager.mainMenuOptions()) {
+        while(programStatus){
 
-            case 1:
-                DisplayManager.createHotel();
-                break;
+            int option = DisplayManager.mainMenuOptions();
+            switch(option){
+                case 1: // Create Hotel
+                    //String name = DisplayManager.enterHotelName();
 
-            case 2:
-                DisplayManager.viewHotel(null);
-                break;
+                    System.out.printf("Enter hotel name: ");
+                    String name = sc.nextLine();
+                    hotels[hotelCount] = new Hotel(name);
 
-            case 3:
-                DisplayManager.manageHotel();
-                break;
-
-            case 4:
-                DisplayManager.bookRoom();
-                break;
+                    manageHotel.addRooms(hotels[hotelCount]);
+                    hotelCount++;
+                    break;
+                case 2: // View Hotel
+                    Hotel hotelOption = DisplayManager.showHotels(hotels);
+                    DisplayManager.viewHotel(hotelOption);
+                    DisplayManager.viewRooms(hotelOption);
+                    break;
+                case 3: // Manage Hotel
+                    DisplayManager.viewHotel(hotels[0]);
+                    int manageOption = DisplayManager.manageHotelOptions();
+                    switch(manageOption){
+                        case 1: // Change the name of the hotel
+                            break;
+                        case 2: // Add rooms
+                            manageHotel.addRooms(hotels[0]);
+                            break;
+                    }
+                    DisplayManager.viewHotel(hotels[0]);
+                    DisplayManager.viewRooms(hotels[0]);
+                    break;
+            }
         }
     }
 }

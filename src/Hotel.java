@@ -2,36 +2,27 @@ import java.util.ArrayList;
 
 public class Hotel {
     private String name;
-    private int numOfRooms;
+    private int roomCount;
     private Room[] rooms;
     private float basePrice;
-    private ArrayList<Client> clients;
-    private int numOfClients;
+    private ArrayList<Client> clients; //arraylist for clients for variable amount of clients
+    private int clientCount;
 
     public Hotel(String name){
         this.name = name;
-        this.numOfRooms = 0;
+        this.roomCount = 0;
         this.rooms = new Room[50];
-        this.basePrice = 1299;
-        this.clients = new ArrayList<Client>(); //making this an ArrayList for a variable amt of clients in a hotel
-        this.numOfClients = 0;
-    }
-
-    public ArrayList<Client> getClients() {
-        return clients;
-    }
-
-    public void addClient(Client client){
-        clients.add(client);
-        numOfClients = clients.size();
+        this.basePrice = 1299; //default as stated in specs
+        this.clients = new ArrayList<Client>();
+        this.clientCount = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getNumOfRooms() {
-        return numOfRooms;
+    public int getRoomCount() {
+        return roomCount;
     }
 
     public Room getRoom(int option) {
@@ -46,14 +37,10 @@ public class Hotel {
         this.name = name;
     }
 
-    public void setNumOfRooms(int numOfRooms) {
-        this.numOfRooms = numOfRooms;
-    }
-
     public void addRoom(Room room){
-        rooms[numOfRooms] = room;
-        rooms[numOfRooms].setHotelName(this.name);
-        numOfRooms++;
+        rooms[roomCount] = room;
+        rooms[roomCount].setHotelName(this.name);
+        roomCount++;
     }
 
     public Room[] getRooms() {
@@ -64,15 +51,17 @@ public class Hotel {
         this.basePrice = basePrice;
     }
 
-    public void setRoomName(String name) {
-        rooms[numOfRooms].setRoomName(name);
+    public ArrayList<Client> getClients() {
+        return clients;
     }
 
-    public int getNumOfClients() {
-        return numOfClients;
+    public void addClient(Client client) {
+        this.clients.add(client);
+        clientCount = clients.size();
     }
 
-    public void setNumOfClients(int numOfClients) {
-        this.numOfClients = numOfClients;
+    public int getClientCount(){
+        return clientCount;
     }
+
 }

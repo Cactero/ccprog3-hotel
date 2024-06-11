@@ -1,19 +1,24 @@
 public class Room {
-    private String roomName;
+    private String roomFloor;
+    private int roomNumber;
     private String hotelName;
-    private float basePrice;
 
-    public Room(String roomName, float basePrice) {
-        this.roomName = roomName;
-        this.basePrice = basePrice;
+    public Room(String roomFloor, int roomNumber) {
+        this.roomFloor = roomFloor;
+        this.roomNumber = roomNumber;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getRoomFloor() {
+        return roomFloor;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomName(String roomFloor, int roomNumber) {
+        this.roomFloor = roomFloor;
+        this.roomNumber = roomNumber;
     }
 
     public String getHotelName() {
@@ -22,13 +27,5 @@ public class Room {
 
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
-    }
-
-    public float getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(float basePrice) {
-        this.basePrice = basePrice;
     }
 }
