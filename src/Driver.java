@@ -1,13 +1,25 @@
 public class Driver {
     public static void main(String[] args) {
-        Room[] rooms = new Room[5];
-        Room room1 = new Room("102", 1299);
-        Hotel ryan = new Hotel("Ryan", 0, rooms);
-        ryan.addRoom(room1);
+        Hotel[] hotels = new Hotel[50];
 
 
-        ManageHotel manageHotel = new ManageHotel();
+        switch (DisplayManager.mainMenuOptions()) {
 
-        DisplayManager.mainMenuOptions();
+            case 1:
+                DisplayManager.createHotel();
+                break;
+
+            case 2:
+                DisplayManager.viewHotel(null);
+                break;
+
+            case 3:
+                DisplayManager.manageHotel();
+                break;
+
+            case 4:
+                DisplayManager.bookRoom();
+                break;
+        }
     }
 }

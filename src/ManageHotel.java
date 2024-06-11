@@ -1,11 +1,10 @@
 import java.util.Scanner;
 
 public class ManageHotel {
-    private Hotel hotel;
+    
+    static Scanner sc = new Scanner(System.in);
 
-    Scanner sc = new Scanner(System.in);
-
-    public void addRooms(Hotel hotel){
+    static public void addRooms(Hotel hotel){
         String roomName;
         boolean hasConflict = false;
         do {
@@ -28,11 +27,11 @@ public class ManageHotel {
         } while(hasConflict);
     }
 
-    public boolean hasNameConflict(String name1, String name2){
+    static private boolean hasNameConflict(String name1, String name2){
         return name1.equals(name2); // Duplicate found
     }
 
-    public void changeHotelName(Hotel hotel, String newName){
+    static public void changeHotelName(Hotel hotel, String newName){
         if(hotel.getName() == newName){
             System.out.println("This is already the hotel's name!");
         }

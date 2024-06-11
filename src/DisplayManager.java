@@ -15,11 +15,12 @@ public class DisplayManager {
         System.out.printf("  1 - Create Hotel\n");
         System.out.printf("  2 - View Hotel\n");
         System.out.printf("  3 - Manage Hotel\n");
+        System.out.printf("  4 - Book A Room\n");
 
         System.out.printf("Input: ");
         int option = sc.nextInt();
 
-        while(option<1 || option>3){
+        while(option<1 || option>4){
             System.out.printf("Option is incorrect!\nInput: ");
             option = sc.nextInt();
         }
