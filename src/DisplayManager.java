@@ -88,7 +88,7 @@ public class DisplayManager {
         System.out.printf("Check-out date: %d\n", client.getCheckOutDay());
     }
 
-    static public void addClient(Hotel[] hotels){
+    static public Client createClient(Hotel[] hotels){
 
         String lastName, firstName;
         int checkInDay, checkOutDay, roomNumber;
@@ -115,7 +115,15 @@ public class DisplayManager {
         System.out.print("Enter client's first name: ");
         firstName = sc.nextLine();
 
-        bookedHotel.addClient(new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom));
+        return new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom);
 
     }
+
+    // private static boolean isBookedDatesValid(Hotel hotel, int checkInDay, int checkOutDay){
+    //     for (Client client : hotel.getClients()) {
+    //         if (client.getBookedRoom()) {
+                
+    //         }
+    //     }
+    // }
 }
