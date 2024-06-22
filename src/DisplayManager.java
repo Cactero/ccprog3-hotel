@@ -95,20 +95,25 @@ public class DisplayManager {
         Hotel bookedHotel;
         Room bookedRoom;
 
-        bookedHotel =  DisplayManager.showHotels(hotels);
-        viewRooms(bookedHotel);
-        System.out.print("Enter room number to book into: ");
-        roomNumber = sc.nextInt();
-        bookedRoom = bookedHotel.getRoom(roomNumber - 1);
+        do {
+            bookedHotel =  DisplayManager.showHotels(hotels);
+            viewRooms(bookedHotel);
+            System.out.print("Enter room number to book into: ");
+            roomNumber = sc.nextInt();
+            bookedRoom = bookedHotel.getRoom(roomNumber - 1);
 
-        System.out.print("Enter check-in date: ");
-        checkInDay = sc.nextInt();
-        System.out.print("Enter check-out date: ");
-        checkOutDay = sc.nextInt();
+            System.out.print("Enter check-in date: ");
+            checkInDay = sc.nextInt();
+            System.out.print("Enter check-out date: ");
+            checkOutDay = sc.nextInt();
 
-        //implement valid date check
+            if (!isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
+                System.out.println("Your booking dates are not valid, please try again!");
+            } else if (isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
+                System.out.println("Your room is occupied during these dates, please try again.");
+            }
 
-        //implement checking if room is occupied during said dates
+        } while (!isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay) && isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay));
 
         System.out.print("Enter client's last name: ");
         lastName = sc.nextLine();
@@ -119,11 +124,27 @@ public class DisplayManager {
 
     }
 
-    // private static boolean isBookedDatesValid(Hotel hotel, int checkInDay, int checkOutDay){
-    //     for (Client client : hotel.getClients()) {
-    //         if (client.getBookedRoom()) {
-                
-    //         }
-    //     }
-    // }
+    private static boolean isBookedDatesValid(Hotel hotel, Room bookedRoom, int checkInDay, int checkOutDay){
+
+        if ((1 <= checkInDay && checkInDay <= 30) && (2 <= checkOutDay && checkOutDay <= 30) && (checkInDay <= checkOutDay)) {
+            if (isRoomOccupied(hotel, bookedRoom, checkInDay, checkOutDay)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+        
+    }
+
+    private static boolean isRoomOccupied(Hotel hotel, Room bookedRoom, int checkInDay, int checkOutDay){
+        
+        for (Client client : hotel.getClients()) {
+            if ((client.getBookedRoom() == bookedRoom) && // checks if the rooms booked are the same rooms
+            ((client.getCheckInDay() <= checkInDay && checkInDay <= client.getCheckOutDay()) || // checks if current client's range of dates contains new client's check in day
+            (checkInDay <= client.getCheckInDay() && client.getCheckInDay() <= checkOutDay))) { // checks if new client's range of dates contains current client's check in day) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
