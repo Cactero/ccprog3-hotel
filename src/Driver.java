@@ -1,7 +1,12 @@
+/**
+ * @author Ryan Gemal
+ * @author Angela Domingo
+ */
+
 import java.util.Scanner;
 
 public class Driver {
-    static int hotelCount = 0;
+    static private int hotelCount = 0;
 
     static private Scanner sc = new Scanner(System.in);
 

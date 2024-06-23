@@ -5,6 +5,7 @@ public class DisplayManager {
     static private Scanner sc = new Scanner(System.in);
 
     /**
+     * @author Ryan Gemal
      * Displays the options to the user and asks the user to select an option.
      * This function assumes that the input given by the user is an integer and
      * has no error handling built in.
@@ -26,6 +27,13 @@ public class DisplayManager {
         return option;
     }
 
+    /**
+     * @author Ryan Gemal
+     * Displays the options to the user and asks the user to select an option.
+     * This function assumes that the input given by the user is an integer and
+     * has no error handling built in.
+     * @return the choice the user selected
+     */
     static public int manageHotelOptions(){
         System.out.println("Input one of the following options:");
         System.out.println("  1 - Change the name of the hotel");
@@ -45,12 +53,22 @@ public class DisplayManager {
         return option;
     }
 
+    /**
+     * @author Ryan Gemal
+     * Prompts the user to enter a hotel name.
+     * @return the hotel name entered
+     */
     static public String enterHotelName(){
         System.out.printf("Enter hotel name: ");
         String name = sc.nextLine();
         return name;
     }
 
+    /**
+     * @author Ryan Gemal
+     * @param hotels the list of Hotels created
+     * @return the selected Hotel
+     */
     static public Hotel showHotels(Hotel[] hotels){
         System.out.println("Choose a hotel: ");
         for(int i = 0; i < hotels.length; i++){
@@ -69,11 +87,19 @@ public class DisplayManager {
         return hotels[option-1];
     }
 
+    /**
+     * @author Ryan Gemal
+     * @param hotel the Hotel to be viewed
+     */
     static public void viewHotel(Hotel hotel){
         System.out.printf("Name of the hotel: %s\n", hotel.getName());
         System.out.printf("Total number of rooms: %d\n", hotel.getRoomCount());
     }
 
+    /**
+     * @author Ryan Gemal
+     * @param hotel the Hotel's rooms to be viewed
+     */
     static public void viewRooms(Hotel hotel){
         System.out.printf("Hotel: %s\n", hotel.getName());
         for(int i = 0; i < hotel.getRoomCount(); i++){
@@ -81,6 +107,10 @@ public class DisplayManager {
         }
     }
 
+    /**
+     * @author Angela Domingo
+     * @param client the Client to be viewed
+     */
     static public void viewClient(Client client){
         System.out.printf("Client name: %s, %s\n", client.getLastName(), client.getFirstName());
         System.out.printf("Booked room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
@@ -88,6 +118,11 @@ public class DisplayManager {
         System.out.printf("Check-out date: %d\n", client.getCheckOutDay());
     }
 
+    /**
+     * @author Angela Domingo
+     * @param hotels the list of Hotels created
+     * @return a new Client object
+     */
     static public Client createClient(Hotel[] hotels){
 
         String lastName, firstName;
@@ -124,6 +159,14 @@ public class DisplayManager {
 
     }
 
+    /**
+     * @author Angela Domingo
+     * @param hotel the selected Hotel of the Client
+     * @param bookedRoom the booked room of the Client
+     * @param checkInDay check in day of the Client
+     * @param checkOutDay check out day of the Client
+     * @return if the booked dates are valid or not
+     */
     private static boolean isBookedDatesValid(Hotel hotel, Room bookedRoom, int checkInDay, int checkOutDay){
 
         if ((1 <= checkInDay && checkInDay <= 30) && (2 <= checkOutDay && checkOutDay <= 30) && (checkInDay <= checkOutDay)) {
@@ -136,6 +179,14 @@ public class DisplayManager {
         
     }
 
+    /**
+     * @author Angela Domingo
+     * @param hotel the selected Hotel of the Client
+     * @param bookedRoom the booked room of the Client
+     * @param checkInDay check in day of the Client
+     * @param checkOutDay check out day of the Client
+     * @return if the room is occupied or not
+     */
     private static boolean isRoomOccupied(Hotel hotel, Room bookedRoom, int checkInDay, int checkOutDay){
         
         for (Client client : hotel.getClients()) {
