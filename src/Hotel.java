@@ -43,6 +43,20 @@ public class Hotel {
         roomCount++;
     }
 
+    public void removeRoom(Room room){
+        int count = 0;
+        for(int i = 0; i < this.roomCount; i++){
+            if(rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()){
+                count++;
+
+                for(int k = i; k < this.roomCount-1; k++){
+                    rooms[k] = rooms[k+1];
+                }
+                i--;
+            }
+        }
+        this.roomCount--;
+    }
     public Room[] getRooms() {
         return rooms;
     }
@@ -62,6 +76,16 @@ public class Hotel {
 
     public int getClientCount(){
         return clientCount;
+    }
+
+    public float totalReservationPrices(Hotel hotel){
+        float sum = 0;
+        /*Client clients[] = getClients().toArray(new Client[0]);
+        for(int i = 0; i < clientCount; i++){
+
+        }
+         */
+        return sum;
     }
 
 }

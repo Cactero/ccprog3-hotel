@@ -5,10 +5,12 @@ public class Room {
     private String roomFloor;
     private int roomNumber;
     private String hotelName;
+    private float basePrice;
 
-    public Room(String roomFloor, int roomNumber) {
+    public Room(String roomFloor, int roomNumber, float basePrice) {
         this.roomFloor = roomFloor;
         this.roomNumber = roomNumber;
+        this.basePrice = basePrice;
     }
 
     /**

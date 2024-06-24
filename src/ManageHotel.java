@@ -16,7 +16,7 @@ public class ManageHotel {
                 number = Integer.parseInt(sc.nextLine());
 
                 for(int i = 0; i < hotel.getRoomCount(); i++){
-                    if(hasNameConflict(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
+                    if(roomsMatch(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
                         System.out.println("There is already a room with this name!");
                         hasConflict = true;
                     }
@@ -25,11 +25,36 @@ public class ManageHotel {
             }
         } while(hasConflict);
         
-        Room newRoom = new Room(floor, number);
+        Room newRoom = new Room(floor, number, hotel.getBasePrice());
         hotel.addRoom(newRoom);
     }
 
-    public boolean hasNameConflict(String roomFloorA, int roomNumberA, String roomFloorB, int roomNumberB){
+    public void removeRooms(Hotel hotel){
+        String floor = new String();
+        int number = 0;
+        boolean notFound;
+        do {
+            notFound = false;
+            DisplayManager.viewRooms(hotel);
+            System.out.println("What floor will the room be? ");
+            floor = sc.nextLine();
+            System.out.println("What room number will the room be? ");
+            number = Integer.parseInt(sc.nextLine());
+            for(int i = 0; i < hotel.getRoomCount() && !notFound; i++){
+                if(roomsMatch(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
+                    notFound = false;
+                    break;
+                }
+            }
+            if(notFound) { System.out.println("Not found, try again."); }
+        } while(notFound);
+
+        Room room = new Room(floor, number, 0);
+        hotel.removeRoom(room);
+
+    }
+
+    public boolean roomsMatch(String roomFloorA, int roomNumberA, String roomFloorB, int roomNumberB){
         return roomFloorA.equals(roomFloorB) && roomNumberA == roomNumberB; // Duplicate found
     }
 
@@ -39,6 +64,25 @@ public class ManageHotel {
         }
         else{
             hotel.setName(newName);
+        }
+    }
+
+    public void updateBasePrice(Hotel hotel){
+        float newPrice = 0.0F;
+        if(hotel.getClientCount() != 0){
+            System.out.println("Sorry, but you cannot update the base price of a room while there are reservrations.");
+        }
+        else{
+            do {
+                System.out.println("Enter a room price (Must be at least 100)");
+                newPrice = sc.nextInt();
+
+                if(newPrice < 100.0F) {
+                    System.out.println("New price must be at least 100! Try again.");
+                }
+            } while(newPrice < 100.0F);
+
+            hotel.setBasePrice(newPrice);
         }
     }
 }

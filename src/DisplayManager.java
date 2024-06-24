@@ -12,7 +12,7 @@ public class DisplayManager {
      * @return the choice the user selected
      */
     static public int mainMenuOptions(){
-        System.out.println("Input one of the following options:");
+        System.out.println("Main Menu:");
         System.out.println("  1 - Create Hotel");
         System.out.println("  2 - View Hotel");
         System.out.println("  3 - Manage Hotel");
@@ -42,11 +42,12 @@ public class DisplayManager {
         System.out.println("  4 - Update the base price for a room");
         System.out.println("  5 - Remove reservation");
         System.out.println("  6 - Remove Hotel");
+        System.out.println("  7 - Back to main menu");
 
         System.out.printf("Input: ");
         int option = sc.nextInt();
 
-        while(option<1 || option>3){
+        while(option<1 || option>7){
             System.out.printf("Option is incorrect!\nInput: ");
             option = sc.nextInt();
         }
@@ -60,6 +61,7 @@ public class DisplayManager {
      */
     static public String enterHotelName(){
         System.out.printf("Enter hotel name: ");
+        sc.nextLine();
         String name = sc.nextLine();
         return name;
     }
@@ -93,7 +95,10 @@ public class DisplayManager {
      */
     static public void viewHotel(Hotel hotel){
         System.out.printf("Name of the hotel: %s\n", hotel.getName());
-        System.out.printf("Total number of rooms: %d\n", hotel.getRoomCount());
+        System.out.printf("Room Count: %d\n", hotel.getRoomCount());
+        System.out.printf("Base Price: %.2f\n", hotel.getBasePrice());
+        System.out.printf("Client Count: %d\n", hotel.getClientCount());
+        System.out.printf("Estimated earnings for the month: \n");
     }
 
     /**
