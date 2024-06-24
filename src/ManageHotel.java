@@ -36,9 +36,9 @@ public class ManageHotel {
         do {
             notFound = false;
             DisplayManager.viewRooms(hotel);
-            System.out.println("What floor will the room be? ");
+            System.out.println("What floor is the room to be removed? ");
             floor = sc.nextLine();
-            System.out.println("What room number will the room be? ");
+            System.out.println("What room number is the room to be removed? ");
             number = Integer.parseInt(sc.nextLine());
             for(int i = 0; i < hotel.getRoomCount() && !notFound; i++){
                 if(roomsMatch(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
@@ -55,7 +55,7 @@ public class ManageHotel {
     }
 
     public boolean roomsMatch(String roomFloorA, int roomNumberA, String roomFloorB, int roomNumberB){
-        return roomFloorA.equals(roomFloorB) && roomNumberA == roomNumberB; // Duplicate found
+        return roomFloorA.equals(roomFloorB) && (roomNumberA == roomNumberB); // Duplicate found
     }
 
     public void changeHotelName(Hotel hotel, String newName){

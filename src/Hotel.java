@@ -44,12 +44,9 @@ public class Hotel {
     }
 
     public void removeRoom(Room room){
-        int count = 0;
         for(int i = 0; i < this.roomCount; i++){
             if(rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()){
-                count++;
-
-                for(int k = i; k < this.roomCount-1; k++){
+                for(int k = i; k < this.roomCount; k++){
                     rooms[k] = rooms[k+1];
                 }
                 i--;
@@ -63,6 +60,10 @@ public class Hotel {
 
     public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
+
+        for(int i = 0; i < roomCount; i++){
+            rooms[i].setBasePrice(basePrice);
+        }
     }
 
     public ArrayList<Client> getClients() {
@@ -80,11 +81,9 @@ public class Hotel {
 
     public float totalReservationPrices(Hotel hotel){
         float sum = 0;
-        /*Client clients[] = getClients().toArray(new Client[0]);
         for(int i = 0; i < clientCount; i++){
-
+            sum += clients.get(i).getReservationCost();
         }
-         */
         return sum;
     }
 

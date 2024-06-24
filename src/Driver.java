@@ -3,6 +3,7 @@
  * @author Angela Domingo
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Driver {
@@ -12,7 +13,8 @@ public class Driver {
 
     public static void main(String[] args) {
         boolean programStatus = true;
-        Hotel hotels[] = new Hotel[100];
+        ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+        //Hotel hotels[] = new Hotel[100];
 
         ManageHotel manageHotel = new ManageHotel();
 
@@ -21,16 +23,30 @@ public class Driver {
             int option = DisplayManager.mainMenuOptions();
             switch(option){
                 case 1: // Create Hotel
-                    String name = DisplayManager.enterHotelName();
-                    hotels[hotelCount] = new Hotel(name);
+                    boolean hasConflict;
+                    do {
+                        String name = DisplayManager.enterHotelName();
+                        hasConflict = false;
+                        for (int i = 0; i < hotels.size(); i++) {
+                            if (name.equals(hotels.get(i).getName())) {
+                                hasConflict = true;
+                            }       
+                        }
+
+                        if (!hasConflict) {
+                            hotels.add(new Hotel(name));
+                        } else {
+                            System.out.println("Name conflict found, enter a new name.");
+                        }
+                    } while (hasConflict);
+                    
 
                     System.out.println("Since you just created a hotel, you must add a room.");
-                    manageHotel.addRooms(hotels[hotelCount]);
-                    hotelCount++;
+                    manageHotel.addRooms(hotels.get(hotelCount));
                     break;
 
                 case 2: // View Hotel
-                    if(hotelCount == 0){
+                    if(hotels.size() == 0){
                         System.out.println("There are currently no hotels.");
                     }
                     else{
@@ -41,12 +57,11 @@ public class Driver {
                     break;
 
                 case 3: // Manage Hotel
-                    if(hotelCount == 0){
+                    if(hotels.size() == 0){
                         System.out.println("There are currently no hotels.");
                     }
                     else {
                         Hotel hotelOption = DisplayManager.showHotels(hotels);
-                        DisplayManager.viewHotel(hotelOption);
 
                         int manageOption = DisplayManager.manageHotelOptions();
                         switch (manageOption) {
@@ -64,10 +79,12 @@ public class Driver {
                                 manageHotel.updateBasePrice(hotelOption);
                                 break;
                         }
-                        DisplayManager.viewHotel(hotels[0]);
-                        DisplayManager.viewRooms(hotels[0]);
                     }
                     break;
+                case 4: // Simulate Booking
+                    DisplayManager.addReservation(hotels);
+                    break;
+                
             }
         }
     }

@@ -104,4 +104,8 @@ public class Client {
     public int getDaysBooked(){
         return checkOutDay - checkInDay + 1;
     }
+
+    public float getReservationCost(){
+        return bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
+    }
 }

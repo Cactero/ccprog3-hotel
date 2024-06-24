@@ -54,4 +54,12 @@ public class Room {
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
     }
+
+    public float getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(float basePrice) {
+        this.basePrice = basePrice;
+    }
 }
