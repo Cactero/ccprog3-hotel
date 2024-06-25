@@ -4,6 +4,7 @@ public class Utilities {
     private static Scanner sc = new Scanner(System.in);
 
     /**
+     * Checks if the given check in and out dates are valid booking dates.
      * @author Angela Domingo
      * @param hotel the selected Hotel of the Client
      * @param bookedRoom the booked room of the Client
@@ -24,6 +25,7 @@ public class Utilities {
     }
 
     /**
+     * Checks if the selected Room is occupied based on the given check in and check out days of the new Client
      * @author Angela Domingo
      * @param hotel the selected Hotel of the Client
      * @param bookedRoom the booked room of the Client
@@ -50,6 +52,7 @@ public class Utilities {
     }
 
     /**
+     * Checks if the selected Room is occupied on a given date.
      * @author Ryan Gemal
      * @param hotel the selected Hotel
      * @param bookedRoom the booked room
@@ -68,6 +71,7 @@ public class Utilities {
 
     /**
      * A fool-proof integer input function that ensures only integers will pass.
+     * @author Ryan Gemal
      * @return the integer that was correctly inputted
      */
     public static int intInput(){

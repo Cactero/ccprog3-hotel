@@ -1,4 +1,5 @@
 /**
+ * Client class, where the client's reservation details are held.
  * @author Angela Domingo
  */
 
@@ -9,6 +10,14 @@ public class Client {
     private int checkOutDay;
     private Room bookedRoom;
 
+    /**
+     * Constructor of the Client object.
+     * @param firstName Client's first name
+     * @param lastName Client's last name
+     * @param checkInDay Client's check in day
+     * @param checkOutDay Client's check out day
+     * @param bookedRoom Client's booked room
+     */
     public Client(String firstName, String lastName, int checkInDay, int checkOutDay, Room bookedRoom) {
         this.firstName = firstName;
         this.lastName = lastName;

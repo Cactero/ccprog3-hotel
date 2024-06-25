@@ -1,4 +1,5 @@
 /**
+ * Room class, where details of a Hotel's Room is
  * @author Ryan Gemal
  */
 public class Room {
@@ -7,6 +8,12 @@ public class Room {
     private String hotelName;
     private float basePrice;
 
+    /**
+     * The constructor for a Room object.
+     * @param roomFloor the floor of the Room
+     * @param roomNumber the number of the Room
+     * @param basePrice the base price of the Room
+     */
     public Room(String roomFloor, int roomNumber, float basePrice) {
         this.roomFloor = roomFloor;
         this.roomNumber = roomNumber;

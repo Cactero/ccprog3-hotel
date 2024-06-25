@@ -1,4 +1,5 @@
 /**
+ * Hotel class, where the details of a Hotel is
  * @author Ryan Gemal
  */
 
@@ -12,6 +13,10 @@ public class Hotel {
     private ArrayList<Client> clients; //arraylist for clients for variable amount of clients
     private int clientCount;
 
+    /**
+     * The constructor for the Hotel object.
+     * @param name the Hotel's name
+     */
     public Hotel(String name){
         this.name = name;
         this.roomCount = 0;

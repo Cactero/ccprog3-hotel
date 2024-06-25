@@ -1,4 +1,5 @@
 /**
+ * Manages the displays of the program.
  * @author Ryan Gemal
  * @author Angela Domingo
  */
@@ -11,10 +12,8 @@ public class DisplayManager {
     private static Scanner sc = new Scanner(System.in);
 
     /**
-     * @author Ryan Gemal
      * Displays the options to the user and asks the user to select an option.
-     * This function assumes that the input given by the user is an integer and
-     * has no error handling built in.
+     * @author Ryan Gemal
      * @return the choice the user selected
      */
     static public int mainMenuOptions(){
@@ -36,10 +35,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Displays the options to the user and asks the user to select an option.
-     * This function assumes that the input given by the user is an integer and
-     * has no error handling built in.
+     * @author Ryan Gemal
      * @return the choice the user selected
      */
     static public int manageHotelOptions(){
@@ -68,8 +65,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Prompts the user to enter a hotel name.
+     * @author Ryan Gemal
      * @return the hotel name entered
      */
     public static String enterHotelName() {
@@ -79,8 +76,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Shows a list of hotels to choose from.
+     * @author Ryan Gemal
      * @param hotels the list of Hotels created
      * @return the selected Hotel
      */
@@ -104,8 +101,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Shows the high-level information and selected low-level information of the selected Hotel.
+     * @author Ryan Gemal
      * @param hotel the Hotel to be viewed
      */
     static public void viewHotel(Hotel hotel){
@@ -193,8 +190,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Shows the number of available and booked rooms of the selected hotel and date.
+     * @author Ryan Gemal
      * @param hotel the selected Hotel to be checked
      * @param date the date to check how many Clients booked on that date
      */
@@ -212,8 +209,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Displays the availability of a given room.
+     * @author Ryan Gemal
      * @param hotel the Hotel the Room is a part of
      * @param room the Room that is being viewed
      */
@@ -237,8 +234,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Ryan Gemal
      * Displays a list of rooms a given Hotel has
+     * @author Ryan Gemal
      * @param hotel the Hotel's rooms to be viewed
      */
     static public void viewRooms(Hotel hotel){
@@ -249,8 +246,8 @@ public class DisplayManager {
     }
 
     /**
-     * @author Angela Domingo
      * Displays the Client's details
+     * @author Angela Domingo
      * @param client the Client to be viewed
      */
     static public void viewClient(Client client){
