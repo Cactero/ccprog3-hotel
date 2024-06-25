@@ -42,27 +42,11 @@ public class Client {
     }
 
     /**
-     * This is a setter for the variable firstName
-     * @param firstName the first name of the Client
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
      * This is a getter for the variable lastName
      * @return the last name of the Client
      */
     public String getLastName() {
         return lastName;
-    }
-
-    /**
-     * This is a setter for the variable lastName
-     * @param lastName the last name of the Client
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     /**

@@ -35,6 +35,9 @@ public class Hotel {
 
     public void setName(String name) {
         this.name = name;
+        for (Room room : rooms) {
+            room.setHotelName(name);
+        }
     }
 
     public void addRoom(Room room){
@@ -75,11 +78,16 @@ public class Hotel {
         clientCount = clients.size();
     }
 
+    public void removeClient(Client client){
+        this.clients.remove(client);
+        clientCount = clients.size();
+    }
+
     public int getClientCount(){
         return clientCount;
     }
 
-    public float totalReservationPrices(Hotel hotel){
+    public float getTotalReservationPrices(){
         float sum = 0;
         for(int i = 0; i < clientCount; i++){
             sum += clients.get(i).getReservationCost();

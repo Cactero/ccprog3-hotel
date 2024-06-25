@@ -18,11 +18,12 @@ public class DisplayManager {
         System.out.println("  2 - View Hotel");
         System.out.println("  3 - Manage Hotel");
         System.out.println("  4 - Simulate Booking");
+        System.out.println("  5 - Exit Program");
 
         System.out.printf("Input: ");
         int option = sc.nextInt();
 
-        while(option<1 || option>4){
+        while(option<1 || option>5){
             System.out.printf("Option is incorrect!\nInput: ");
             option = sc.nextInt();
         }
@@ -100,7 +101,7 @@ public class DisplayManager {
         System.out.printf("Room Count: %d\n", hotel.getRoomCount());
         System.out.printf("Base Price: %.2f\n", hotel.getBasePrice());
         System.out.printf("Client Count: %d\n", hotel.getClientCount());
-        System.out.printf("Estimated earnings for the month: $%.2f\n\n", hotel.totalReservationPrices(hotel));
+        System.out.printf("Estimated earnings for the month: $%.2f\n\n", hotel.getTotalReservationPrices());
 
         System.out.println("Select low-level information to see:");
         System.out.println("1 - Total number of available and booked rooms for a selected date");
@@ -119,29 +120,28 @@ public class DisplayManager {
                 break;
         
             case 2:
+                int number;
                 viewRooms(hotel);
-                ManageHotel manageHotel = new ManageHotel();
-                System.out.printf("Enter room floor: ");
-                String floor = sc.nextLine();
-                
-                System.out.printf("Enter room number: ");
-                int number = Integer.parseInt(sc.nextLine());
 
-                for (int i = 0; i < hotel.getRoomCount(); i++) {
-                    if (manageHotel.roomsMatch(hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber(), floor, number)) {
-                        viewRoom(hotel, hotel.getRoom(i));
+                do {
+                    System.out.printf("Enter choice: ");
+                    number = Integer.parseInt(sc.nextLine());
+                    if (!(1 <= number && number <= hotel.getRoomCount())) {
+                        System.out.println("Out of bounds, try again.");
                     }
-                }
+                } while (!(1 <= number && number <= hotel.getRoomCount()));
+
+                viewRoom(hotel, hotel.getRoom(number - 1));
                 
                 break;
 
             case 3:
-                System.out.printf("Enter client first name: ");
-                String firstName = sc.nextLine();
-                
                 System.out.printf("Enter client last name: ");
                 String lastName = sc.nextLine();
 
+                System.out.printf("Enter client first name: ");
+                String firstName = sc.nextLine();
+                
                 for (Client client : hotel.getClients()) {
                     if (client.getFirstName().equals(firstName) && client.getLastName().equals(lastName)) {
                         DisplayManager.viewClient(client);
@@ -173,7 +173,7 @@ public class DisplayManager {
         System.out.printf("Base price: %.2f\n", room.getBasePrice());
         for(int i = 0; i < 31; i++){
             System.out.printf("%d-", i+1);
-            if(DisplayManager.isRoomOccupied(hotel, room, i+1)){
+            if(ManageHotel.isRoomOccupied(hotel, room, i+1)){
                 System.out.printf("B");
             }
             else{
@@ -203,107 +203,13 @@ public class DisplayManager {
      * @param client the Client to be viewed
      */
     static public void viewClient(Client client){
-        System.out.printf("Client name: %s, %s\n", client.getLastName(), client.getFirstName());
+        System.out.printf("\nClient name: %s, %s\n", client.getLastName(), client.getFirstName());
         System.out.printf("Booked room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
         System.out.printf("Base reservation price: %.2f\n", client.getBookedRoom().getBasePrice());
         System.out.printf("Check-in date: %d\n", client.getCheckInDay());
-        System.out.printf("Check-out date: %d\n", client.getCheckOutDay());
-        System.out.printf("Total reservation price: %.2f\n", client.getReservationCost());
+        System.out.printf("Check-out date: %d\n\n", client.getCheckOutDay());
+        System.out.printf("Breakdown of cost/night: %d nights * $.2f = \n", client.getDaysBooked(), client.getBookedRoom().getBasePrice());
+        System.out.printf("Total reservation price: %.2f\n\n", client.getReservationCost());
     }
 
-    /**
-     * @author Angela Domingo
-     * @param hotels the list of Hotels created
-     * @return a new Client object
-     */
-    static public void addReservation(ArrayList<Hotel> hotels){
-
-        String lastName, firstName;
-        int checkInDay, checkOutDay, roomNumber;
-        Hotel bookedHotel;
-        Room bookedRoom;
-
-        do {
-            bookedHotel =  DisplayManager.showHotels(hotels);
-            viewRooms(bookedHotel);
-            System.out.print("Enter room number to book into: ");
-            sc.nextLine();
-            roomNumber = Integer.parseInt(sc.nextLine());
-            bookedRoom = bookedHotel.getRoom(roomNumber - 1);
-
-            System.out.print("Enter check-in date: ");
-            checkInDay = Integer.parseInt(sc.nextLine());
-            System.out.print("Enter check-out date: ");
-            checkOutDay = Integer.parseInt(sc.nextLine());
-
-            if (!isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
-                System.out.println("Your booking dates are not valid, please try again!");
-            } else if (isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
-                System.out.println("Your room is occupied during these dates, please try again.");
-            }
-
-        } while (!isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay) && isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay));
-
-        System.out.print("Enter client's last name: ");
-        lastName = sc.nextLine();
-        System.out.print("Enter client's first name: ");
-        firstName = sc.nextLine();
-
-        bookedHotel.addClient(new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom));
-
-    }
-
-    /**
-     * @author Angela Domingo
-     * @param hotel the selected Hotel of the Client
-     * @param bookedRoom the booked room of the Client
-     * @param checkInDay check in day of the Client
-     * @param checkOutDay check out day of the Client
-     * @return if the booked dates are valid or not
-     */
-    private static boolean isBookedDatesValid(Hotel hotel, Room bookedRoom, int checkInDay, int checkOutDay){
-
-        if ((1 <= checkInDay && checkInDay <= 30) && (2 <= checkOutDay && checkOutDay <= 31) && (checkInDay <= checkOutDay)) {
-            if (isRoomOccupied(hotel, bookedRoom, checkInDay, checkOutDay)) {
-                return false;
-            }
-            return true;
-        }
-        return false;
-        
-    }
-
-    /**
-     * @author Angela Domingo
-     * @param hotel the selected Hotel of the Client
-     * @param bookedRoom the booked room of the Client
-     * @param checkInDay check in day of the Client
-     * @param checkOutDay check out day of the Client
-     * @return if the room is occupied or not
-     */
-    private static boolean isRoomOccupied(Hotel hotel, Room bookedRoom, int checkInDay, int checkOutDay){
-        
-        if (hotel.getClientCount() == 0) {
-            return false;
-        }
-
-        for (Client client : hotel.getClients()) {
-            if ((client.getBookedRoom() == bookedRoom) && // checks if the rooms booked are the same rooms
-            ((client.getCheckInDay() < checkInDay && checkInDay <= client.getCheckOutDay()) || // checks if current client's range of dates contains new client's check in day
-            (client.getCheckInDay() <= checkOutDay && checkOutDay < client.getCheckOutDay()))) { // checks if new client's range of dates contains current client's check in day) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean isRoomOccupied(Hotel hotel, Room bookedRoom, int date){
-        for (Client client : hotel.getClients()){
-            if((client.getCheckInDay() <= date && date <= client.getCheckOutDay()) && (client.getBookedRoom() == bookedRoom))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 }

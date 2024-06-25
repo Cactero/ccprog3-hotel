@@ -30,16 +30,6 @@ public class Room {
     }
 
     /**
-     * This is a setter for the room floor and number of the Room
-     * @param roomFloor the floor of the Room
-     * @param roomNumber the number of the Room
-     */
-    public void setRoomName(String roomFloor, int roomNumber) {
-        this.roomFloor = roomFloor;
-        this.roomNumber = roomNumber;
-    }
-
-    /**
      * This is a getter for the variable hotelName
      * @return the Hotel name the Room is associated with
      */
