@@ -1,3 +1,8 @@
+/**
+ * @author Ryan Gemal
+ * @author Angela Domingo
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,11 +26,11 @@ public class DisplayManager {
         System.out.println("  5 - Exit Program");
 
         System.out.printf("Input: ");
-        int option = sc.nextInt();
+        int option = Integer.parseInt(sc.nextLine());
 
         while(option<1 || option>5){
             System.out.printf("Option is incorrect!\nInput: ");
-            option = sc.nextInt();
+            option = Integer.parseInt(sc.nextLine());
         }
         return option;
     }
@@ -48,11 +53,11 @@ public class DisplayManager {
         System.out.println("  7 - Back to main menu");
 
         System.out.printf("Input: ");
-        int option = sc.nextInt();
+        int option = Integer.parseInt(sc.nextLine());
 
         while(option<1 || option>7){
             System.out.printf("Option is incorrect!\nInput: ");
-            option = sc.nextInt();
+            option = Integer.parseInt(sc.nextLine());
         }
         return option;
     }
@@ -64,36 +69,38 @@ public class DisplayManager {
      */
     static public String enterHotelName(){
         System.out.printf("Enter hotel name: ");
-        sc.nextLine();
         String name = sc.nextLine();
         return name;
     }
 
     /**
      * @author Ryan Gemal
+     * Shows a list of hotels to choose from.
      * @param hotels the list of Hotels created
      * @return the selected Hotel
      */
     static public Hotel showHotels(ArrayList<Hotel> hotels){
+
+        int option;
+
         System.out.println("Choose a hotel: ");
         for(int i = 0; i < hotels.size(); i++){
-            if(hotels.get(i) != null){
-                System.out.printf("  %d - %s\n", i+1, hotels.get(i).getName());
-            }
+            System.out.printf("  %d - %s\n", i+1, hotels.get(i).getName());
         }
 
-        System.out.printf("Input: ");
-        int option = sc.nextInt();
+        do {
+            System.out.printf("Input: ");
+            option = Integer.parseInt(sc.nextLine());
+            if (option<1 || option>hotels.size())
+                System.out.println("Option is incorrect!");
+        } while (option<1 || option>hotels.size());
 
-        while(option<1 || option>hotels.size()){
-            System.out.printf("Option is incorrect!\nInput: ");
-            option = sc.nextInt();
-        }
         return hotels.get(option-1);
     }
 
     /**
      * @author Ryan Gemal
+     * Shows the high-level information and selected low-level information of the selected Hotel.
      * @param hotel the Hotel to be viewed
      */
     static public void viewHotel(Hotel hotel){
@@ -107,14 +114,22 @@ public class DisplayManager {
         System.out.println("1 - Total number of available and booked rooms for a selected date");
         System.out.println("2 - Information about a selected room");
         System.out.println("3 - Information about a selected reservation");
+
+        int choice;
+
+        do {
+            System.out.printf("Input: ");
+            sc.nextLine();
+            choice = Integer.parseInt(sc.nextLine());
+            if (!(1 <= choice && choice <= 3)) {
+                System.out.println("Option is incorrect!");
+            }
+        } while (!(1 <= choice && choice <= 3));
         
-        System.out.printf("Input: ");
-        sc.nextLine();
-        int choice = Integer.parseInt(sc.nextLine());
 
         switch (choice) {
             case 1:
-                System.out.println("Enter a date: ");
+                System.out.printf("Enter a date: ");
                 int date = Integer.parseInt(sc.nextLine());
                 DisplayManager.viewRoomsDate(hotel, date);
                 break;
@@ -147,11 +162,16 @@ public class DisplayManager {
                         DisplayManager.viewClient(client);
                     }
                 }
-
                 break;
         }        
     }
 
+    /**
+     * @author Ryan Gemal
+     * Shows the number of available and booked rooms of the selected hotel and date.
+     * @param hotel the selected Hotel to be checked
+     * @param date the date to check how many Clients booked on that date
+     */
     static public void viewRoomsDate(Hotel hotel, int date){
         int availableRooms = 0;
         int bookedRooms = 0;
@@ -168,6 +188,12 @@ public class DisplayManager {
         System.out.printf("Booked rooms: %d\n", bookedRooms);
     }
 
+    /**
+     * @author Ryan Gemal
+     * 
+     * @param hotel
+     * @param room
+     */
     static public void viewRoom(Hotel hotel, Room room){
         System.out.printf("Room name: %s%d\n", room.getRoomFloor(), room.getRoomNumber());
         System.out.printf("Base price: %.2f\n", room.getBasePrice());
@@ -203,13 +229,13 @@ public class DisplayManager {
      * @param client the Client to be viewed
      */
     static public void viewClient(Client client){
-        System.out.printf("\nClient name: %s, %s\n", client.getLastName(), client.getFirstName());
-        System.out.printf("Booked room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
-        System.out.printf("Base reservation price: %.2f\n", client.getBookedRoom().getBasePrice());
-        System.out.printf("Check-in date: %d\n", client.getCheckInDay());
-        System.out.printf("Check-out date: %d\n\n", client.getCheckOutDay());
-        System.out.printf("Breakdown of cost/night: %d nights * $.2f = \n", client.getDaysBooked(), client.getBookedRoom().getBasePrice());
-        System.out.printf("Total reservation price: %.2f\n\n", client.getReservationCost());
+        System.out.printf("\nClient Name: %s, %s\n", client.getLastName(), client.getFirstName());
+        System.out.printf("Booked Room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
+        System.out.printf("Base Reservation Price: %.2f\n", client.getBookedRoom().getBasePrice());
+        System.out.printf("Check-in Date: %d\n", client.getCheckInDay());
+        System.out.printf("Check-out Date: %d\n", client.getCheckOutDay());
+        System.out.printf("Breakdown of Cost/Night: %d nights * $.2f = \n", client.getDaysBooked(), client.getBookedRoom().getBasePrice());
+        System.out.printf("Total Reservation Price: %.2f\n\n", client.getReservationCost());
     }
 
 }

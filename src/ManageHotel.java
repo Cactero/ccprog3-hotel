@@ -96,7 +96,7 @@ public class ManageHotel {
         int choice;
 
         for (int i = 0; i < hotel.getClientCount(); i++) {
-                System.out.printf("Reservation %02d:\n", i+1);
+                System.out.printf("Reservation %d:", i+1);
                 DisplayManager.viewClient(hotel.getClients().get(i));
         }
 
