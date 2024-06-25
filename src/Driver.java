@@ -6,7 +6,6 @@
 import java.util.ArrayList;
 
 public class Driver {
-    static ManageHotel manageHotel = new ManageHotel();
 
     public static void main(String[] args) {
         boolean programStatus = true;
@@ -44,7 +43,7 @@ public class Driver {
                         System.out.println("There are currently no hotels.");
                     }
                     else {
-                        Hotel hotelOption = DisplayManager.showHotels(hotels);
+                        Hotel hotelOption = DisplayManager.chooseHotel(hotels);
                         DisplayManager.viewHotel(hotelOption);
                     }
                     break;
@@ -54,7 +53,7 @@ public class Driver {
                         System.out.println("There are currently no hotels.");
                     }
                     else {
-                        Hotel hotelOption = DisplayManager.showHotels(hotels);
+                        Hotel hotelOption = DisplayManager.chooseHotel(hotels);
 
                         int manageOption = DisplayManager.manageHotelOptions();
                         switch (manageOption) {

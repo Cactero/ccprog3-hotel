@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class DisplayManager {
 
     private static Scanner sc = new Scanner(System.in);
-    private static Utilities util = new Utilities();
 
     /**
      * @author Ryan Gemal
@@ -27,11 +26,11 @@ public class DisplayManager {
         System.out.println("  5 - Exit Program");
 
         System.out.printf("Input: ");
-        int option = util.intInput();
+        int option = Utilities.intInput();
 
         while(option<1 || option>5){
             System.out.printf("Option is incorrect!\nInput: ");
-            option = util.intInput();
+            option = Utilities.intInput();
         }
         return option;
     }
@@ -53,15 +52,18 @@ public class DisplayManager {
         System.out.println("  6 - Remove Hotel");
         System.out.println("  7 - Back to main menu");
 
-        System.out.printf("Input: ");
-        int option = util.intInput();
+        int option;
 
-        while(option<1 || option>7) {
-            System.out.printf("Option is incorrect!\nInput: ");
-            option = util.intInput();
+        do {
+            System.out.printf("Input: ");
+            option = Utilities.intInput();
 
-            return option;
-        }
+            if(option<1 || option>7) {
+                System.out.println("Option is incorrect!");
+            }
+        } while (option<1 || option>7);
+
+        
         return option;
     }
 
@@ -82,7 +84,7 @@ public class DisplayManager {
      * @param hotels the list of Hotels created
      * @return the selected Hotel
      */
-    static public Hotel showHotels(ArrayList<Hotel> hotels){
+    static public Hotel chooseHotel(ArrayList<Hotel> hotels){
 
         int option;
 
@@ -93,7 +95,7 @@ public class DisplayManager {
 
         do {
             System.out.printf("Input: ");
-            option = util.intInput();
+            option = Utilities.intInput();
             if (option<1 || option>hotels.size())
                 System.out.println("Option is incorrect!");
         } while (option<1 || option>hotels.size());
@@ -123,7 +125,7 @@ public class DisplayManager {
 
         do {
             System.out.printf("Input: ");
-            choice = util.intInput();
+            choice = Utilities.intInput();
             if (!(1 <= choice && choice <= 4)) {
                 System.out.println("Option is incorrect!");
             }
@@ -132,8 +134,16 @@ public class DisplayManager {
 
         switch (choice) {
             case 1:
-                System.out.printf("Enter a date: ");
-                int date = util.intInput();
+                int date;
+
+                do {
+                    System.out.printf("Enter a date: ");
+                    date = Utilities.intInput();
+                    if (!(1 <= date && date <= 31)) {
+                        System.out.println("Out of bounds, try again.");
+                    }
+                } while (!(1 <= date && date <= 31));
+                
                 DisplayManager.viewRoomsDate(hotel, date);
                 break;
         
@@ -143,26 +153,39 @@ public class DisplayManager {
 
                 do {
                     System.out.printf("Enter choice: ");
-                    number = util.intInput();
+                    number = Utilities.intInput();
                     if (!(1 <= number && number <= hotel.getRoomCount())) {
                         System.out.println("Out of bounds, try again.");
                     }
                 } while (!(1 <= number && number <= hotel.getRoomCount()));
 
-                viewRoom(hotel, hotel.getRoom(number - 1));
+                viewRoomAvailability(hotel, hotel.getRoom(number - 1));
                 
                 break;
 
             case 3:
-                System.out.printf("Enter client last name: ");
-                String lastName = sc.nextLine();
+                if (hotel.getClientCount() == 0) {
+                    System.out.println("There are no reservations in this hotel.");
+                } else {
+                    int count = 0;
+                    System.out.printf("Enter client last name: ");
+                    String lastName = sc.nextLine();
+    
+                    System.out.printf("Enter client first name: ");
+                    String firstName = sc.nextLine();
 
-                System.out.printf("Enter client first name: ");
-                String firstName = sc.nextLine();
-                
-                for (Client client : hotel.getClients()) {
-                    if (client.getFirstName().equals(firstName) && client.getLastName().equals(lastName)) {
-                        DisplayManager.viewClient(client);
+                    for (Client client : hotel.getClients()) {
+                        if (client.getFirstName().equals(firstName) && client.getLastName().equals(lastName)) {
+                            count++;
+                        }
+                    }
+                    
+                    System.out.printf("Clients found: %d\n", count);
+
+                    for (Client client : hotel.getClients()) {
+                        if (client.getFirstName().equals(firstName) && client.getLastName().equals(lastName)) {
+                            DisplayManager.viewClient(client);
+                        }
                     }
                 }
                 break;
@@ -176,33 +199,30 @@ public class DisplayManager {
      * @param date the date to check how many Clients booked on that date
      */
     static public void viewRoomsDate(Hotel hotel, int date){
-        int availableRooms = 0;
         int bookedRooms = 0;
         
         for (Client client : hotel.getClients()) {
             if ((client.getCheckInDay() <= date && date <= client.getCheckOutDay())) {
                 bookedRooms++;
-            } else {
-                availableRooms++;
             }
         }
 
-        System.out.printf("Available rooms: %d\n", availableRooms);
+        System.out.printf("Available rooms: %d\n", hotel.getRoomCount() - bookedRooms);
         System.out.printf("Booked rooms: %d\n", bookedRooms);
     }
 
     /**
      * @author Ryan Gemal
-     * 
-     * @param hotel
-     * @param room
+     * Displays the availability of a given room.
+     * @param hotel the Hotel the Room is a part of
+     * @param room the Room that is being viewed
      */
-    static public void viewRoom(Hotel hotel, Room room){
+    static public void viewRoomAvailability(Hotel hotel, Room room){
         System.out.printf("Room name: %s%d\n", room.getRoomFloor(), room.getRoomNumber());
         System.out.printf("Base price: %.2f\n", room.getBasePrice());
         for(int i = 0; i < 31; i++){
             System.out.printf("%d-", i+1);
-            if(util.isRoomOccupied(hotel, room, i+1)){
+            if(Utilities.isRoomOccupied(hotel, room, i+1)){
                 System.out.printf("B");
             }
             else{
@@ -218,6 +238,7 @@ public class DisplayManager {
 
     /**
      * @author Ryan Gemal
+     * Displays a list of rooms a given Hotel has
      * @param hotel the Hotel's rooms to be viewed
      */
     static public void viewRooms(Hotel hotel){
@@ -229,6 +250,7 @@ public class DisplayManager {
 
     /**
      * @author Angela Domingo
+     * Displays the Client's details
      * @param client the Client to be viewed
      */
     static public void viewClient(Client client){

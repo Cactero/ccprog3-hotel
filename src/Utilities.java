@@ -40,13 +40,22 @@ public class Utilities {
         for (Client client : hotel.getClients()) {
             if ((client.getBookedRoom() == bookedRoom) && // checks if the rooms booked are the same rooms
                     ((client.getCheckInDay() < checkInDay && checkInDay <= client.getCheckOutDay()) || // checks if current client's range of dates contains new client's check in day
-                            (client.getCheckInDay() <= checkOutDay && checkOutDay < client.getCheckOutDay()))) { // checks if new client's range of dates contains current client's check in day) {
+                    (client.getCheckInDay() <= checkOutDay && checkOutDay < client.getCheckOutDay()) ||
+                    (checkInDay < client.getCheckInDay() && client.getCheckInDay() <= checkOutDay) || // checks if current client's range of dates contains new client's check in day
+                    (checkInDay <= client.getCheckOutDay() && client.getCheckOutDay() < checkOutDay))) { // checks if new client's range of dates contains current client's check in day) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * @author Ryan Gemal
+     * @param hotel the selected Hotel
+     * @param bookedRoom the booked room
+     * @param date the date to check if the Room is occupied or not
+     * @return if the room is occupied or not
+     */
     public static boolean isRoomOccupied(Hotel hotel, Room bookedRoom, int date){
         for (Client client : hotel.getClients()){
             if((client.getCheckInDay() <= date && date <= client.getCheckOutDay()) && (client.getBookedRoom() == bookedRoom))
@@ -57,6 +66,10 @@ public class Utilities {
         return false;
     }
 
+    /**
+     * A fool-proof integer input function that ensures only integers will pass.
+     * @return the integer that was correctly inputted
+     */
     public static int intInput(){
         boolean invalidInput;
         int integer = 0;

@@ -45,10 +45,18 @@ public class Room {
         this.hotelName = hotelName;
     }
 
+    /**
+     * This is a getter for the variable basePrice.
+     * @return the base price of the Room
+     */
     public float getBasePrice() {
         return basePrice;
     }
 
+    /**
+     * This is a setter for the variable basePrice.
+     * @param basePrice the new base price of the Room
+     */
     public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
     }

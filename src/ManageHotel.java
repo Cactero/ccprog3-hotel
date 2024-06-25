@@ -1,10 +1,19 @@
+/**
+ * @author Ryan Gemal
+ * @author Angela Domingo
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ManageHotel {
     private static Scanner sc = new Scanner(System.in);
-    private static Utilities util = new Utilities();
 
+    /**
+     * @author Ryan Gemal
+     * Adds a room to the selected Hotel.
+     * @param hotel the Hotel where the new Room will be added to
+     */
     public static void addRooms(Hotel hotel){
         String floor;
         int number = 0;
@@ -13,14 +22,12 @@ public class ManageHotel {
             System.out.println("Max amount of rooms in hotel reached.");
         } else {
             boolean hasConflict;
-            boolean invalidInput;
             do {
                 hasConflict = false;
-                invalidInput = true;
-                System.out.println("What floor will the room be? ");
+                System.out.print("What floor will the room be? ");
                 floor = sc.nextLine().toUpperCase();
-                System.out.println("What room number will the room be? (Numbers)");
-                number = util.intInput();
+                System.out.print("What room number will the room be? (Numbers)");
+                number = Utilities.intInput();
 
                 for(int i = 0; i < hotel.getRoomCount(); i++){
                     if(roomsMatch(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
@@ -33,23 +40,24 @@ public class ManageHotel {
             Room newRoom = new Room(floor, number, hotel.getBasePrice());
             hotel.addRoom(newRoom);
         }
-
-
     }
 
+    /**
+     * @author Ryan Gemal
+     * Removes a room from the selected Hotel.
+     * @param hotel the Hotel where the Room will be removed from
+     */
     public static void removeRooms(Hotel hotel){
         String floor = new String();
         int number = 0;
         boolean notFound;
-        boolean invalidInput;
         do {
             notFound = false;
-            invalidInput = true;
             DisplayManager.viewRooms(hotel);
-            System.out.println("What floor is the room to be removed? ");
+            System.out.print("What floor is the room to be removed? ");
             floor = sc.nextLine();
-            System.out.println("What room number is the room to be removed? ");
-            number = util.intInput();
+            System.out.print("What room number is the room to be removed? ");
+            number = Utilities.intInput();
             for(int i = 0; i < hotel.getRoomCount() && !notFound; i++){
                 if(roomsMatch(floor, number, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber())){
                     notFound = false;
@@ -64,6 +72,15 @@ public class ManageHotel {
 
     }
 
+    /**
+     * @author Ryan Gemal
+     * Checks if two rooms are the same based on their names.
+     * @param roomFloorA floor of the first room
+     * @param roomNumberA number of the first room
+     * @param roomFloorB floor of the second room
+     * @param roomNumberB number of the second room
+     * @return whether the rooms are the same or not
+     */
     public static boolean roomsMatch(String roomFloorA, int roomNumberA, String roomFloorB, int roomNumberB){
         return roomFloorA.equals(roomFloorB) && (roomNumberA == roomNumberB); // Duplicate found
     }
@@ -77,17 +94,20 @@ public class ManageHotel {
         }
     }
 
+    /**
+     * @author Ryan Gemal
+     * Updates the base price of the selected Hotel.
+     * @param hotel the selected Hotel where the base price will be updated
+     */
     public static void updateBasePrice(Hotel hotel){
         float newPrice = 0.0F;
         if(hotel.getClientCount() != 0){
             System.out.println("Sorry, but you cannot update the base price of a room while there are reservrations.");
         }
         else{
-            boolean invalidInput;
             do {
-                invalidInput = true;
                 System.out.println("Enter a room price (Must be at least 100)");
-                newPrice = (float) util.intInput();
+                newPrice = (float) Utilities.intInput();
                 if(newPrice < 100.0F) {
                     System.out.println("New price must be at least 100! Try again.");
                 }
@@ -97,52 +117,48 @@ public class ManageHotel {
         }
     }
 
+    /**
+     * @author Angela Domingo
+     * Removes a reservation from the hotel.
+     * @param hotel the Hotel where the reservation will be removed from
+     */
     public static void removeReservation(Hotel hotel){
         Client selectedClient;
         int choice = 0;
 
-        for (int i = 0; i < hotel.getClientCount(); i++) {
-            System.out.printf("Reservation %d:", i+1);
-            DisplayManager.viewClient(hotel.getClients().get(i));
+        if (hotel.getClientCount() == 0) {
+            System.out.println("There are no reservations in this hotel.");
+        } else {
+            for (int i = 0; i < hotel.getClientCount(); i++) {
+                System.out.printf("Reservation %d:", i+1);
+                DisplayManager.viewClient(hotel.getClients().get(i));
+            }
+    
+            do {
+                System.out.println("\nInput:");
+                choice = Utilities.intInput();
+    
+                if (!(1 <= choice && choice <= hotel.getClientCount())) {
+                    System.out.println("Option is incorrect.\n");
+                }
+            } while (!(1 <= choice && choice <= hotel.getClientCount()));
+    
+            selectedClient = hotel.getClients().get(choice-1);
+            hotel.removeClient(selectedClient);
         }
-        boolean invalidInput;
-        System.out.println("\nInput:");
-        choice = util.intInput();
-
-        if (1 <= choice && choice <= hotel.getClientCount()) {
-            System.out.println("Option is incorrect.\n");
-        }
-        while (1 <= choice && choice <= hotel.getClientCount());
-
-        selectedClient = hotel.getClients().get(choice-1);
-        hotel.removeClient(selectedClient);
     }
 
     public static void removeHotel(ArrayList<Hotel> hotels){
-        int choice = 0;
-        boolean invalidInput;
-
-        for (int i = 0; i < hotels.size(); i++) {
-            System.out.printf("Hotel %d: %s\n", i+1, hotels.get(i).getName());
-        }
-
-        do {
-            choice = util.intInput();
-
-
-            if (!(1 <= choice && choice <= hotels.size())) {
-                System.out.println("Option is incorrect.\n");
-            }
-        } while (!(1 <= choice && choice <= hotels.size()));
-
-        hotels.remove(choice-1);
+        Hotel selectedHotel;
+        selectedHotel = DisplayManager.chooseHotel(hotels);
+        hotels.remove(selectedHotel);
     }
 
 
     /**
      * @author Angela Domingo
+     * Adds a reservation to a hotel.
      * @param hotels the list of Hotels created
-     * @return a new Client object
      */
     public static void addReservation(ArrayList<Hotel> hotels){
 
@@ -152,24 +168,30 @@ public class ManageHotel {
         Room bookedRoom;
 
         do {
-            bookedHotel =  DisplayManager.showHotels(hotels);
+            bookedHotel =  DisplayManager.chooseHotel(hotels);
             DisplayManager.viewRooms(bookedHotel);
-            System.out.print("Enter room number to book into: ");
-            roomNumber = util.intInput();
+            do {
+                System.out.print("Enter room number to book into: ");
+                roomNumber = Utilities.intInput();
+                if (!(1 <= roomNumber && roomNumber <= bookedHotel.getRoomCount())) {
+                    System.out.println("");
+                }
+            } while (!(1 <= roomNumber && roomNumber <= bookedHotel.getRoomCount()));
+            
             bookedRoom = bookedHotel.getRoom(roomNumber - 1);
 
             System.out.print("Enter check-in date: ");
-            checkInDay = util.intInput();
+            checkInDay = Utilities.intInput();
             System.out.print("Enter check-out date: ");
-            checkOutDay = util.intInput();
+            checkOutDay = Utilities.intInput();
 
-            if (!util.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
+            if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
                 System.out.println("Your booking dates are not valid, please try again!");
-            } else if (util.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
+            } else if (Utilities.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
                 System.out.println("Your room is occupied during these dates, please try again.");
             }
 
-        } while (!util.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay) || util.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay));
+        } while (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay) || Utilities.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay));
 
         System.out.print("Enter client's last name: ");
         lastName = sc.nextLine();

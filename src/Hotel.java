@@ -1,3 +1,7 @@
+/**
+ * @author Ryan Gemal
+ */
+
 import java.util.ArrayList;
 
 public class Hotel {
@@ -7,7 +11,6 @@ public class Hotel {
     private float basePrice;
     private ArrayList<Client> clients; //arraylist for clients for variable amount of clients
     private int clientCount;
-    private static Utilities util = new Utilities();
 
     public Hotel(String name){
         this.name = name;
@@ -18,22 +21,44 @@ public class Hotel {
         this.clientCount = 0;
     }
 
+    
+    /** 
+     * This is a getter for name.
+     * @return the Hotel name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * This is a getter for roomCount.
+     * @return the room count of the Hotel
+     */
     public int getRoomCount() {
         return roomCount;
     }
 
+    /**
+     * This is a getter for a single room in the rooms array.
+     * @param option the index number of the selected Room
+     * @return the selected Room
+     */
     public Room getRoom(int option) {
         return rooms[option];
     }
 
+    /**
+     * This is a getter for basePrice.
+     * @return the base price of the Hotel
+     */
     public float getBasePrice() {
         return basePrice;
     }
 
+    /**
+     * This is a setter for name.
+     * @param name the new name of the Hotel
+     */
     public void setName(String name) {
         this.name = name;
         for (Room room : rooms) {
@@ -41,17 +66,26 @@ public class Hotel {
         }
     }
 
+    /**
+     * Adds a Room to the Hotel.
+     * @param room the Room to be added
+     */
     public void addRoom(Room room){
         rooms[roomCount] = room;
         rooms[roomCount].setHotelName(this.name);
         roomCount++;
     }
 
+    /**
+     * Removes a Room from the Hotel.
+     * @param hotel the Hotel
+     * @param room the Room to be removed
+     */
     public void removeRoom(Hotel hotel, Room room){
         boolean noReservations = true;
 
         for(int i = 0; i < 31; i++){
-            if(util.isRoomOccupied(hotel, room, i+1)){
+            if(Utilities.isRoomOccupied(hotel, room, i+1)){
                 noReservations = false;
             }
         }
@@ -74,10 +108,19 @@ public class Hotel {
             this.roomCount--;
         }
     }
+
+    /**
+     * This is a getter for rooms.
+     * @return the array of rooms of the Hotel
+     */
     public Room[] getRooms() {
         return rooms;
     }
 
+    /**
+     * This is a setter for basePrice.
+     * @param basePrice the new base price of the Hotel
+     */
     public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
 
@@ -86,24 +129,44 @@ public class Hotel {
         }
     }
 
+    /**
+     * This is a getter of clients.
+     * @return an ArrayList of Clients
+     */
     public ArrayList<Client> getClients() {
         return clients;
     }
 
+    /**
+     * This adds a new client to the Hotel.
+     * @param client the Client to be added
+     */
     public void addClient(Client client) {
         this.clients.add(client);
         clientCount = clients.size();
     }
 
+    /**
+     * This removes a client from the Hotel.
+     * @param client the Client to be removed
+     */
     public void removeClient(Client client){
         this.clients.remove(client);
         clientCount = clients.size();
     }
 
+    /**
+     * This is a getter for clientCount.
+     * @return the client count of the Hotel
+     */
     public int getClientCount(){
         return clientCount;
     }
 
+    /**
+     * This calculates the total reservation prices of the Hotel
+     * @return the total reservation prices of the Hotel
+     */
     public float getTotalReservationPrices(){
         float sum = 0;
         for(int i = 0; i < clientCount; i++){
