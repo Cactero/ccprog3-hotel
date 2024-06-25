@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class DisplayManager {
 
-    static private Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
+    private static Utilities util = new Utilities();
 
     /**
      * @author Ryan Gemal
@@ -26,11 +27,11 @@ public class DisplayManager {
         System.out.println("  5 - Exit Program");
 
         System.out.printf("Input: ");
-        int option = Integer.parseInt(sc.nextLine());
+        int option = util.intInput();
 
         while(option<1 || option>5){
             System.out.printf("Option is incorrect!\nInput: ");
-            option = Integer.parseInt(sc.nextLine());
+            option = util.intInput();
         }
         return option;
     }
@@ -53,13 +54,15 @@ public class DisplayManager {
         System.out.println("  7 - Back to main menu");
 
         System.out.printf("Input: ");
-        int option = Integer.parseInt(sc.nextLine());
+        int option = util.intInput();
 
-        while(option<1 || option>7){
+        while(option<1 || option>7) {
             System.out.printf("Option is incorrect!\nInput: ");
-            option = Integer.parseInt(sc.nextLine());
+            option = util.intInput();
+
+            return option;
         }
-        return option;
+        return 0;
     }
 
     /**
@@ -67,10 +70,10 @@ public class DisplayManager {
      * Prompts the user to enter a hotel name.
      * @return the hotel name entered
      */
-    static public String enterHotelName(){
-        System.out.printf("Enter hotel name: ");
-        String name = sc.nextLine();
-        return name;
+    public static String enterHotelName() {
+            System.out.printf("Enter hotel name: ");
+            String name = sc.nextLine();
+            return name;
     }
 
     /**
@@ -90,7 +93,7 @@ public class DisplayManager {
 
         do {
             System.out.printf("Input: ");
-            option = Integer.parseInt(sc.nextLine());
+            option = util.intInput();
             if (option<1 || option>hotels.size())
                 System.out.println("Option is incorrect!");
         } while (option<1 || option>hotels.size());
@@ -114,23 +117,23 @@ public class DisplayManager {
         System.out.println("1 - Total number of available and booked rooms for a selected date");
         System.out.println("2 - Information about a selected room");
         System.out.println("3 - Information about a selected reservation");
+        System.out.println("4 - Back to main menu");
 
         int choice;
 
         do {
             System.out.printf("Input: ");
-            sc.nextLine();
-            choice = Integer.parseInt(sc.nextLine());
-            if (!(1 <= choice && choice <= 3)) {
+            choice = util.intInput();
+            if (!(1 <= choice && choice <= 4)) {
                 System.out.println("Option is incorrect!");
             }
-        } while (!(1 <= choice && choice <= 3));
+        } while (!(1 <= choice && choice <= 4));
         
 
         switch (choice) {
             case 1:
                 System.out.printf("Enter a date: ");
-                int date = Integer.parseInt(sc.nextLine());
+                int date = util.intInput();
                 DisplayManager.viewRoomsDate(hotel, date);
                 break;
         
@@ -140,7 +143,7 @@ public class DisplayManager {
 
                 do {
                     System.out.printf("Enter choice: ");
-                    number = Integer.parseInt(sc.nextLine());
+                    number = util.intInput();
                     if (!(1 <= number && number <= hotel.getRoomCount())) {
                         System.out.println("Out of bounds, try again.");
                     }
@@ -199,7 +202,7 @@ public class DisplayManager {
         System.out.printf("Base price: %.2f\n", room.getBasePrice());
         for(int i = 0; i < 31; i++){
             System.out.printf("%d-", i+1);
-            if(ManageHotel.isRoomOccupied(hotel, room, i+1)){
+            if(util.isRoomOccupied(hotel, room, i+1)){
                 System.out.printf("B");
             }
             else{

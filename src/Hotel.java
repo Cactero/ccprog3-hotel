@@ -7,6 +7,7 @@ public class Hotel {
     private float basePrice;
     private ArrayList<Client> clients; //arraylist for clients for variable amount of clients
     private int clientCount;
+    private static Utilities util = new Utilities();
 
     public Hotel(String name){
         this.name = name;
@@ -46,16 +47,32 @@ public class Hotel {
         roomCount++;
     }
 
-    public void removeRoom(Room room){
-        for(int i = 0; i < this.roomCount; i++){
-            if(rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()){
-                for(int k = i; k < this.roomCount; k++){
-                    rooms[k] = rooms[k+1];
-                }
-                i--;
+    public void removeRoom(Hotel hotel, Room room){
+        boolean noReservations = true;
+
+        for(int i = 0; i < 31; i++){
+            if(util.isRoomOccupied(hotel, room, i+1)){
+                noReservations = false;
             }
         }
-        this.roomCount--;
+
+        if(roomCount == 1){
+            System.out.println("You cannot remove this room because it is the only room!");
+        }
+        else if (!noReservations){
+            System.out.println("You cannot remove this room because there is currently a reservation!");
+        }
+        else {
+            for (int i = 0; i < this.roomCount; i++) {
+                if (rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()) {
+                    for (int k = i; k < this.roomCount; k++) {
+                        rooms[k] = rooms[k + 1];
+                    }
+                    i--;
+                }
+            }
+            this.roomCount--;
+        }
     }
     public Room[] getRooms() {
         return rooms;
