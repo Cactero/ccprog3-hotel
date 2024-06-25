@@ -1,18 +1,16 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * Manages a Hotel or a list of Hotels.
  * @author Ryan Gemal
  * @author Angela Domingo
  */
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class ManageHotel {
     private static Scanner sc = new Scanner(System.in);
 
     /**
      * Adds a room to the selected Hotel.
-     * @author Ryan Gemal
      * @param hotel the Hotel where the new Room will be added to
      */
     public static void addRooms(Hotel hotel){
@@ -45,7 +43,6 @@ public class ManageHotel {
 
     /**
      * Removes a room from the selected Hotel.
-     * @author Ryan Gemal
      * @param hotel the Hotel where the Room will be removed from
      */
     public static void removeRooms(Hotel hotel){
@@ -75,7 +72,6 @@ public class ManageHotel {
 
     /**
      * Checks if two rooms are the same based on their names.
-     * @author Ryan Gemal
      * @param roomFloorA floor of the first room
      * @param roomNumberA number of the first room
      * @param roomFloorB floor of the second room
@@ -102,7 +98,6 @@ public class ManageHotel {
 
     /**
      * Updates the base price of the selected Hotel.
-     * @author Ryan Gemal
      * @param hotel the selected Hotel where the base price will be updated
      */
     public static void updateBasePrice(Hotel hotel){
@@ -125,7 +120,6 @@ public class ManageHotel {
 
     /**
      * Removes a reservation from the hotel.
-     * @author Angela Domingo
      * @param hotel the Hotel where the reservation will be removed from
      */
     public static void removeReservation(Hotel hotel){
@@ -156,7 +150,6 @@ public class ManageHotel {
 
     /**
      * Removes a hotel from the list of hotels.
-     * @author Angela Domingo
      * @param hotels the list of hotels where a Hotel will be removed
      */
     public static void removeHotel(ArrayList<Hotel> hotels){
@@ -168,7 +161,6 @@ public class ManageHotel {
 
     /**
      * Adds a reservation to a hotel.
-     * @author Angela Domingo
      * @param hotels the list of Hotels created
      */
     public static void addReservation(ArrayList<Hotel> hotels){

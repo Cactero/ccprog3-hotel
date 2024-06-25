@@ -1,10 +1,9 @@
+import java.util.ArrayList;
+
 /**
  * Hotel class, where the details of a Hotel is
  * @author Ryan Gemal
  */
-
-import java.util.ArrayList;
-
 public class Hotel {
     private String name;
     private int roomCount;

@@ -1,12 +1,16 @@
+import java.util.ArrayList;
+
 /**
+ * The main file of the entire program, which contains the main function.
  * @author Ryan Gemal
  * @author Angela Domingo
  */
-
-import java.util.ArrayList;
-
 public class Driver {
-
+    
+    /**
+     * The main function of the program.
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         boolean programStatus = true;
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
