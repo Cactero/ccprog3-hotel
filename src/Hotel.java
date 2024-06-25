@@ -63,7 +63,7 @@ public class Hotel {
             System.out.println("You cannot remove this room because there is currently a reservation!");
         }
         else {
-            for (int i = 0; i < this.roomCount; i++) {
+            for (int i = 0; i < this.roomCount-1; i++) {
                 if (rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()) {
                     for (int k = i; k < this.roomCount; k++) {
                         rooms[k] = rooms[k + 1];

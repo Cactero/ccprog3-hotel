@@ -62,7 +62,7 @@ public class DisplayManager {
 
             return option;
         }
-        return 0;
+        return option;
     }
 
     /**

@@ -18,7 +18,7 @@ public class ManageHotel {
                 hasConflict = false;
                 invalidInput = true;
                 System.out.println("What floor will the room be? ");
-                floor = sc.nextLine();
+                floor = sc.nextLine().toUpperCase();
                 System.out.println("What room number will the room be? (Numbers)");
                 number = util.intInput();
 
@@ -135,7 +135,7 @@ public class ManageHotel {
             }
         } while (!(1 <= choice && choice <= hotels.size()));
 
-        hotels.remove(choice);
+        hotels.remove(choice-1);
     }
 
 
