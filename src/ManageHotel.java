@@ -23,9 +23,9 @@ public class ManageHotel {
             boolean hasConflict;
             do {
                 hasConflict = false;
-                System.out.print("What floor will the room be? ");
+                System.out.print("What floor will the room be?: ");
                 floor = sc.nextLine().toUpperCase();
-                System.out.print("What room number will the room be? (Numbers)");
+                System.out.print("What room number will the room be? (Numbers): ");
                 number = Utilities.intInput();
 
                 for(int i = 0; i < hotel.getRoomCount(); i++){
