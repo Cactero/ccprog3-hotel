@@ -65,8 +65,8 @@ public class Hotel {
      */
     public void setName(String name) {
         this.name = name;
-        for (Room room : rooms) {
-            room.setHotelName(name);
+        for (int i = 0; i < roomCount; i++) {
+            rooms[i].setHotelName(name);
         }
     }
 
