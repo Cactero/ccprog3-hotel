@@ -103,6 +103,6 @@ public class Client {
      * @return the total reservation cost of the Client
      */
     public float getReservationCost(){
-        return bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
+        return bookedRoom.getTotalPrice() * (checkOutDay - checkInDay + 1);
     }
 }

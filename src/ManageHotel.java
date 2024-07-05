@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class ManageHotel {
     public static void addRooms(Hotel hotel){
         String floor;
         int number = 0;
+        int type = 0;
 
         if (hotel.getRoomCount() >= 50) {
             System.out.println("Max amount of rooms in hotel reached.");
@@ -34,9 +36,31 @@ public class ManageHotel {
                         hasConflict = true;
                     }
                 }
+
+                do {
+                    System.out.println("What type of room do you want to create?");
+                    System.out.println("[1] Standard (1x base rate)");
+                    System.out.println("[2] Deluxe (20% more from base rate)");
+                    System.out.println("[3] Executive (35% more from base rate)");
+                    System.out.printf(": ");
+                    type = Utilities.intInput(1, 3);
+                } while(type < 1 || type > 3);
+
             } while(hasConflict);
 
             Room newRoom = new Room(floor, number, hotel.getBasePrice());
+            switch(type){
+                case 1:
+                    newRoom.setRoomType("Standard");
+                    break;
+                case 2:
+                    newRoom.setRoomType("Deluxe");
+                    break;
+                case 3:
+                    newRoom.setRoomType("Executive");
+                    break;
+            }
+
             hotel.addRoom(newRoom);
         }
     }
@@ -103,7 +127,7 @@ public class ManageHotel {
     public static void updateBasePrice(Hotel hotel){
         float newPrice = 0.0F;
         if(hotel.getClientCount() != 0){
-            System.out.println("Sorry, but you cannot update the base price of a room while there are reservrations.");
+            System.out.println("Sorry, but you cannot update the base price of a room while there are reservations.");
         }
         else{
             do {
@@ -169,6 +193,8 @@ public class ManageHotel {
         int checkInDay, checkOutDay, roomNumber;
         Hotel bookedHotel;
         Room bookedRoom;
+        String option;
+        String discountCode;
 
         do {
             bookedHotel =  DisplayManager.chooseHotel(hotels);
@@ -200,8 +226,63 @@ public class ManageHotel {
         lastName = sc.nextLine();
         System.out.print("Enter client's first name: ");
         firstName = sc.nextLine();
+        /*
+
+        System.out.println("Do you have a discount code?");
+        System.out.println("[Y]es or [N]o?");
+        System.out.println(": ");
+        option = sc.nextLine();
+        if(option.equals("Y")){
+            System.out.println("Enter discount code: ");
+            discountCode = sc.nextLine();
+            if(discountCode.equals(""))
+
+        }
+
+         */
 
         bookedHotel.addClient(new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom));
+    }
+
+    public static void setRoomType(Hotel hotel){
+        int type = 0;
+        int number;
+        boolean isOccupied = false;
+        Room room;
+
+            DisplayManager.viewRooms(hotel);
+
+            do {
+                System.out.printf("Enter choice: ");
+                number = Utilities.intInput();
+                if (!(1 <= number && number <= hotel.getRoomCount())) {
+                    System.out.println("Out of bounds, try again.");
+                }
+            } while (!(1 <= number && number <= hotel.getRoomCount()));
+
+            room = hotel.getRoom(number-1);
+
+            if(Utilities.isRoomOccupied(hotel, room, 1, 30));
+            do {
+                System.out.println("What type of room do you want to change this room to?");
+                System.out.println("[1] Standard (1x base rate)");
+                System.out.println("[2] Deluxe (20% more from base rate)");
+                System.out.println("[3] Executive (35% more from base rate)");
+                System.out.printf(": ");
+                type = Utilities.intInput(1, 3);
+            } while(type < 1 || type > 3);
+
+            switch(type){
+                case 1:
+                    room.setRoomType("Standard");
+                    break;
+                case 2:
+                    room.setRoomType("Deluxe");
+                    break;
+                case 3:
+                    room.setRoomType("Executive");
+                    break;
+            }
 
     }
 }

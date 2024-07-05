@@ -90,4 +90,29 @@ public class Utilities {
         return integer;
     }
 
+    /**
+     * A fool-proof integer input function that ensures only integers will pass, with inputs for the minimum and maximum input accepted.
+     * @param min the minimum integer accepted (inclusive)
+     * @param max the maximum integer accepted (inclusive)
+     * @return the integer that was correctly inputted
+     */
+    public static int intInput(int min, int max){
+        boolean invalidInput;
+        int integer = 0;
+        do {
+            invalidInput = true;
+            try {
+                integer = Integer.parseInt(sc.nextLine());
+                invalidInput = false;
+            } catch (Exception NumberFormatException) {
+                System.out.println("You must input a number. Try again.");
+            }
+
+            if(integer < min || integer > max){
+                invalidInput = true;
+            }
+        } while(invalidInput);
+        return integer;
+    }
+
 }

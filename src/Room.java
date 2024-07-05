@@ -7,6 +7,9 @@ public class Room {
     private int roomNumber;
     private String hotelName;
     private float basePrice;
+    private float priceMultiplier;
+    private float totalPrice;
+    private String type;
 
     /**
      * The constructor for a Room object.
@@ -18,6 +21,8 @@ public class Room {
         this.roomFloor = roomFloor;
         this.roomNumber = roomNumber;
         this.basePrice = basePrice;
+        this.priceMultiplier = 1.0F;
+        this.totalPrice = basePrice * priceMultiplier;
     }
 
     /**
@@ -67,4 +72,27 @@ public class Room {
     public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
     }
+
+    public void setRoomType(String type){
+        this.type = type;
+        if(type.equals("Standard")){
+            this.priceMultiplier = 1.0F;
+        }
+
+        else if(type.equals("Deluxe")){
+            this.priceMultiplier = 1.2F;
+        }
+
+        else if(type.equals("Executive")){
+            this.priceMultiplier = 1.35F;
+        }
+
+        this.totalPrice = basePrice * priceMultiplier;
+    }
+
+    public float getTotalPrice() { return totalPrice; }
+
+    public String getType(){ return type; }
+
+    public float getPriceMultiplier(){ return priceMultiplier; }
 }

@@ -44,7 +44,8 @@ public class DisplayManager {
         System.out.println("  4 - Update the base price for a room");
         System.out.println("  5 - Remove reservation");
         System.out.println("  6 - Remove Hotel");
-        System.out.println("  7 - Back to main menu");
+        System.out.println("  7 - Set room type");
+        System.out.println("  8 - Back to main menu");
 
         int option;
 
@@ -52,10 +53,10 @@ public class DisplayManager {
             System.out.printf("Input: ");
             option = Utilities.intInput();
 
-            if(option<1 || option>7) {
+            if(option<1 || option>8) {
                 System.out.println("Option is incorrect!");
             }
-        } while (option<1 || option>7);
+        } while (option<1 || option>8);
 
         
         return option;
@@ -232,7 +233,7 @@ public class DisplayManager {
     static public void viewRooms(Hotel hotel){
         System.out.printf("Hotel: %s\n", hotel.getName());
         for(int i = 0; i < hotel.getRoomCount(); i++){
-            System.out.printf("Room %d: %s%d\n", i+1, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber());
+            System.out.printf("Room %d: %s%d (%s)\n", i+1, hotel.getRoom(i).getRoomFloor(), hotel.getRoom(i).getRoomNumber(), hotel.getRoom(i).getType());
         }
     }
 
@@ -243,7 +244,9 @@ public class DisplayManager {
     static public void viewClient(Client client){
         System.out.printf("\nClient Name: %s, %s\n", client.getLastName(), client.getFirstName());
         System.out.printf("Booked Room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
+        System.out.printf("Room type: %s\n", client.getBookedRoom().getType());
         System.out.printf("Base Reservation Price: %.2f\n", client.getBookedRoom().getBasePrice());
+        System.out.printf("Price multiplier: %.2f\n", client.getBookedRoom().getPriceMultiplier());
         System.out.printf("Check-in Date: %d\n", client.getCheckInDay());
         System.out.printf("Check-out Date: %d\n", client.getCheckOutDay());
         System.out.printf("Breakdown of Cost/Night: %d nights * $%.2f = \n", client.getDaysBooked(), client.getBookedRoom().getBasePrice());

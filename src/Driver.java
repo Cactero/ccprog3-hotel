@@ -80,6 +80,8 @@ public class Driver {
                             case 6:
                                 ManageHotel.removeHotel(hotels);
                                 break;
+                            case 7:
+                                ManageHotel.setRoomType(hotelOption);
                         }
                     }
                     break;
