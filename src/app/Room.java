@@ -1,3 +1,5 @@
+package app;
+
 /**
  * Room class, where details of a Hotel's Room is
  * @author Ryan Gemal

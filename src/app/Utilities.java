@@ -1,3 +1,5 @@
+package app;
+
 import java.util.Scanner;
 
 /**
@@ -113,6 +115,13 @@ public class Utilities {
             }
         } while(invalidInput);
         return integer;
+    }
+
+    public static boolean isPaydayDay(Client client){
+        boolean coversDay15 = (client.getCheckInDay() <= 15 && client.getCheckOutDay() > 15);
+        boolean coversDay30 = (client.getCheckInDay() <= 30 && client.getCheckOutDay() > 30);
+
+        return (coversDay15 && client.getCheckOutDay() != 15) || (coversDay30 && client.getCheckOutDay() != 30);
     }
 
 }

@@ -1,3 +1,5 @@
+package app;
+
 import java.util.ArrayList;
 
 /**
@@ -43,7 +45,7 @@ public class Driver {
                     break;
 
                 case 2: // View Hotel
-                    if(hotels.size() == 0){
+                    if(hotels.isEmpty()){
                         System.out.println("There are currently no hotels.");
                     }
                     else {
@@ -53,7 +55,7 @@ public class Driver {
                     break;
 
                 case 3: // Manage Hotel
-                    if(hotels.size() == 0){
+                    if(hotels.isEmpty()){
                         System.out.println("There are currently no hotels.");
                     }
                     else {
@@ -86,7 +88,7 @@ public class Driver {
                     }
                     break;
                 case 4: // Simulate Booking
-                    if (hotels.size() == 0) {
+                    if (hotels.isEmpty()) {
                         System.out.println("There are currently no hotels.");
                     } else {
                         ManageHotel.addReservation(hotels);

@@ -1,4 +1,7 @@
-import java.sql.SQLOutput;
+package app;
+
+import discount.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -188,60 +191,131 @@ public class ManageHotel {
      * @param hotels the list of Hotels created
      */
     public static void addReservation(ArrayList<Hotel> hotels){
-
+        boolean ongoing = true;
         String lastName, firstName;
-        int checkInDay, checkOutDay, roomNumber;
+        int checkInDay, checkOutDay = 0, roomNumber;
         Hotel bookedHotel;
         Room bookedRoom;
         String option;
         String discountCode;
-
-        do {
-            bookedHotel =  DisplayManager.chooseHotel(hotels);
-            DisplayManager.viewRooms(bookedHotel);
+        Discount discount = null;
+        outer:
+        while(ongoing) {
             do {
-                System.out.print("Enter room number to book into: ");
-                roomNumber = Utilities.intInput();
-                if (!(1 <= roomNumber && roomNumber <= bookedHotel.getRoomCount())) {
-                    System.out.println("");
+                bookedHotel = DisplayManager.chooseHotel(hotels);
+                DisplayManager.viewRooms(bookedHotel);
+                do {
+                    System.out.print("Enter room number to book into (0 to cancel): ");
+                    roomNumber = Utilities.intInput();
+                    if(roomNumber == 0){
+                        break outer;
+                    }
+                    else if (!(1 <= roomNumber && roomNumber <= bookedHotel.getRoomCount())) {
+                        System.out.println("Invalid room number, try again");
+                    }
+                } while (!(1 <= roomNumber && roomNumber <= bookedHotel.getRoomCount()));
+
+                bookedRoom = bookedHotel.getRoom(roomNumber - 1);
+
+                DisplayManager.viewRoomAvailability(bookedHotel, bookedRoom);
+
+                System.out.print("Enter check-in date (0 to cancel): ");
+                checkInDay = Utilities.intInput();
+                if (checkInDay == 0) {
+                    break outer;
                 }
-            } while (!(1 <= roomNumber && roomNumber <= bookedHotel.getRoomCount()));
-            
-            bookedRoom = bookedHotel.getRoom(roomNumber - 1);
+                System.out.print("Enter check-out date (0 to cancel): ");
+                checkOutDay = Utilities.intInput();
+                if (checkOutDay == 0) {
+                    break outer;
+                }
 
-            System.out.print("Enter check-in date: ");
-            checkInDay = Utilities.intInput();
-            System.out.print("Enter check-out date: ");
-            checkOutDay = Utilities.intInput();
+                if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
+                    System.out.println("Your booking dates are not valid, please try again!");
+                } else if (Utilities.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
+                    System.out.println("Your room is occupied during these dates, please try again.");
+                }
 
-            if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
-                System.out.println("Your booking dates are not valid, please try again!");
-            } else if (Utilities.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
-                System.out.println("Your room is occupied during these dates, please try again.");
+            } while (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay) || Utilities.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay));
+
+            System.out.print("Enter client's last name: ");
+            lastName = sc.nextLine();
+            System.out.print("Enter client's first name: ");
+            firstName = sc.nextLine();
+            if(lastName.isEmpty() || firstName.isEmpty()){
+                System.out.println("Name empty, cancelling reservation.");
+                break;
             }
 
-        } while (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay) || Utilities.isRoomOccupied(bookedHotel, bookedRoom, checkInDay, checkOutDay));
+            Client client = new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom);
+            bookedHotel.addClient(client);
 
-        System.out.print("Enter client's last name: ");
-        lastName = sc.nextLine();
-        System.out.print("Enter client's first name: ");
-        firstName = sc.nextLine();
-        /*
+            System.out.println("Do you have a discount code?");
+            System.out.println("[Y]es or [N]o?");
+            System.out.print(": ");
+            option = sc.nextLine();
+            if (option.equalsIgnoreCase("Y")) {
+                boolean isValid = false;
+                do {
+                    System.out.print("Enter discount code: ");
+                    discountCode = sc.nextLine();
+                    discount = getDiscountCode(discountCode);
 
-        System.out.println("Do you have a discount code?");
-        System.out.println("[Y]es or [N]o?");
-        System.out.println(": ");
-        option = sc.nextLine();
-        if(option.equals("Y")){
-            System.out.println("Enter discount code: ");
-            discountCode = sc.nextLine();
-            if(discountCode.equals(""))
+                    if ((discountCode.equals("I_WORK_HERE") || discountCode.equals("STAY4_GET1") || discountCode.equals("PAYDAY"))) {
 
+                        if (discountCode.equals("I_WORK_HERE")) {
+                            System.out.println("Discount valid!");
+                            System.out.println("You get a flat 10% discount to the final price of your reservation!");
+                            //isValid = true;
+                            break;
+                        } else if (discountCode.equals("STAY4_GET1")) {
+                            System.out.println("Discount valid!");
+                            if (client.getDaysBooked() >= 5) {
+                                System.out.println("Your first day of reservation is free!");
+                                //isValid = true;
+                                break;
+                            }
+                        } else {
+                            if (Utilities.isPaydayDay(client)) {
+                                System.out.println("Discount valid!");
+                                System.out.println("You get a 7% discount to your overall price!");
+                                //isValid = true;
+                                break;
+                            }
+                        }
+
+                    }
+                    if (!isValid) {
+                        System.out.println("Discount invalid! Try again?");
+                        System.out.println("[Y]es or [N]o?");
+                        String tryDiscountAgain = sc.nextLine();
+                        if (tryDiscountAgain.equalsIgnoreCase("n")) {
+                            isValid = true;
+                        }
+                    }
+                } while (!isValid);
+            }
+
+            if (discount != null) {
+                float discountPrice = discount.applyDiscount(client);
+                System.out.printf("Discounted: $%.2f\n", discountPrice);
+            }
+
+            System.out.printf("Total reservation price: $%.2f\n", client.getReservationCost());
         }
+    }
 
-         */
-
-        bookedHotel.addClient(new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom));
+    public static Discount getDiscountCode(String code){
+        switch(code){
+            case "I_WORK_HERE":
+                return new IWorkHereDiscount();
+            case "STAY4_GET1":
+                return new Stay4Get1Discount();
+            case "PAYDAY":
+                return new PaydayDiscount();
+            default:
+                return null;
+        }
     }
 
     public static void setRoomType(Hotel hotel){

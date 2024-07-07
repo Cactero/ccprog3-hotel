@@ -1,3 +1,5 @@
+package app;
+
 /**
  * Client class, where the client's reservation details are held.
  * @author Angela Domingo
@@ -9,6 +11,7 @@ public class Client {
     private int checkInDay;
     private int checkOutDay;
     private Room bookedRoom;
+    private float discountPrice;
 
     /**
      * Constructor of the Client object.
@@ -103,6 +106,10 @@ public class Client {
      * @return the total reservation cost of the Client
      */
     public float getReservationCost(){
-        return bookedRoom.getTotalPrice() * (checkOutDay - checkInDay + 1);
+        return bookedRoom.getTotalPrice() * (checkOutDay - checkInDay + 1) - getDiscountPrice();
     }
+
+    public float getDiscountPrice() { return discountPrice; }
+
+    public void setDiscountPrice(float discountPrice) { this.discountPrice = discountPrice; }
 }
