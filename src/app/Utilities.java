@@ -117,11 +117,24 @@ public class Utilities {
         return integer;
     }
 
+    public static boolean isDayBooked(Client client, int day){
+        boolean coversDay = (client.getCheckInDay() <= day && client.getCheckOutDay() > day);
+
+        return coversDay;
+    }
+
     public static boolean isPaydayDay(Client client){
-        boolean coversDay15 = (client.getCheckInDay() <= 15 && client.getCheckOutDay() > 15);
-        boolean coversDay30 = (client.getCheckInDay() <= 30 && client.getCheckOutDay() > 30);
+        boolean coversDay15 = isDayBooked(client, 15);
+        boolean coversDay30 = isDayBooked(client, 30);
 
         return (coversDay15 && client.getCheckOutDay() != 15) || (coversDay30 && client.getCheckOutDay() != 30);
     }
 
+    public static float getFinalPrice(Client client){
+        float currentPrice = 0F;
+        for(int i = client.getCheckInDay(); i < client.getCheckOutDay()+1; i++){
+            //if(
+        }
+        return currentPrice;
+    }
 }

@@ -257,5 +257,4 @@ public class DisplayManager {
         System.out.printf("Discount: $%.2f\n", client.getDiscountPrice());
         System.out.printf("Total Reservation Price: $%.2f\n\n", client.getReservationCost());
     }
-
 }

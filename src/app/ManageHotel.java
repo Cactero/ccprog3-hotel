@@ -198,7 +198,7 @@ public class ManageHotel {
         Room bookedRoom;
         String option;
         String discountCode;
-        Discount discount = null;
+        PriceModifier discount = null;
         outer:
         while(ongoing) {
             do {
@@ -297,7 +297,7 @@ public class ManageHotel {
             }
 
             if (discount != null) {
-                float discountPrice = discount.applyDiscount(client);
+                float discountPrice = discount.applyPriceModifier(client);
                 System.out.printf("Discounted: $%.2f\n", discountPrice);
             }
 
@@ -305,7 +305,7 @@ public class ManageHotel {
         }
     }
 
-    public static Discount getDiscountCode(String code){
+    public static PriceModifier getDiscountCode(String code){
         switch(code){
             case "I_WORK_HERE":
                 return new IWorkHereDiscount();
@@ -342,7 +342,7 @@ public class ManageHotel {
                 System.out.println("[1] Standard (1x base rate)");
                 System.out.println("[2] Deluxe (20% more from base rate)");
                 System.out.println("[3] Executive (35% more from base rate)");
-                System.out.printf(": ");
+                System.out.print(": ");
                 type = Utilities.intInput(1, 3);
             } while(type < 1 || type > 3);
 
