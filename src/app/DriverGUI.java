@@ -8,6 +8,6 @@ public class DriverGUI {
     ArrayList<Hotel> hotels = new ArrayList<Hotel>();
 
     public static void main(String[] args) {
-        MainMenuModel mainMenuModel = new MainMenuModel();
+        new MainMenuModel();
     }
 }

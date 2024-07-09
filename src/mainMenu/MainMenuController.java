@@ -5,20 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenuController {
-    private JButton button1;
+    private JButton createHotelButton;
     private JPanel panel1;
     private final MainMenuModel mainMenuModel;
+    private MainMenuView mainMenuView;
 
     public MainMenuController(MainMenuModel mainMenuModel) {
         this.mainMenuModel = mainMenuModel;
+        this.mainMenuView = new MainMenuView();
 
-        JFrame frame = new JFrame("App");
-        frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-
-        button1.addActionListener(new ActionListener() {
+        mainMenuView.addCreateHotelButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //JOptionPane.showMessageDialog(null, "Create hotel");

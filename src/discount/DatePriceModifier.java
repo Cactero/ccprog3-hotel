@@ -2,7 +2,7 @@ package discount;
 
 import app.Client;
 
-public class DatePriceModifier implements PriceModifier {
+public class DatePriceModifier implements Discount {
     @Override
-    public float applyPriceModifier(Client client){ return 0F; };
+    public float applyDiscount(Client client){ return 0F; };
 }

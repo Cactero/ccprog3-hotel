@@ -10,7 +10,7 @@ public class MainMenuModel {
     }
 
     public static void createHotel(){
-        CreateHotelModel createHotelController = new CreateHotelModel();
+        new CreateHotelModel();
     }
 
 

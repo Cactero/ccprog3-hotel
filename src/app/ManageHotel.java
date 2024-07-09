@@ -198,7 +198,7 @@ public class ManageHotel {
         Room bookedRoom;
         String option;
         String discountCode;
-        PriceModifier discount = null;
+        Discount discount = null;
         outer:
         while(ongoing) {
             do {
@@ -297,7 +297,7 @@ public class ManageHotel {
             }
 
             if (discount != null) {
-                float discountPrice = discount.applyPriceModifier(client);
+                float discountPrice = discount.applyDiscount(client);
                 System.out.printf("Discounted: $%.2f\n", discountPrice);
             }
 
@@ -305,7 +305,7 @@ public class ManageHotel {
         }
     }
 
-    public static PriceModifier getDiscountCode(String code){
+    public static Discount getDiscountCode(String code){
         switch(code){
             case "I_WORK_HERE":
                 return new IWorkHereDiscount();
@@ -321,7 +321,6 @@ public class ManageHotel {
     public static void setRoomType(Hotel hotel){
         int type = 0;
         int number;
-        boolean isOccupied = false;
         Room room;
 
             DisplayManager.viewRooms(hotel);
