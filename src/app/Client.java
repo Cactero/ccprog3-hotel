@@ -17,7 +17,7 @@ public class Client {
     private Room bookedRoom;
     private float normalPrice;
     private float finalPrice;
-    private ArrayList<DatePriceModifier> datePriceModifiers;
+    private ArrayList<String> discountsUsed;
 
     /**
      * Constructor of the Client object.
@@ -33,9 +33,9 @@ public class Client {
         this.checkInDay = checkInDay;
         this.checkOutDay = checkOutDay;
         this.bookedRoom = bookedRoom;
-        this.normalPrice = bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
+        this.normalPrice = bookedRoom.getUpdatedPrice() * (checkOutDay - checkInDay);
         this.finalPrice = this.normalPrice;
-        this.datePriceModifiers = new ArrayList<DatePriceModifier>();
+        this.discountsUsed = new ArrayList<>();
     }
 
     /**
@@ -84,7 +84,7 @@ public class Client {
      */
     public void setCheckInDay(int checkInDay) {
         this.checkInDay = checkInDay;
-        this.normalPrice = bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
+        this.normalPrice = bookedRoom.getUpdatedPrice() * getNightsBooked();
     }
 
     /**
@@ -101,15 +101,15 @@ public class Client {
      */
     public void setCheckOutDay(int checkOutDay) {
         this.checkOutDay = checkOutDay;
-        this.normalPrice = bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
+        this.normalPrice = bookedRoom.getBasePrice() * getNightsBooked();
     }
 
     /**
-     * This calculates the number of days the client has booked.
-     * @return the number of days the client booked the Room
+     * This calculates the number of nights the client has booked.
+     * @return the number of nights the client booked the Room
      */
-    public int getDaysBooked(){
-        return checkOutDay - checkInDay + 1;
+    public int getNightsBooked(){
+        return checkOutDay - checkInDay;
     }
 
     /**
@@ -128,7 +128,15 @@ public class Client {
         return this.finalPrice;
     }
 
-    public void addDatePriceModifier(DatePriceModifier datePriceModifier) {
-        this.datePriceModifiers.add(datePriceModifier);
+    public void addDiscountsUsed(ArrayList<String> names){
+        this.discountsUsed.addAll(names);
+    }
+
+    public void addDiscountsUsed(String name){
+        this.discountsUsed.add(name);
+    }
+
+    public ArrayList<String> getDiscountsUsed(){
+        return discountsUsed;
     }
 }

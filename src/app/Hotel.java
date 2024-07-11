@@ -15,7 +15,7 @@ public class Hotel {
     private float basePrice;
     private ArrayList<Client> clients; //arraylist for clients for variable amount of clients
     private int clientCount;
-    private ArrayList<DatePriceModifier> datePriceModifiers;
+    private DatePriceModifier datePriceModifier;
 
     /**
      * The constructor for the Hotel object.
@@ -28,7 +28,7 @@ public class Hotel {
         this.basePrice = 1299; //default as stated in specs
         this.clients = new ArrayList<Client>();
         this.clientCount = 0;
-        this.datePriceModifiers = new ArrayList<DatePriceModifier>();
+        this.datePriceModifier = new DatePriceModifier();
     }
 
     
@@ -185,16 +185,4 @@ public class Hotel {
         return sum;
     }
 
-    public ArrayList<DatePriceModifier> getDatePriceModifiers() {
-        return datePriceModifiers;
-    }
-
-    public void addDatePriceModifier(DatePriceModifier datePriceModifier) {
-        this.datePriceModifiers.add(datePriceModifier);
-        for (Client client : clients){
-            if (client != null){
-                client.addDatePriceModifier(datePriceModifier);
-            }
-        }
-    }
 }

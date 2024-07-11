@@ -3,6 +3,11 @@ package discount;
 import app.*;
 
 public class IWorkHereDiscount implements Discount {
+
+    public String getDiscountName() {
+        return "I Work Here";
+    }
+
     @Override
     public float applyDiscount(Client client) {
         // apply discount to final price

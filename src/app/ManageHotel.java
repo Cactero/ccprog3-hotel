@@ -270,7 +270,7 @@ public class ManageHotel {
                             break;
                         } else if (discountCode.equals("STAY4_GET1")) {
                             System.out.println("Discount valid!");
-                            if (client.getDaysBooked() >= 5) {
+                            if (client.getNightsBooked() >= 5) {
                                 System.out.println("Your first day of reservation is free!");
                                 //isValid = true;
                                 break;

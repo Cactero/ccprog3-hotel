@@ -5,24 +5,39 @@ import app.Client;
 import java.util.ArrayList;
 
 public class DatePriceModifier implements Discount {
-    ArrayList<Integer> affectedDates;
-    float modifiedRate;
+    private float[] modifiedRates;
+    private ArrayList<String> dpmNames;
 
-    public DatePriceModifier(ArrayList<Integer> affectedDates, float modifiedRate){
-        this.affectedDates = affectedDates;
-        this.modifiedRate = modifiedRate;
+    public DatePriceModifier(){
+        this.dpmNames = new ArrayList<>();
+        this.modifiedRates = new float[31];
+
+        for (int i = 0; i < 31; i++) {
+            this.modifiedRates[i] = 1f;
+        }
+    }
+
+    public ArrayList<String> getDpmNames(){
+        return dpmNames;
+    }
+
+    public void addAffectedDates(String discountName, ArrayList<Integer> affectedDates, float modifiedRate){
+        for (int affectedDate : affectedDates){
+            modifiedRates[affectedDate-1] = modifiedRate;
+        }
+        dpmNames.add(discountName);
     }
 
     @Override
     public float applyDiscount(Client client){
-        float finalPrice = client.getNormalPrice();
+        float baseRate = client.getBookedRoom().getBasePrice();
+        float finalPrice = 0f;
 
-        for (int i = client.getCheckInDay(); i <= client.getCheckOutDay(); i++) {
-            if (affectedDates.contains(i)){
-                finalPrice *= modifiedRate;
-            }
+        for (int i = client.getCheckInDay(); i < client.getCheckOutDay(); i++) {
+            finalPrice += (baseRate * modifiedRates[i-1]);
         }
 
+        client.addDiscountsUsed(this.dpmNames);
         return finalPrice;
     }
 }

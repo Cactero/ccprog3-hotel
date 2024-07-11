@@ -212,7 +212,7 @@ public class DisplayManager {
     static public void viewRoomAvailability(Hotel hotel, Room room){
         System.out.printf("Room name: %s%d\n", room.getRoomFloor(), room.getRoomNumber());
         System.out.printf("Base price: %.2f\n", room.getBasePrice());
-        System.out.printf("Price per night: %.2f\n", room.getTotalPrice());
+        System.out.printf("Price per night: %.2f\n", room.getUpdatedPrice());
         for(int i = 0; i < 31; i++){
             System.out.printf("%d-", i+1);
             if(Utilities.isRoomOccupied(hotel, room, i+1)){
@@ -245,16 +245,21 @@ public class DisplayManager {
      * @param client the Client to be viewed
      */
     static public void viewClient(Client client){
-        System.out.printf("\nClient Name: %s, %s\n", client.getLastName(), client.getFirstName());
-        System.out.printf("Booked Room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
+        System.out.printf("\nClient name: %s, %s\n", client.getLastName(), client.getFirstName());
+        System.out.printf("Booked room: %s%d\n", client.getBookedRoom().getRoomFloor(), client.getBookedRoom().getRoomNumber());
         System.out.printf("Room type: %s\n", client.getBookedRoom().getType());
-        System.out.printf("Base Reservation Price: $%.2f\n", client.getBookedRoom().getBasePrice());
-        System.out.printf("Price multiplier: %.2fX\n", client.getBookedRoom().getPriceMultiplier());
-        System.out.printf("Price per night: $%.2f\n", client.getBookedRoom().getTotalPrice());
         System.out.printf("Check-in Date: %d\n", client.getCheckInDay());
-        System.out.printf("Check-out Date: %d\n", client.getCheckOutDay());
-        System.out.printf("Breakdown of Cost/Night: %d nights * $%.2f = $%.2f\n", client.getDaysBooked(), client.getBookedRoom().getTotalPrice(), client.getDaysBooked() * client.getBookedRoom().getTotalPrice());
-        System.out.printf("Discount: $%.2f\n", client.getTotalPrice());
-        System.out.printf("Total Reservation Price: $%.2f\n\n", client.getNormalPrice());
+        System.out.printf("Check-out Date: %d\n\n", client.getCheckOutDay());
+        System.out.println("Breakdown of final reservation cost:");
+        System.out.printf("Base reservation price of room: $%.2f\n", client.getBookedRoom().getBasePrice());
+        System.out.printf("Price multiplier: %.2fX\n", client.getBookedRoom().getPriceMultiplier());
+        System.out.printf("Price per night: $%.2f\n", client.getBookedRoom().getUpdatedPrice());
+        System.out.printf("Total original base reservation cost: $%.2f\n", client.getNormalPrice());
+        System.out.print("Discounts used: ");
+        for (int i = 0; i < client.getDiscountsUsed().size(); i++) {
+            System.out.print(client.getDiscountsUsed().get(i));
+            if (i < client.getDiscountsUsed().size() - 1) System.out.print(", ");
+        }
+        System.out.printf("\nTotal Reservation Price: $%.2f\n\n", client.getFinalPrice());
     }
 }

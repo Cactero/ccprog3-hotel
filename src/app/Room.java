@@ -10,7 +10,7 @@ public class Room {
     private String hotelName;
     private float basePrice;
     private float priceMultiplier;
-    private float totalPrice;
+    private float updatedPrice;
     private String type;
 
     /**
@@ -24,7 +24,7 @@ public class Room {
         this.roomNumber = roomNumber;
         this.basePrice = basePrice;
         this.priceMultiplier = 1.0F;
-        this.totalPrice = basePrice * priceMultiplier;
+        this.updatedPrice = basePrice * priceMultiplier;
     }
 
     /**
@@ -89,10 +89,10 @@ public class Room {
             this.priceMultiplier = 1.35F;
         }
 
-        this.totalPrice = basePrice * priceMultiplier;
+        this.updatedPrice = basePrice * priceMultiplier;
     }
 
-    public float getTotalPrice() { return totalPrice; }
+    public float getUpdatedPrice() { return updatedPrice; }
 
     public String getType(){ return type; }
 
