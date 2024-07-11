@@ -301,7 +301,7 @@ public class ManageHotel {
                 System.out.printf("Discounted: $%.2f\n", discountPrice);
             }
 
-            System.out.printf("Total reservation price: $%.2f\n", client.getReservationCost());
+            System.out.printf("Total reservation price: $%.2f\n", client.getNormalPrice());
         }
     }
 

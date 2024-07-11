@@ -1,5 +1,9 @@
 package app;
 
+import discount.DatePriceModifier;
+
+import java.util.ArrayList;
+
 /**
  * Client class, where the client's reservation details are held.
  * @author Angela Domingo
@@ -11,7 +15,9 @@ public class Client {
     private int checkInDay;
     private int checkOutDay;
     private Room bookedRoom;
-    private float discountPrice;
+    private float normalPrice;
+    private float finalPrice;
+    private ArrayList<DatePriceModifier> datePriceModifiers;
 
     /**
      * Constructor of the Client object.
@@ -27,6 +33,9 @@ public class Client {
         this.checkInDay = checkInDay;
         this.checkOutDay = checkOutDay;
         this.bookedRoom = bookedRoom;
+        this.normalPrice = bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
+        this.finalPrice = this.normalPrice;
+        this.datePriceModifiers = new ArrayList<DatePriceModifier>();
     }
 
     /**
@@ -75,6 +84,7 @@ public class Client {
      */
     public void setCheckInDay(int checkInDay) {
         this.checkInDay = checkInDay;
+        this.normalPrice = bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
     }
 
     /**
@@ -91,6 +101,7 @@ public class Client {
      */
     public void setCheckOutDay(int checkOutDay) {
         this.checkOutDay = checkOutDay;
+        this.normalPrice = bookedRoom.getBasePrice() * (checkOutDay - checkInDay + 1);
     }
 
     /**
@@ -102,14 +113,22 @@ public class Client {
     }
 
     /**
-     * This calculates the total reservation cost of the Client.
-     * @return the total reservation cost of the Client
+     * This calculates the original reservation cost of the Client without the discounts.
+     * @return the original reservation cost of the Client
      */
-    public float getReservationCost(){
-        return bookedRoom.getTotalPrice() * (checkOutDay - checkInDay + 1) - getDiscountPrice();
+    public float getNormalPrice(){
+        return normalPrice;
     }
 
-    public float getDiscountPrice() { return discountPrice; }
+    public void setFinalPrice(float finalPrice){
+        this.finalPrice = finalPrice;
+    }
 
-    public void setDiscountPrice(float discountPrice) { this.discountPrice = discountPrice; }
+    public float getFinalPrice() {
+        return this.finalPrice;
+    }
+
+    public void addDatePriceModifier(DatePriceModifier datePriceModifier) {
+        this.datePriceModifiers.add(datePriceModifier);
+    }
 }

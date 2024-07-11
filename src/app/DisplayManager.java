@@ -254,7 +254,7 @@ public class DisplayManager {
         System.out.printf("Check-in Date: %d\n", client.getCheckInDay());
         System.out.printf("Check-out Date: %d\n", client.getCheckOutDay());
         System.out.printf("Breakdown of Cost/Night: %d nights * $%.2f = $%.2f\n", client.getDaysBooked(), client.getBookedRoom().getTotalPrice(), client.getDaysBooked() * client.getBookedRoom().getTotalPrice());
-        System.out.printf("Discount: $%.2f\n", client.getDiscountPrice());
-        System.out.printf("Total Reservation Price: $%.2f\n\n", client.getReservationCost());
+        System.out.printf("Discount: $%.2f\n", client.getTotalPrice());
+        System.out.printf("Total Reservation Price: $%.2f\n\n", client.getNormalPrice());
     }
 }
