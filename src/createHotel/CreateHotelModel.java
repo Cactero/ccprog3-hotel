@@ -26,8 +26,8 @@ public class CreateHotelModel {
         new MainMenuModel(hotels);
     }
 
-    public void createRoom(boolean fromCreateHotel){
-        new CreateRoomModel(hotels, fromCreateHotel);
+    public void createRoom(Hotel hotel, boolean fromCreateHotel){
+        new CreateRoomModel(hotels, hotel, fromCreateHotel);
     }
 
 }

@@ -29,9 +29,10 @@ public class CreateHotelController {
                 }
 
                 if (!hasConflict){
-                    createHotelModel.addHotel(new Hotel(hotelName));
+                    Hotel hotel = new Hotel(hotelName);
+                    createHotelModel.addHotel(hotel);
                     createHotelView.dispose();
-                    createHotelModel.createRoom(true);
+                    createHotelModel.createRoom(hotel,true);
                 } else {
                     JOptionPane.showMessageDialog(null, "A hotel with the same name already exists.", "Invalid Hotel Name", JOptionPane.PLAIN_MESSAGE);
                 }

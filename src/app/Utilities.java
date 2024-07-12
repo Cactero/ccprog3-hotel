@@ -129,12 +129,4 @@ public class Utilities {
 
         return (coversDay15 && client.getCheckOutDay() != 15) || (coversDay30 && client.getCheckOutDay() != 30);
     }
-
-    public static float getFinalPrice(Client client){
-        float currentPrice = 0F;
-        for(int i = client.getCheckInDay(); i < client.getCheckOutDay()+1; i++){
-            //if(
-        }
-        return currentPrice;
-    }
 }

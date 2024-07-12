@@ -11,6 +11,6 @@ import java.util.Date;
 
 public class DriverGUI {
     public static void main(String[] args) {
-        new MainMenuModel();
+        new MainMenuModel(new ArrayList<Hotel>());
     }
 }

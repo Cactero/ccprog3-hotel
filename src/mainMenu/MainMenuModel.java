@@ -15,11 +15,6 @@ public class MainMenuModel {
         new MainMenuController(this);
     }
 
-    public MainMenuModel(){
-        this.hotels = new ArrayList<>();
-        new MainMenuController(this);
-    }
-
     public void createHotel(){
         new CreateHotelModel(hotels);
     }

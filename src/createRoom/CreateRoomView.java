@@ -1,17 +1,29 @@
 package createRoom;
 
+import app.Room;
 import mainMenu.Button;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class CreateRoomView extends JFrame{
+
     private JPanel contentHolder;
     private Image bgImage;
+
+    private JPanel roomInfoHolder;
+    private JTextField roomFloorField;
+    private JTextField roomNumberField;
+    private JTextField roomTypeField;
+
+    private JPanel buttonsHolder;
+    private JButton mainMenuButton;
+    private JButton createRoomButton;
 
     public CreateRoomView(boolean fromCreateHotel){
         // background image
@@ -25,6 +37,26 @@ public class CreateRoomView extends JFrame{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        roomInfoHolder = new JPanel();
+        roomFloorField = new JTextField();
+        roomNumberField = new JTextField();
+        roomTypeField = new JTextField();
+        roomInfoHolder.add(roomFloorField);
+        roomInfoHolder.add(roomNumberField);
+        roomInfoHolder.add(roomTypeField);
+        contentHolder.add(roomInfoHolder, BorderLayout.CENTER);
+
+        // cancel room creation and create room buttons
+        buttonsHolder = new JPanel();
+        buttonsHolder.setOpaque(false);
+        mainMenuButton = new Button("Cancel");
+        if (!fromCreateHotel){
+            buttonsHolder.add(mainMenuButton);
+        }
+        createRoomButton = new Button("Create");
+        buttonsHolder.add(createRoomButton);
+        contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
         setContentPane(contentHolder);
@@ -40,6 +72,11 @@ public class CreateRoomView extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
 
-    }
 
+    }
+    public void addCreateRoomButtonListener (ActionListener listener) {createRoomButton.addActionListener(listener);}
+    public void addMainMenuButtonListener (ActionListener listener) {mainMenuButton.addActionListener(listener);}
+    public String getRoomFloor() {return roomFloorField.getText();}
+    public String getRoomNumber() {return roomNumberField.getText();}
+    public String getRoomType() {return roomTypeField.getText();}
 }
