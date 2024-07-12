@@ -185,4 +185,8 @@ public class Hotel {
         return sum;
     }
 
+    public void addDPMAffectedDates(String discountName, ArrayList<Integer> affectedDates, float modifiedRate){
+        datePriceModifier.addAffectedDates(discountName, affectedDates, modifiedRate);
+    }
+
 }
