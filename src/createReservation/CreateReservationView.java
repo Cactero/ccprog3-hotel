@@ -15,7 +15,7 @@ public class CreateReservationView extends JFrame {
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
-            contentHolder = new JPanel(new GridLayout(0, 2)) {
+            contentHolder = new JPanel(new BorderLayout()) {
                 @Override public void paintComponent(Graphics g) {
                     g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
                 }
@@ -24,10 +24,7 @@ public class CreateReservationView extends JFrame {
             throw new RuntimeException(e);
         }
 
-
-
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
-        setLayout(new GridLayout());
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
@@ -37,7 +34,7 @@ public class CreateReservationView extends JFrame {
             }
         });
         setSize(1280, 720);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 

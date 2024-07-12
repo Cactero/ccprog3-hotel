@@ -1,17 +1,35 @@
 package mainMenu;
 
+import app.Hotel;
 import createHotel.CreateHotelModel;
+import createReservation.CreateReservationModel;
+import manageHotel.ManageHotelModel;
+
+import java.util.ArrayList;
 
 public class MainMenuModel {
-    private MainMenuController mainMenuController;
+    private ArrayList<Hotel> hotels;
+
+    public MainMenuModel(ArrayList<Hotel> hotels){
+        this.hotels = hotels;
+        new MainMenuController(this);
+    }
 
     public MainMenuModel(){
-        this.mainMenuController = new MainMenuController(this);
+        this.hotels = new ArrayList<>();
+        new MainMenuController(this);
     }
 
-    public static void createHotel(){
-        new CreateHotelModel();
+    public void createHotel(){
+        new CreateHotelModel(hotels);
     }
 
+    public void manageHotel(){
+        new ManageHotelModel(hotels);
+    }
+
+    public void createReservation(){
+        new CreateReservationModel(hotels);
+    }
 
 }

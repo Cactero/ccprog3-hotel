@@ -1,14 +1,33 @@
 package createHotel;
 
 import app.*;
+import createRoom.CreateRoomModel;
+import mainMenu.MainMenuModel;
+
+import java.util.ArrayList;
 
 public class CreateHotelModel {
-    private CreateHotelController createHotelController;
-    private Hotel hotel;
+    private ArrayList<Hotel> hotels;
 
-    public CreateHotelModel(){
-        this.createHotelController = new CreateHotelController(this, hotel);
+    public CreateHotelModel(ArrayList<Hotel> hotels){
+        this.hotels = hotels;
+        new CreateHotelController(this);
     }
 
+    public ArrayList<Hotel> getHotels(){
+        return this.hotels;
+    }
+
+    public void addHotel(Hotel hotel){
+        hotels.add(hotel);
+    }
+
+    public void mainMenu(){
+        new MainMenuModel(hotels);
+    }
+
+    public void createRoom(boolean fromCreateHotel){
+        new CreateRoomModel(hotels, fromCreateHotel);
+    }
 
 }

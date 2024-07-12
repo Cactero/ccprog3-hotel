@@ -1,5 +1,6 @@
 package app;
 
+import com.sun.tools.javac.Main;
 import discount.DatePriceModifier;
 import mainMenu.MainMenuController;
 import mainMenu.MainMenuModel;
@@ -9,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DriverGUI {
-    ArrayList<Hotel> hotels = new ArrayList<Hotel>();
-
     public static void main(String[] args) {
         new MainMenuModel();
     }

@@ -1,4 +1,6 @@
-package manageHotel;
+package createRoom;
+
+import mainMenu.Button;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -7,18 +9,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-public class ManageHotelView extends JFrame {
-
+public class CreateRoomView extends JFrame{
     private JPanel contentHolder;
     private Image bgImage;
 
-
-
-    public ManageHotelView(){
+    public CreateRoomView(boolean fromCreateHotel){
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
-            contentHolder = new JPanel(new GridLayout(0, 2)) {
+            contentHolder = new JPanel(new BorderLayout()) {
                 @Override public void paintComponent(Graphics g) {
                     g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
                 }
@@ -27,10 +26,7 @@ public class ManageHotelView extends JFrame {
             throw new RuntimeException(e);
         }
 
-
-
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
-        setLayout(new GridLayout());
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
@@ -45,6 +41,5 @@ public class ManageHotelView extends JFrame {
         setVisible(true);
 
     }
-
 
 }

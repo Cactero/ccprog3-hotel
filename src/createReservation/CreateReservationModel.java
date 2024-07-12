@@ -9,6 +9,9 @@ public class CreateReservationModel {
 
     public CreateReservationModel(ArrayList<Hotel> hotels){
         this.hotels = hotels;
+        new CreateReservationController(this);
     }
+
+
 
 }

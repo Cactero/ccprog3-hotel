@@ -20,6 +20,7 @@ public class MainMenuView extends JFrame{
     private JButton createHotelButton;
     private JButton manageHotelButton;
     private JButton createReservationButton;
+    private JButton exitButton;
 
     private ImageIcon hotelImage;
     private JLabel hotelLabel;
@@ -127,9 +128,11 @@ public class MainMenuView extends JFrame{
         createHotelButton = new Button("Create Hotel");
         manageHotelButton = new Button("Manage Hotel");
         createReservationButton = new Button("Make Reservation");
+        exitButton = new Button("Exit Program");
         rightSide.add(createHotelButton);
         rightSide.add(manageHotelButton);
         rightSide.add(createReservationButton);
+        rightSide.add(exitButton);
 
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
@@ -155,6 +158,9 @@ public class MainMenuView extends JFrame{
     }
 
     public void addCreateHotelButtonListener(ActionListener listener) {createHotelButton.addActionListener(listener);}
+    public void addManageHotelButtonListener(ActionListener listener) {manageHotelButton.addActionListener(listener);}
+    public void addCreateReservationButtonListener(ActionListener listener) {createReservationButton.addActionListener(listener);}
+    public void addExitButtonListener(ActionListener listener) {exitButton.addActionListener(listener);}
 
 
 }
