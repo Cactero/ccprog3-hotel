@@ -3,6 +3,7 @@ package createRoom;
 import app.Hotel;
 import app.Room;
 import mainMenu.MainMenuModel;
+import manageHotel.ManageHotelModel;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,8 @@ public class CreateRoomModel {
         new MainMenuModel(hotels);
     }
 
-
+    public void manageHotel(){
+        new ManageHotelModel(hotels);
+    }
 
 }

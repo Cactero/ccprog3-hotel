@@ -1,6 +1,8 @@
 package createReservation;
 
 import app.Hotel;
+import mainMenu.MainMenuModel;
+import manageHotel.ManageHotelModel;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,8 @@ public class CreateReservationModel {
         new CreateReservationController(this);
     }
 
-
+    public void manageHotel(){
+        new ManageHotelModel(hotels);
+    }
 
 }

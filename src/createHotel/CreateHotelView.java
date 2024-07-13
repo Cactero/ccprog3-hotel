@@ -67,5 +67,4 @@ public class CreateHotelView extends JFrame {
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
     public void addCreateHotelButtonListener(ActionListener listener) { createHotelButton.addActionListener(listener); }
     public String getHotelNameInput() { return hotelNameInput.getText(); }
-
 }

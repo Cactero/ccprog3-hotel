@@ -29,6 +29,7 @@ public class CreateRoomController {
                     String newRoomFloor = createRoomView.getRoomFloor();
                     int newRoomNumber = Integer.parseInt(createRoomView.getRoomNumber());
                     String newRoomType = createRoomView.getRoomType();
+
                     for (Room room : createRoomModel.getSelectedHotel().getRooms()){
                         if (room != null){
                             if (ManageHotel.roomsMatch(room.getRoomFloor(), room.getRoomNumber(), newRoomFloor, newRoomNumber)){
@@ -42,18 +43,15 @@ public class CreateRoomController {
                         newRoom.setRoomType(newRoomType);
                         createRoomModel.addRoom(newRoom);
                         JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
-
+                        createRoomView.resetInputFields();
                     } else {
                         JOptionPane.showMessageDialog(null, "A room with the same name was found.", "Duplicate room name found", JOptionPane.PLAIN_MESSAGE);
                     }
 
                     if (fromCreateHotel){
                         createRoomView.dispose();
-                        new CreateRoomView(false);
+                        new CreateRoomModel(createRoomModel.getHotels(), createRoomModel.getSelectedHotel(), false);
                     }
-
-
-
                 } catch (NumberFormatException _){
                     JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE);
                 }
@@ -64,7 +62,10 @@ public class CreateRoomController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 createRoomView.dispose();
-                createRoomModel.mainMenu();
+                if (fromCreateHotel)
+                    createRoomModel.mainMenu();
+                else
+                    createRoomModel.manageHotel();
             }
         });
     }

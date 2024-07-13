@@ -19,7 +19,7 @@ public class CreateRoomView extends JFrame{
     private JPanel roomInfoHolder;
     private JTextField roomFloorField;
     private JTextField roomNumberField;
-    private JTextField roomTypeField;
+    private JComboBox roomTypeField;
 
     private JPanel buttonsHolder;
     private JButton mainMenuButton;
@@ -38,10 +38,11 @@ public class CreateRoomView extends JFrame{
             throw new RuntimeException(e);
         }
 
-        roomInfoHolder = new JPanel();
-        roomFloorField = new JTextField();
-        roomNumberField = new JTextField();
-        roomTypeField = new JTextField();
+        roomInfoHolder = new JPanel(new FlowLayout());
+        roomFloorField = new JTextField(10);
+        roomNumberField = new JTextField(10);
+        String[] roomTypes = new String[] {"Standard", "Deluxe", "Executive"};
+        roomTypeField = new JComboBox(roomTypes);
         roomInfoHolder.add(roomFloorField);
         roomInfoHolder.add(roomNumberField);
         roomInfoHolder.add(roomTypeField);
@@ -78,5 +79,10 @@ public class CreateRoomView extends JFrame{
     public void addMainMenuButtonListener (ActionListener listener) {mainMenuButton.addActionListener(listener);}
     public String getRoomFloor() {return roomFloorField.getText();}
     public String getRoomNumber() {return roomNumberField.getText();}
-    public String getRoomType() {return roomTypeField.getText();}
+    public String getRoomType() {return (String) roomTypeField.getItemAt(roomTypeField.getSelectedIndex());}
+    public void resetInputFields() {
+        roomFloorField.setText("");
+        roomNumberField.setText("");
+        roomTypeField.setSelectedIndex(0);
+    }
 }

@@ -1,8 +1,11 @@
 package createReservation;
 
+import mainMenu.Button;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -10,6 +13,10 @@ import java.io.IOException;
 public class CreateReservationView extends JFrame {
     private JPanel contentHolder;
     private Image bgImage;
+
+    private JPanel buttonsHolder;
+    private JButton manageHotelButton;
+    private JButton createClientButton;
 
     public CreateReservationView(){
         // background image
@@ -23,6 +30,15 @@ public class CreateReservationView extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // cancel room creation and create room buttons
+        buttonsHolder = new JPanel();
+        buttonsHolder.setOpaque(false);
+        manageHotelButton = new mainMenu.Button("Cancel");
+        buttonsHolder.add(manageHotelButton);
+        createClientButton = new Button("Create");
+        buttonsHolder.add(createClientButton);
+        contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
         setContentPane(contentHolder);
@@ -39,4 +55,7 @@ public class CreateReservationView extends JFrame {
         setVisible(true);
 
     }
+
+    public void addManageHotelButtonListener(ActionListener listener) { manageHotelButton.addActionListener(listener); }
+    public void addCreateClientButtonListener(ActionListener listener) { createClientButton.addActionListener(listener); }
 }
