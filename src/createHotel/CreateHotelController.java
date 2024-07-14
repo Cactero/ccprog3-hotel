@@ -21,7 +21,7 @@ public class CreateHotelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean hasConflict = false;
-                String hotelName = createHotelView.getHotelNameInput();
+                String hotelName = createHotelView.getHotelName();
                 for (Hotel hotel : createHotelModel.getHotels()){
                     if (hotel.getName().equals(hotelName)){
                         hasConflict = true;

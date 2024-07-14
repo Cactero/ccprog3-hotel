@@ -31,8 +31,15 @@ public class MainMenuController {
         mainMenuView.addCreateReservationButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainMenuView.dispose();
-                mainMenuModel.createReservation();
+                boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
+
+                if (!hotelListEmpty){
+                    mainMenuView.dispose();
+                    mainMenuModel.createReservation();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         });
 

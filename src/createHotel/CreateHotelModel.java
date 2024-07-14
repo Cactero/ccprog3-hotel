@@ -19,15 +19,15 @@ public class CreateHotelModel {
     }
 
     public void addHotel(Hotel hotel){
-        hotels.add(hotel);
+        this.hotels.add(hotel);
     }
 
     public void mainMenu(){
-        new MainMenuModel(hotels);
+        new MainMenuModel(this.hotels);
     }
 
     public void createRoom(Hotel hotel, boolean fromCreateHotel){
-        new CreateRoomModel(hotels, hotel, fromCreateHotel);
+        new CreateRoomModel(this.hotels, hotel, fromCreateHotel);
     }
 
 }

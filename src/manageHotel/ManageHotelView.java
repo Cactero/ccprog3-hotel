@@ -1,8 +1,11 @@
 package manageHotel;
 
+import mainMenu.Button;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -12,13 +15,23 @@ public class ManageHotelView extends JFrame {
     private JPanel contentHolder;
     private Image bgImage;
 
+    private JPanel optionsHolder;
+    private JButton changeHotelName;
+    private JButton addRooms;
+    private JButton removeRooms;
+    private JButton updateBasePrice;
+    private JButton removeReservation;
+    private JButton removeHotel;
+    private JButton changeRoomType;
 
+    private JPanel buttonsHolder;
+    private JButton mainMenuButton;
 
     public ManageHotelView(){
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
-            contentHolder = new JPanel(new GridLayout(0, 2)) {
+            contentHolder = new JPanel(new BorderLayout()) {
                 @Override public void paintComponent(Graphics g) {
                     g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
                 }
@@ -27,10 +40,34 @@ public class ManageHotelView extends JFrame {
             throw new RuntimeException(e);
         }
 
+        optionsHolder = new JPanel();
+        optionsHolder.setOpaque(false);
 
+        changeHotelName = new Button("Change Hotel Name");
+        addRooms = new Button("Add Rooms");
+        removeRooms = new Button("Remove Rooms");
+        updateBasePrice = new Button("Update Base Price");
+        removeReservation = new Button("Remove Reservation");
+        removeHotel = new Button("Remove Hotel");
+        changeRoomType = new Button("Change Room Type");
+        optionsHolder.add(changeHotelName);
+        optionsHolder.add(addRooms);
+        optionsHolder.add(removeRooms);
+        optionsHolder.add(updateBasePrice);
+        optionsHolder.add(removeReservation);
+        optionsHolder.add(removeHotel);
+        optionsHolder.add(changeRoomType);
+        contentHolder.add(optionsHolder);
+
+
+        // cancel room creation and create room buttons
+        buttonsHolder = new JPanel();
+        buttonsHolder.setOpaque(false);
+        mainMenuButton = new mainMenu.Button("Cancel");
+        buttonsHolder.add(mainMenuButton);
+        contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
-        setLayout(new GridLayout());
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
@@ -46,5 +83,12 @@ public class ManageHotelView extends JFrame {
 
     }
 
-
+    public void addAddRoomsButtonListener(ActionListener listener) { addRooms.addActionListener(listener); }
+    public void addRemoveRoomsButtonListener(ActionListener listener) { removeRooms.addActionListener(listener); }
+    public void addChangeHotelNameButtonListener(ActionListener listener) { changeHotelName.addActionListener(listener); }
+    public void addUpdateBasePriceButtonListener(ActionListener listener) { updateBasePrice.addActionListener(listener); }
+    public void addRemoveReservationButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
+    public void addRemoveHotelButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
+    public void addChangeRoomTypeButtonListener(ActionListener listener) { changeRoomType.addActionListener(listener); }
+    public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
 }

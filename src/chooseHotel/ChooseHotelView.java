@@ -1,5 +1,6 @@
-package createHotel;
+package chooseHotel;
 
+import app.Hotel;
 import mainMenu.Button;
 
 import javax.imageio.ImageIO;
@@ -9,19 +10,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class CreateHotelView extends JFrame {
+public class ChooseHotelView extends JFrame {
 
     private JPanel contentHolder;
     private Image bgImage;
 
-    private JTextField hotelNameField;
+    private JPanel inputHolder;
+    private JComboBox hotelListField;
 
     private JPanel buttonsHolder;
     private JButton mainMenuButton;
-    private JButton createHotelButton;
+    private JButton chooseHotelButton;
 
-    public CreateHotelView(){
+    public ChooseHotelView(ArrayList<Hotel> hotels){
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
@@ -34,21 +37,25 @@ public class CreateHotelView extends JFrame {
             throw new RuntimeException(e);
         }
 
-        // text field for hotel name input
-        hotelNameField = new JTextField();
-        hotelNameField.setColumns(10);
-        hotelNameField.setOpaque(false);
+        inputHolder = new JPanel();
+        inputHolder.setOpaque(false);
+        ArrayList<String> hotelNames = new ArrayList<>();
+        for (Hotel hotel : hotels){
+            hotelNames.add(hotel.getName());
+        }
+        hotelListField = new JComboBox<>(hotelNames.toArray());
+        inputHolder.add(hotelListField);
+        contentHolder.add(inputHolder);
 
         // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new Button("Cancel");
-        createHotelButton = new Button("Create");
+        mainMenuButton = new mainMenu.Button("Cancel");
+        chooseHotelButton = new Button("Create");
         buttonsHolder.add(mainMenuButton);
-        buttonsHolder.add(createHotelButton);
+        buttonsHolder.add(chooseHotelButton);
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
-        contentHolder.add(hotelNameField, BorderLayout.CENTER);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
@@ -66,6 +73,6 @@ public class CreateHotelView extends JFrame {
     }
 
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
-    public void addCreateHotelButtonListener(ActionListener listener) { createHotelButton.addActionListener(listener); }
-    public String getHotelName() { return hotelNameField.getText(); }
+    public void addChooseHotelButtonListener(ActionListener listener) { chooseHotelButton.addActionListener(listener); }
+    public String getHotelName() { return (String) hotelListField.getItemAt(hotelListField.getSelectedIndex()); }
 }

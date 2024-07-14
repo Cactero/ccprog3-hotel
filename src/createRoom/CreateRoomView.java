@@ -42,7 +42,7 @@ public class CreateRoomView extends JFrame{
         roomFloorField = new JTextField(10);
         roomNumberField = new JTextField(10);
         String[] roomTypes = new String[] {"Standard", "Deluxe", "Executive"};
-        roomTypeField = new JComboBox(roomTypes);
+        roomTypeField = new JComboBox<>(roomTypes);
         roomInfoHolder.add(roomFloorField);
         roomInfoHolder.add(roomNumberField);
         roomInfoHolder.add(roomTypeField);
@@ -50,6 +50,7 @@ public class CreateRoomView extends JFrame{
 
         // cancel room creation and create room buttons
         buttonsHolder = new JPanel();
+        buttonsHolder.setOpaque(false);
         buttonsHolder.setOpaque(false);
         mainMenuButton = new Button("Cancel");
         if (!fromCreateHotel){

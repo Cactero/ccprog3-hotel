@@ -46,11 +46,12 @@ public class CreateRoomController {
                         createRoomView.resetInputFields();
                     } else {
                         JOptionPane.showMessageDialog(null, "A room with the same name was found.", "Duplicate room name found", JOptionPane.PLAIN_MESSAGE);
+                        createRoomView.resetInputFields();
                     }
 
                     if (fromCreateHotel){
                         createRoomView.dispose();
-                        new CreateRoomModel(createRoomModel.getHotels(), createRoomModel.getSelectedHotel(), false);
+                        createRoomModel.mainMenu();
                     }
                 } catch (NumberFormatException _){
                     JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE);

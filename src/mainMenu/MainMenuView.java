@@ -43,6 +43,7 @@ public class MainMenuView extends JFrame{
         }
 
         rightSide = new JPanel();
+        rightSide.setLayout(new BoxLayout(rightSide, BoxLayout.PAGE_AXIS));
         rightSide.setOpaque(false);
 
         // hotel image
@@ -87,25 +88,24 @@ public class MainMenuView extends JFrame{
 
         // app name image
         logoImage = new ImageIcon(this.getClass().getResource("/assets/MainMenu/HOTEL_NAME.png"));
-        logoLabel = new JLabel() {
+        logoLabel = new JLabel(logoImage) {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
                 Image image = logoImage.getImage();
                 int panelWidth = getWidth();
                 int panelHeight = getHeight();
-                int imageWidth = image.getWidth(null);
-                int imageHeight = image.getHeight(null);
+                int imageWidth = image.getWidth(rightSide);
+                int imageHeight = image.getHeight(rightSide);
                 double scalingFactor = 0.80;
 
                 // Calculate the new dimensions of the image to maintain aspect ratio
-                double aspectRatio = (double) imageWidth / imageHeight;
-                int newWidth = (int) (panelWidth * scalingFactor);
-                int newHeight = (int) (newWidth / aspectRatio);
+                double aspectRatio = (double) imageHeight / imageWidth;
+                int newHeight = (int) (panelHeight * scalingFactor);
+                int newWidth = (int) (newHeight / aspectRatio);
 
-                if (newHeight > panelHeight * scalingFactor) {
-                    newHeight = (int) (panelHeight * scalingFactor);
-                    newWidth = (int) (newHeight * aspectRatio);
+                if (newWidth > panelWidth * scalingFactor) {
+                    newWidth = (int) (panelWidth * scalingFactor);
+                    newHeight = (int) (newWidth * aspectRatio);
                 }
 
                 // Center the image
@@ -118,11 +118,12 @@ public class MainMenuView extends JFrame{
 
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(800, 600);  // Set a default size for layout purposes
+                return new Dimension(800, 200);  // Set a default size for layout purposes
             }
         };
         logoLabel.setVisible(true);
         rightSide.add(logoLabel);
+        rightSide.add(Box.createVerticalStrut(75));
 
         // buttons
         createHotelButton = new Button("Create Hotel");
@@ -136,7 +137,6 @@ public class MainMenuView extends JFrame{
 
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
-        setLayout(new GridLayout());
         contentHolder.add(hotelLabel);
         contentHolder.add(rightSide);
         setContentPane(contentHolder);

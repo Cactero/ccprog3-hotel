@@ -1,6 +1,7 @@
 package mainMenu;
 
 import app.Hotel;
+import chooseHotel.ChooseHotelModel;
 import createHotel.CreateHotelModel;
 import createReservation.CreateReservationModel;
 import manageHotel.ManageHotelModel;
@@ -15,6 +16,10 @@ public class MainMenuModel {
         new MainMenuController(this);
     }
 
+    public ArrayList<Hotel> getHotels() {
+        return hotels;
+    }
+
     public void createHotel(){
         new CreateHotelModel(hotels);
     }
@@ -24,7 +29,8 @@ public class MainMenuModel {
     }
 
     public void createReservation(){
-        new CreateReservationModel(hotels);
+        // add select hotel screen first
+         new ChooseHotelModel(hotels, true);
     }
 
 }

@@ -27,11 +27,7 @@ public class CreateRoomModel {
     }
 
     public void addRoom(Room room){
-        for (Hotel hotel : hotels){
-            if (hotel == selectedHotel){
-                hotel.addRoom(room);
-            }
-        }
+        selectedHotel.addRoom(room);
     }
 
     public void mainMenu(){
