@@ -23,6 +23,61 @@ public class ManageHotelController {
             }
         });
 
+        manageHotelView.addAddRoomsButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
+
+        manageHotelView.addRemoveRoomsButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
+
+        manageHotelView.addChangeHotelNameButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
+
+        manageHotelView.addUpdateBasePriceButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
+
+        manageHotelView.addRemoveReservationButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
+
+        manageHotelView.addRemoveHotelButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
+
+        manageHotelView.addChangeRoomTypeButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageHotelView.dispose();
+                manageHotelModel.chooseHotel();
+            }
+        });
 
     }
 

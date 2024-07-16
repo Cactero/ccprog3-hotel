@@ -1,6 +1,7 @@
 package manageHotel;
 
-import mainMenu.Button;
+import shared.Button;
+import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,6 +15,10 @@ public class ManageHotelView extends JFrame {
 
     private JPanel contentHolder;
     private Image bgImage;
+
+    private JPanel headerHolder;
+    private JLabel headerLabel;
+    private ImageIcon headerImage;
 
     private JPanel optionsHolder;
     private JButton changeHotelName;
@@ -40,9 +45,16 @@ public class ManageHotelView extends JFrame {
             throw new RuntimeException(e);
         }
 
+        // app name image
+        headerHolder = new JPanel();
+        headerHolder.setOpaque(false);
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/ManageHotel/MANAGE_HOTEL_NAME.png"));
+        headerLabel = new HeaderLabel(headerImage);
+        headerHolder.add(headerLabel);
+        contentHolder.add(headerHolder, BorderLayout.NORTH);
+
         optionsHolder = new JPanel();
         optionsHolder.setOpaque(false);
-
         changeHotelName = new Button("Change Hotel Name");
         addRooms = new Button("Add Rooms");
         removeRooms = new Button("Remove Rooms");
@@ -63,7 +75,7 @@ public class ManageHotelView extends JFrame {
         // cancel room creation and create room buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new mainMenu.Button("Cancel");
+        mainMenuButton = new Button("Cancel");
         buttonsHolder.add(mainMenuButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 

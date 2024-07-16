@@ -1,7 +1,7 @@
 package chooseHotel;
 
 import app.Hotel;
-import mainMenu.Button;
+import shared.Button;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -50,8 +50,8 @@ public class ChooseHotelView extends JFrame {
         // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new mainMenu.Button("Cancel");
-        chooseHotelButton = new Button("Create");
+        mainMenuButton = new Button("Cancel");
+        chooseHotelButton = new Button("Choose");
         buttonsHolder.add(mainMenuButton);
         buttonsHolder.add(chooseHotelButton);
 

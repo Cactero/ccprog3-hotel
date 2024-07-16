@@ -1,15 +1,11 @@
 package createRoom;
 
-import app.Hotel;
 import app.ManageHotel;
 import app.Room;
-import createHotel.CreateHotelModel;
-import createHotel.CreateHotelView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class CreateRoomController {
 

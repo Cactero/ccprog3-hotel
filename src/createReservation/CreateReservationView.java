@@ -2,7 +2,8 @@ package createReservation;
 
 import app.Hotel;
 import app.Room;
-import mainMenu.Button;
+import shared.Button;
+import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,10 +12,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CreateReservationView extends JFrame {
     private JPanel contentHolder;
     private Image bgImage;
+
+    private JPanel headerHolder;
+    private JLabel headerLabel;
+    private ImageIcon headerImage;
 
     private JPanel inputHolder;
     private JTextField firstNameField;
@@ -22,6 +28,7 @@ public class CreateReservationView extends JFrame {
     private JSpinner checkInDayField;
     private JSpinner checkOutDayField;
     private JComboBox roomListField;
+    private JTextField discountField;
 
     private JPanel buttonsHolder;
     private JButton mainMenuButton;
@@ -40,6 +47,14 @@ public class CreateReservationView extends JFrame {
             throw new RuntimeException(e);
         }
 
+        // app name image
+        headerHolder = new JPanel();
+        headerHolder.setOpaque(false);
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/CreateReservation/CREATE_RESERVATION_NAME.png"));
+        headerLabel = new HeaderLabel(headerImage);
+        headerHolder.add(headerLabel);
+        contentHolder.add(headerHolder, BorderLayout.NORTH);
+
         inputHolder = new JPanel();
         inputHolder.setOpaque(false);
         firstNameField = new JTextField(10);
@@ -48,18 +63,25 @@ public class CreateReservationView extends JFrame {
         checkInDayField = new JSpinner(checkInDayOptions);
         SpinnerNumberModel checkOutDayOptions = new SpinnerNumberModel(2, 2, 31, 1);
         checkOutDayField = new JSpinner(checkOutDayOptions);
-        roomListField = new JComboBox<>(selectedHotel.getRooms());
+        ArrayList<String> roomNames = new ArrayList<>();
+        for (Room room : selectedHotel.getRooms()){
+            if (room != null)
+                roomNames.add(room.getRoomFloor() + room.getRoomNumber());
+        }
+        roomListField = new JComboBox<>(roomNames.toArray());
+        discountField = new JTextField(10);
         inputHolder.add(firstNameField);
         inputHolder.add(lastNameField);
         inputHolder.add(checkInDayField);
         inputHolder.add(checkOutDayField);
         inputHolder.add(roomListField);
+        inputHolder.add(discountField);
         contentHolder.add(inputHolder);
 
         // cancel room creation and create room buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new mainMenu.Button("Cancel");
+        mainMenuButton = new Button("Cancel");
         buttonsHolder.add(mainMenuButton);
         createClientButton = new Button("Create");
         buttonsHolder.add(createClientButton);
@@ -93,6 +115,7 @@ public class CreateReservationView extends JFrame {
         checkInDayField.setValue(1);
         checkOutDayField.setValue(2);
         roomListField.setSelectedIndex(0);
+        discountField.setText("");
     }
     public void addCreateClientButtonListener(ActionListener listener) { createClientButton.addActionListener(listener); }
 }

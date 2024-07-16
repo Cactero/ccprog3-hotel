@@ -1,4 +1,4 @@
-package mainMenu;
+package shared;
 
 import java.awt.*;
 

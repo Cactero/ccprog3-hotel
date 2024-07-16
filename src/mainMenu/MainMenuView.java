@@ -1,14 +1,14 @@
 package mainMenu;
 
+import shared.Button;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import java.io.IOException;
 
 public class MainMenuView extends JFrame{
@@ -126,9 +126,9 @@ public class MainMenuView extends JFrame{
         rightSide.add(Box.createVerticalStrut(75));
 
         // buttons
-        createHotelButton = new Button("Create Hotel");
-        manageHotelButton = new Button("Manage Hotel");
-        createReservationButton = new Button("Make Reservation");
+        createHotelButton = new shared.Button("Create Hotel");
+        manageHotelButton = new shared.Button("Manage Hotel");
+        createReservationButton = new shared.Button("Make Reservation");
         exitButton = new Button("Exit Program");
         rightSide.add(createHotelButton);
         rightSide.add(manageHotelButton);

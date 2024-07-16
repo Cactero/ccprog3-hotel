@@ -1,4 +1,4 @@
-package createHotel;
+package enterHotelName;
 
 import app.*;
 import createRoom.CreateRoomModel;
@@ -6,12 +6,12 @@ import mainMenu.MainMenuModel;
 
 import java.util.ArrayList;
 
-public class CreateHotelModel {
+public class EnterHotelNameModel {
     private ArrayList<Hotel> hotels;
 
-    public CreateHotelModel(ArrayList<Hotel> hotels){
+    public EnterHotelNameModel(ArrayList<Hotel> hotels, boolean fromChangeHotelName){
         this.hotels = hotels;
-        new CreateHotelController(this);
+        new EnterHotelNameController(this, fromChangeHotelName);
     }
 
     public ArrayList<Hotel> getHotels(){

@@ -1,9 +1,7 @@
 package manageHotel;
 
 import app.Hotel;
-import createHotel.CreateHotelModel;
-import createReservation.CreateReservationModel;
-import mainMenu.MainMenuController;
+import chooseHotel.ChooseHotelModel;
 import mainMenu.MainMenuModel;
 
 import java.util.ArrayList;
@@ -22,5 +20,9 @@ public class ManageHotelModel {
 
     public void mainMenu(){
         new MainMenuModel(hotels);
+    }
+
+    public void chooseHotel(){
+        new ChooseHotelModel(hotels, false);
     }
 }

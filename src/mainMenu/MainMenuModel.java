@@ -2,8 +2,7 @@ package mainMenu;
 
 import app.Hotel;
 import chooseHotel.ChooseHotelModel;
-import createHotel.CreateHotelModel;
-import createReservation.CreateReservationModel;
+import enterHotelName.EnterHotelNameModel;
 import manageHotel.ManageHotelModel;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class MainMenuModel {
     }
 
     public void createHotel(){
-        new CreateHotelModel(hotels);
+        new EnterHotelNameModel(hotels, false);
     }
 
     public void manageHotel(){

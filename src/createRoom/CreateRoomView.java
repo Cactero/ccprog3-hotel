@@ -1,7 +1,7 @@
 package createRoom;
 
-import app.Room;
-import mainMenu.Button;
+import shared.Button;
+import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,6 +15,10 @@ public class CreateRoomView extends JFrame{
 
     private JPanel contentHolder;
     private Image bgImage;
+
+    private JPanel headerHolder;
+    private JLabel headerLabel;
+    private ImageIcon headerImage;
 
     private JPanel roomInfoHolder;
     private JTextField roomFloorField;
@@ -37,6 +41,14 @@ public class CreateRoomView extends JFrame{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // app name image
+        headerHolder = new JPanel();
+        headerHolder.setOpaque(false);
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/CreateRoom/CREATE_ROOM_NAME.png"));
+        headerLabel = new HeaderLabel(headerImage);
+        headerHolder.add(headerLabel);
+        contentHolder.add(headerHolder, BorderLayout.NORTH);
 
         roomInfoHolder = new JPanel(new FlowLayout());
         roomFloorField = new JTextField(10);

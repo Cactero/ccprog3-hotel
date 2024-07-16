@@ -1,6 +1,6 @@
-package createHotel;
+package enterHotelName;
 
-import mainMenu.Button;
+import shared.Button;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-public class CreateHotelView extends JFrame {
+public class EnterHotelNameView extends JFrame {
 
     private JPanel contentHolder;
     private Image bgImage;
@@ -21,7 +21,7 @@ public class CreateHotelView extends JFrame {
     private JButton mainMenuButton;
     private JButton createHotelButton;
 
-    public CreateHotelView(){
+    public EnterHotelNameView(boolean fromChangeHotelName){
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
@@ -68,4 +68,5 @@ public class CreateHotelView extends JFrame {
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
     public void addCreateHotelButtonListener(ActionListener listener) { createHotelButton.addActionListener(listener); }
     public String getHotelName() { return hotelNameField.getText(); }
+    public void resetInputFields(){ hotelNameField.setText("");}
 }
