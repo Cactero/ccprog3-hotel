@@ -1,6 +1,7 @@
 package enterHotelName;
 
 import shared.Button;
+import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,13 +16,18 @@ public class EnterHotelNameView extends JFrame {
     private JPanel contentHolder;
     private Image bgImage;
 
+    private JPanel headerHolder;
+    private JLabel headerLabel;
+    private ImageIcon headerImage;
+
+    private JPanel inputHolder;
     private JTextField hotelNameField;
 
     private JPanel buttonsHolder;
     private JButton mainMenuButton;
     private JButton createHotelButton;
 
-    public EnterHotelNameView(boolean fromChangeHotelName){
+    public EnterHotelNameView(){
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
@@ -34,10 +40,21 @@ public class EnterHotelNameView extends JFrame {
             throw new RuntimeException(e);
         }
 
+        // app name image
+        headerHolder = new JPanel();
+        headerHolder.setOpaque(false);
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/ENTER_HOTEL_NAME.png"));
+        headerLabel = new HeaderLabel(headerImage, headerHolder);
+        headerHolder.add(headerLabel);
+        contentHolder.add(headerHolder, BorderLayout.NORTH);
+
         // text field for hotel name input
-        hotelNameField = new JTextField();
-        hotelNameField.setColumns(10);
+        inputHolder = new JPanel();
+        inputHolder.setOpaque(false);
+        hotelNameField = new JTextField(25);
         hotelNameField.setOpaque(false);
+        inputHolder.add(hotelNameField);
+        contentHolder.add(inputHolder);
 
         // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();
@@ -48,7 +65,6 @@ public class EnterHotelNameView extends JFrame {
         buttonsHolder.add(createHotelButton);
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
-        contentHolder.add(hotelNameField, BorderLayout.CENTER);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()

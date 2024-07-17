@@ -46,7 +46,7 @@ public class CreateRoomView extends JFrame{
         headerHolder = new JPanel();
         headerHolder.setOpaque(false);
         headerImage = new ImageIcon(this.getClass().getResource("/assets/CreateRoom/CREATE_ROOM_NAME.png"));
-        headerLabel = new HeaderLabel(headerImage);
+        headerLabel = new HeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);
 

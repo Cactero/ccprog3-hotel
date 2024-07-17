@@ -42,12 +42,8 @@ public class MainMenuView extends JFrame{
             throw new RuntimeException(e);
         }
 
-        rightSide = new JPanel();
-        rightSide.setLayout(new BoxLayout(rightSide, BoxLayout.PAGE_AXIS));
-        rightSide.setOpaque(false);
-
         // hotel image
-        hotelImage = new ImageIcon(this.getClass().getResource("/assets/MainMenu/HOTEL_GRAPHIC.png"));
+        hotelImage = new ImageIcon(this.getClass().getResource("/assets/HOTEL_GRAPHIC.png"));
         hotelLabel = new JLabel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -86,8 +82,11 @@ public class MainMenuView extends JFrame{
         hotelLabel.setVisible(true);
         hotelLabel.setOpaque(false);
 
+        rightSide = new JPanel();
+        rightSide.setOpaque(false);
+
         // app name image
-        logoImage = new ImageIcon(this.getClass().getResource("/assets/MainMenu/HOTEL_NAME.png"));
+        logoImage = new ImageIcon(this.getClass().getResource("/assets/MAIN_MENU_NAME.png"));
         logoLabel = new JLabel(logoImage) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -96,7 +95,7 @@ public class MainMenuView extends JFrame{
                 int panelHeight = getHeight();
                 int imageWidth = image.getWidth(rightSide);
                 int imageHeight = image.getHeight(rightSide);
-                double scalingFactor = 0.80;
+                double scalingFactor = 0.90;
 
                 // Calculate the new dimensions of the image to maintain aspect ratio
                 double aspectRatio = (double) imageHeight / imageWidth;
@@ -118,22 +117,26 @@ public class MainMenuView extends JFrame{
 
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(800, 200);  // Set a default size for layout purposes
+                return new Dimension(rightSide.getWidth(), 250);  // Set a default size for layout purposes
             }
         };
         logoLabel.setVisible(true);
         rightSide.add(logoLabel);
-        rightSide.add(Box.createVerticalStrut(75));
 
         // buttons
-        createHotelButton = new shared.Button("Create Hotel");
-        manageHotelButton = new shared.Button("Manage Hotel");
-        createReservationButton = new shared.Button("Make Reservation");
+        createHotelButton = new Button("Create Hotel");
+        manageHotelButton = new Button("Manage Hotel");
+        createReservationButton = new Button("Make Reservation");
         exitButton = new Button("Exit Program");
-        rightSide.add(createHotelButton);
-        rightSide.add(manageHotelButton);
-        rightSide.add(createReservationButton);
-        rightSide.add(exitButton);
+        JPanel buttonsHolder = new JPanel();
+        buttonsHolder.setOpaque(false);
+        buttonsHolder.setLayout(new BoxLayout(buttonsHolder, BoxLayout.Y_AXIS));
+        buttonsHolder.add(createHotelButton);
+        buttonsHolder.add(manageHotelButton);
+        buttonsHolder.add(createReservationButton);
+        buttonsHolder.add(exitButton);
+        rightSide.add(Box.createVerticalStrut(450));
+        rightSide.add(buttonsHolder);
 
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");

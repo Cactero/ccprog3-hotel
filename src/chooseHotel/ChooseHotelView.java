@@ -2,6 +2,7 @@ package chooseHotel;
 
 import app.Hotel;
 import shared.Button;
+import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,6 +17,10 @@ public class ChooseHotelView extends JFrame {
 
     private JPanel contentHolder;
     private Image bgImage;
+
+    private JPanel headerHolder;
+    private JLabel headerLabel;
+    private ImageIcon headerImage;
 
     private JPanel inputHolder;
     private JComboBox hotelListField;
@@ -36,6 +41,13 @@ public class ChooseHotelView extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        headerHolder = new JPanel();
+        headerHolder.setOpaque(false);
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/CHOOSE_HOTEL_NAME.png"));
+        headerLabel = new HeaderLabel(headerImage, headerHolder);
+        headerHolder.add(headerLabel);
+        contentHolder.add(headerHolder, BorderLayout.NORTH);
 
         inputHolder = new JPanel();
         inputHolder.setOpaque(false);

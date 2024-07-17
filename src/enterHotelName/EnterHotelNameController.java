@@ -13,7 +13,7 @@ public class EnterHotelNameController {
 
     public EnterHotelNameController(EnterHotelNameModel enterHotelNameModel, boolean fromChangeHotelName){
         this.enterHotelNameModel = enterHotelNameModel;
-        enterHotelNameView = new EnterHotelNameView(fromChangeHotelName);
+        enterHotelNameView = new EnterHotelNameView();
 
         enterHotelNameView.addCreateHotelButtonListener(new ActionListener() {
             @Override
