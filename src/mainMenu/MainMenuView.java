@@ -11,6 +11,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * The View of Main Menu.
+ * @author Angela Domingo
+ */
 public class MainMenuView extends JFrame{
 
     private JPanel contentHolder;
@@ -18,6 +22,7 @@ public class MainMenuView extends JFrame{
 
     private Image bgImage;
     private JButton createHotelButton;
+    private JButton viewHotelButton;
     private JButton manageHotelButton;
     private JButton createReservationButton;
     private JButton exitButton;
@@ -125,6 +130,7 @@ public class MainMenuView extends JFrame{
 
         // buttons
         createHotelButton = new Button("Create Hotel");
+        viewHotelButton = new Button("View Hotel");
         manageHotelButton = new Button("Manage Hotel");
         createReservationButton = new Button("Make Reservation");
         exitButton = new Button("Exit Program");
@@ -132,6 +138,7 @@ public class MainMenuView extends JFrame{
         buttonsHolder.setOpaque(false);
         buttonsHolder.setLayout(new BoxLayout(buttonsHolder, BoxLayout.Y_AXIS));
         buttonsHolder.add(createHotelButton);
+        buttonsHolder.add(viewHotelButton);
         buttonsHolder.add(manageHotelButton);
         buttonsHolder.add(createReservationButton);
         buttonsHolder.add(exitButton);
@@ -139,7 +146,7 @@ public class MainMenuView extends JFrame{
         rightSide.add(buttonsHolder);
 
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
+        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         contentHolder.add(hotelLabel);
         contentHolder.add(rightSide);
         setContentPane(contentHolder);
@@ -160,9 +167,34 @@ public class MainMenuView extends JFrame{
 
     }
 
+    /**
+     * Adds a listener to the Create Hotel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addCreateHotelButtonListener(ActionListener listener) {createHotelButton.addActionListener(listener);}
+
+    /**
+     * Adds a listener to the View Hotel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
+    public void addViewHotelButtonListener(ActionListener listener) { viewHotelButton.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Manage Hotel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addManageHotelButtonListener(ActionListener listener) {manageHotelButton.addActionListener(listener);}
+
+    /**
+     * Adds a listener to the Create Reservation button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addCreateReservationButtonListener(ActionListener listener) {createReservationButton.addActionListener(listener);}
+
+    /**
+     * Adds a listener to the Exit Button button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addExitButtonListener(ActionListener listener) {exitButton.addActionListener(listener);}
 
 

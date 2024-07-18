@@ -9,6 +9,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The Controller for Create Reservation.
+ * @author Angela Domingo
+ */
 public class CreateReservationController {
     private CreateReservationModel createReservationModel;
     private CreateReservationView createReservationView;
@@ -24,8 +28,17 @@ public class CreateReservationController {
                 String lastName = createReservationView.getLastName();
                 int checkInDay = createReservationView.getCheckInDay();
                 int checkOutDay = createReservationView.getCheckOutDay();
-                Room bookedRoom = createReservationView.getSelectedRoom();
+                String bookedRoomName = createReservationView.getSelectedRoom();
+
                 Hotel bookedHotel = createReservationModel.getSelectedHotel();
+                Room bookedRoom = null;
+                for (Room room : bookedHotel.getRooms()){
+                    if (room != null){
+                        String roomName = String.format("%s%d", room.getRoomFloor(), room.getRoomNumber());
+                        if (roomName.equals(bookedRoomName))
+                            bookedRoom = room;
+                    }
+                }
 
                 if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
                     System.out.println("Your booking dates are not valid, please try again!");

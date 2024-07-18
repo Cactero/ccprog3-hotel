@@ -13,6 +13,10 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The View for Choose Hotel
+ * @author Angela Domingo
+ */
 public class ChooseHotelView extends JFrame {
 
     private JPanel contentHolder;
@@ -67,7 +71,7 @@ public class ChooseHotelView extends JFrame {
         buttonsHolder.add(mainMenuButton);
         buttonsHolder.add(chooseHotelButton);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
+        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
@@ -84,7 +88,21 @@ public class ChooseHotelView extends JFrame {
 
     }
 
+    /**
+     * Adds a listener to the Main Menu button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Choose Hotel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addChooseHotelButtonListener(ActionListener listener) { chooseHotelButton.addActionListener(listener); }
+
+    /**
+     * Returns the content currently selected inside Hotel List Field.
+     * @return the name of the current item shown in Hotel List Field
+     */
     public String getHotelName() { return (String) hotelListField.getItemAt(hotelListField.getSelectedIndex()); }
 }

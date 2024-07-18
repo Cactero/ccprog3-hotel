@@ -11,6 +11,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * The View for Enter Hotel Name.
+ * @author Angela Domingo
+ */
 public class EnterHotelNameView extends JFrame {
 
     private JPanel contentHolder;
@@ -64,7 +68,7 @@ public class EnterHotelNameView extends JFrame {
         buttonsHolder.add(mainMenuButton);
         buttonsHolder.add(createHotelButton);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
+        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
@@ -81,8 +85,26 @@ public class EnterHotelNameView extends JFrame {
 
     }
 
+    /**
+     * Adds a listener to the Main Menu button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Create Hotel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addCreateHotelButtonListener(ActionListener listener) { createHotelButton.addActionListener(listener); }
+
+    /**
+     * Returns the current content inside hotelNameField.
+     * @return the String currently inside hotelNameField
+     */
     public String getHotelName() { return hotelNameField.getText(); }
+
+    /**
+     * Resets the input fields after a failed attempt.
+     */
     public void resetInputFields(){ hotelNameField.setText("");}
 }

@@ -6,7 +6,10 @@ import java.awt.event.ActionListener;
 
 import app.*;
 
-
+/**
+ * The Controller for Enter Hotel Name
+ * @author Angela Domingo
+ */
 public class EnterHotelNameController {
     private EnterHotelNameModel enterHotelNameModel;
     private EnterHotelNameView enterHotelNameView;

@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * The Controller for Manage Hotel.
+ * @author Angela Domingo
+ */
 public class ManageHotelController {
 
     private ManageHotelView manageHotelView;

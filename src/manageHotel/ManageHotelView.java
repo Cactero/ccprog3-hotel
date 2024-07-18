@@ -11,6 +11,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ *
+ */
 public class ManageHotelView extends JFrame {
 
     private JPanel contentHolder;
@@ -79,7 +82,7 @@ public class ManageHotelView extends JFrame {
         buttonsHolder.add(mainMenuButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
+        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {

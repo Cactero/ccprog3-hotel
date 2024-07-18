@@ -87,7 +87,7 @@ public class CreateReservationView extends JFrame {
         buttonsHolder.add(createClientButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
+        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
@@ -103,12 +103,45 @@ public class CreateReservationView extends JFrame {
 
     }
 
+    /**
+     * Adds a listener to the Main Menu button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
+
+    /**
+     * Returns the current content of firstNameField
+     * @return the text currently inside firstNameField
+     */
     public String getFirstName() { return firstNameField.getText(); }
+
+    /**
+     * Returns the current content of lastNameField.
+     * @return the text currently inside lastNameField
+     */
     public String getLastName() { return lastNameField.getText(); }
+
+    /**
+     * Returns the current content of checkInDayField.
+     * @return the number currently inside checkInDayField
+     */
     public int getCheckInDay() { return (int) checkInDayField.getValue(); }
+
+    /**
+     * Returns the current content of checkOutDayField
+     * @return the number currently inside checkOutDayField
+     */
     public int getCheckOutDay() { return (int) checkOutDayField.getValue(); }
-    public Room getSelectedRoom() { return (Room) roomListField.getSelectedItem(); }
+
+    /**
+     * Returns the current content of roomListField
+     * @return the name of the Room currently inside roomListField
+     */
+    public String getSelectedRoom() { return (String) roomListField.getSelectedItem(); }
+
+    /**
+     * Resets the input fields after a failed attempt.
+     */
     public void resetInputFields() {
         firstNameField.setText("");
         lastNameField.setText("");
@@ -117,5 +150,10 @@ public class CreateReservationView extends JFrame {
         roomListField.setSelectedIndex(0);
         discountField.setText("");
     }
+
+    /**
+     * Adds a listener to the Create Client button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addCreateClientButtonListener(ActionListener listener) { createClientButton.addActionListener(listener); }
 }

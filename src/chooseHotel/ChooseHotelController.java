@@ -5,6 +5,10 @@ import app.Hotel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The Controller for Choose Hotel.
+ * @author Angela Domingo
+ */
 public class ChooseHotelController {
 
     private ChooseHotelModel chooseHotelModel;

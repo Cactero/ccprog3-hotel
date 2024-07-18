@@ -11,6 +11,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * The View of Create Room.
+ * @author Angela Domingo
+ */
 public class CreateRoomView extends JFrame{
 
     private JPanel contentHolder;
@@ -45,7 +49,7 @@ public class CreateRoomView extends JFrame{
         // app name image
         headerHolder = new JPanel();
         headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/CreateRoom/CREATE_ROOM_NAME.png"));
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/CREATE_ROOM_NAME.png"));
         headerLabel = new HeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);
@@ -72,7 +76,7 @@ public class CreateRoomView extends JFrame{
         buttonsHolder.add(createRoomButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 4)");
+        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
@@ -88,11 +92,41 @@ public class CreateRoomView extends JFrame{
 
 
     }
+
+    /**
+     * Adds a listener to the Create Room button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addCreateRoomButtonListener (ActionListener listener) {createRoomButton.addActionListener(listener);}
+
+
+    /**
+     * Adds a listener to the Main Menu button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener (ActionListener listener) {mainMenuButton.addActionListener(listener);}
+
+    /**
+     * Returns the current content in roomFloorField
+     * @return the string currently inside roomFloorField
+     */
     public String getRoomFloor() {return roomFloorField.getText();}
+
+    /**
+     * Returns the current content in roomNumberField
+     * @return the number currently inside roomNumberField
+     */
     public String getRoomNumber() {return roomNumberField.getText();}
+
+    /**
+     * Returns the current content in roomTypeField
+     * @return the string currently inside roomTypeField
+     */
     public String getRoomType() {return (String) roomTypeField.getItemAt(roomTypeField.getSelectedIndex());}
+
+    /**
+     * Resets the input fields after a failed attempt.
+     */
     public void resetInputFields() {
         roomFloorField.setText("");
         roomNumberField.setText("");

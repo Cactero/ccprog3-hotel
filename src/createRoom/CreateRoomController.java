@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The Controller for Create Room
+ * @author Angela Domingo
+ */
 public class CreateRoomController {
 
     private CreateRoomModel createRoomModel;
