@@ -1,23 +1,23 @@
-package TEMPLATE_MVC_FILES;
+package TEMPLATE_MVC_FILES_NEW;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import app.Hotel;
+import main.MainFrame;
 
-public class Controller {
-    Model modelFileOfFolder;
-    View viewFileOfController;
+import javax.swing.*;
+import java.util.ArrayList;
 
-    public Controller(Model modelFileOfFolder){
-        this.modelFileOfFolder = modelFileOfFolder;
-        viewFileOfController = new View();
+public class Controller2 {
+    Model2 modelFileOfFolder;
+    View2 viewFileOfController;
 
-        // access methods created inside of view like this
-        viewFileOfController.addMainMenuButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // dito mismo logic of what happens after you click button
-            }
-        });
+    private MainFrame frame;
+
+    public Controller2(ArrayList<Hotel> hotels, MainFrame frame){
+        this.modelFileOfFolder = new Model2(hotels);
+        this.viewFileOfController = new View2();
+        this.frame = frame;
+
+        viewFileOfController.addMainMenuButtonListener(this::mainMenuListener);
 
         /**
          * example of how an implemented listener looks like
@@ -52,5 +52,15 @@ public class Controller {
          *
          * refer sa ginawa nating logic chuchu inside the orig mco1 files sa loob ng ManageHotel/DisplayManager/Utilities
          */
+    }
+
+    // deconstruct the method so that it is its entire function
+    private void mainMenuListener() {
+        System.out.printf("hallo");
+        frame.switchToModel1();
+    }
+
+    public JPanel getContentHolder(){
+        return viewFileOfController.getContentHolder();
     }
 }
