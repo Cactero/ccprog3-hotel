@@ -20,54 +20,42 @@ public class CreateRoomController {
         this.createRoomModel = createRoomModel;
         this.createRoomView = new CreateRoomView(fromCreateHotel);
 
-        createRoomView.addCreateRoomButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean hasConflict = false;
+        createRoom(fromCreateHotel);
+    }
 
-                try {
-                    String newRoomFloor = createRoomView.getRoomFloor();
-                    int newRoomNumber = Integer.parseInt(createRoomView.getRoomNumber());
-                    String newRoomType = createRoomView.getRoomType();
+    public void createRoom(boolean fromCreateHotel){
+        boolean hasConflict = false;
 
-                    for (Room room : createRoomModel.getSelectedHotel().getRooms()){
-                        if (room != null){
-                            if (ManageHotel.roomsMatch(room.getRoomFloor(), room.getRoomNumber(), newRoomFloor, newRoomNumber)){
-                                hasConflict = true;
-                            }
-                        }
+        try {
+            String newRoomFloor = createRoomView.getRoomFloor();
+            int newRoomNumber = Integer.parseInt(createRoomView.getRoomNumber());
+            String newRoomType = createRoomView.getRoomType();
+
+            for (Room room : createRoomModel.getSelectedHotel().getRooms()){
+                if (room != null){
+                    if (ManageHotel.roomsMatch(room.getRoomFloor(), room.getRoomNumber(), newRoomFloor, newRoomNumber)){
+                        hasConflict = true;
                     }
-
-                    if (!hasConflict){
-                        Room newRoom = new Room(newRoomFloor, newRoomNumber, createRoomModel.getSelectedHotel().getBasePrice());
-                        newRoom.setRoomType(newRoomType);
-                        createRoomModel.addRoom(newRoom);
-                        JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
-                        createRoomView.resetInputFields();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "A room with the same name was found.", "Duplicate room name found", JOptionPane.PLAIN_MESSAGE);
-                        createRoomView.resetInputFields();
-                    }
-
-                    if (fromCreateHotel){
-                        createRoomView.dispose();
-                        createRoomModel.mainMenu();
-                    }
-                } catch (NumberFormatException _){
-                    JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE);
                 }
             }
-        });
 
-        createRoomView.addMainMenuButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createRoomView.dispose();
-                if (fromCreateHotel)
-                    createRoomModel.mainMenu();
-                else
-                    createRoomModel.manageHotel();
+            if (!hasConflict){
+                Room newRoom = new Room(newRoomFloor, newRoomNumber, createRoomModel.getSelectedHotel().getBasePrice());
+                newRoom.setRoomType(newRoomType);
+                createRoomModel.addRoom(newRoom);
+                JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
+                createRoomView.resetInputFields();
+            } else {
+                JOptionPane.showMessageDialog(null, "A room with the same name was found.", "Duplicate room name found", JOptionPane.PLAIN_MESSAGE);
+                createRoomView.resetInputFields();
             }
-        });
+
+            if (fromCreateHotel){
+                createRoomView.dispose();
+                //JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
+            }
+        } catch (NumberFormatException _){
+            JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 }

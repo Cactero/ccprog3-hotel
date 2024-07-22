@@ -1,7 +1,5 @@
 package app;
 
-import discount.DatePriceModifier;
-
 import java.util.ArrayList;
 
 /**

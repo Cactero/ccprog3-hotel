@@ -50,4 +50,7 @@ public class EnterHotelNameModel {
         new CreateRoomModel(this.hotels, hotel, fromCreateHotel);
     }
 
+    public void enterHotelName(){
+
+    }
 }

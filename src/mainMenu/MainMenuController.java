@@ -20,7 +20,7 @@ public class MainMenuController {
         mainMenuView.addCreateHotelButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainMenuView.dispose();
+                //mainMenuView.dispose();
                 mainMenuModel.createHotel();
             }
         });
@@ -31,7 +31,6 @@ public class MainMenuController {
                 boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
 
                 if (!hotelListEmpty){
-                    mainMenuView.dispose();
                     mainMenuModel.viewHotel();
                 }
                 else {
@@ -46,7 +45,6 @@ public class MainMenuController {
                 boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
 
                 if (!hotelListEmpty){
-                    mainMenuView.dispose();
                     mainMenuModel.manageHotel();
                 }
                 else {
@@ -61,7 +59,6 @@ public class MainMenuController {
                 boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
 
                 if (!hotelListEmpty){
-                    mainMenuView.dispose();
                     mainMenuModel.createReservation();
                 }
                 else {

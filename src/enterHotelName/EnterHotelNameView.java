@@ -31,6 +31,7 @@ public class EnterHotelNameView extends JFrame {
     private JButton mainMenuButton;
     private JButton createHotelButton;
 
+    /*
     public EnterHotelNameView(){
         // background image
         try {
@@ -78,12 +79,13 @@ public class EnterHotelNameView extends JFrame {
                 // add img elements here
             }
         });
-        setSize(1280, 720);
+        setSize(600, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 
     }
+     */
 
     /**
      * Adds a listener to the Main Menu button.
@@ -101,7 +103,11 @@ public class EnterHotelNameView extends JFrame {
      * Returns the current content inside hotelNameField.
      * @return the String currently inside hotelNameField
      */
-    public String getHotelName() { return hotelNameField.getText(); }
+    public String getHotelName() {
+        String hotelName = JOptionPane.showInputDialog("Enter your hotel name:");
+        JOptionPane.showMessageDialog(null, "Hotel " + hotelName + " made!");
+        return hotelName;
+    }
 
     /**
      * Resets the input fields after a failed attempt.

@@ -1,21 +1,21 @@
-package createRoom;
+package viewHotel;
 
-import shared.Button;
+import app.Hotel;
 import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * The View of Create Room.
  * @author Angela Domingo
  */
-public class CreateRoomView extends JFrame{
+public class ViewHotelView extends JFrame{
 
     private JPanel contentHolder;
     private Image bgImage;
@@ -34,7 +34,7 @@ public class CreateRoomView extends JFrame{
     private JButton createRoomButton;
 
     /*
-    public CreateRoomView(boolean fromCreateHotel){
+    public ViewHotelView(){
         // background image
         try {
             bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
@@ -47,36 +47,33 @@ public class CreateRoomView extends JFrame{
             throw new RuntimeException(e);
         }
 
-        // app name image
         headerHolder = new JPanel();
         headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/CREATE_ROOM.png"));
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/CHOOSE_HOTEL_NAME.png"));
         headerLabel = new HeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);
 
-        roomInfoHolder = new JPanel(new FlowLayout());
-        roomFloorField = new JTextField(10);
-        roomNumberField = new JTextField(10);
+        inputHolder = new JPanel();
+        inputHolder.setOpaque(false);
+        ArrayList<String> hotelNames = new ArrayList<>();
+        for (Hotel hotel : hotels){
+            hotelNames.add(hotel.getName());
+        }
+        hotelListField = new JComboBox<>(hotelNames.toArray());
+        inputHolder.add(hotelListField);
+        contentHolder.add(inputHolder);
 
-        roomInfoHolder.add(roomFloorField);
-        roomInfoHolder.add(roomNumberField);
-        roomInfoHolder.add(roomTypeField);
-        contentHolder.add(roomInfoHolder, BorderLayout.CENTER);
-
-        // cancel room creation and create room buttons
+        // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        buttonsHolder.setOpaque(false);
         mainMenuButton = new Button("Cancel");
-        if (!fromCreateHotel){
-            buttonsHolder.add(mainMenuButton);
-        }
-        createRoomButton = new Button("Create");
-        buttonsHolder.add(createRoomButton);
-        contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
+        chooseHotelButton = new Button("Choose");
+        buttonsHolder.add(mainMenuButton);
+        buttonsHolder.add(chooseHotelButton);
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
+        contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
         setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
@@ -90,47 +87,9 @@ public class CreateRoomView extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
 
-
     }
 
      */
-
-    public CreateRoomView(boolean fromCreateView){
-        JPanel createRoomPanel = new JPanel();
-        roomFloorField = new JTextField(10);
-        roomNumberField = new JTextField(10);
-
-        createRoomPanel.add(new JLabel("Floor:"));
-        createRoomPanel.add(roomFloorField);
-        createRoomPanel.add(Box.createHorizontalStrut(15));
-        createRoomPanel.add(new JLabel("Number:"));
-        createRoomPanel.add(roomNumberField);
-        createRoomPanel.add(Box.createHorizontalStrut(15));
-        String[] roomTypes = new String[] {"Standard", "Deluxe", "Executive"};
-        roomTypeField = new JComboBox<>(roomTypes);
-        createRoomPanel.add(roomTypeField);
-
-        setContentPane(createRoomPanel);
-
-        addWindowListener( new WindowAdapter()
-        {
-            public void windowResized(WindowEvent evt)
-            {
-                // add img elements here
-            }
-        });
-
-        int result = JOptionPane.showConfirmDialog(null, createRoomPanel,
-                "Make a new room", JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-            //System.out.println("Floor: " + roomFloorField.getText());
-            //System.out.println("Number: " + roomNumberField.getText());
-            //System.out.println("Type: ", (String) roomTypeField.getItemAt(roomTypeField.getSelectedIndex()));
-        }
-
-        //setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
-
-    }
 
     public void promptUser(){
 

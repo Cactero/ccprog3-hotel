@@ -33,6 +33,7 @@ public class ChooseHotelView extends JFrame {
     private JButton mainMenuButton;
     private JButton chooseHotelButton;
 
+    /*
     public ChooseHotelView(ArrayList<Hotel> hotels){
         // background image
         try {
@@ -81,13 +82,48 @@ public class ChooseHotelView extends JFrame {
                 // add img elements here
             }
         });
-        setSize(1280, 720);
+        setSize(600, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 
     }
 
+     */
+
+    public ChooseHotelView(ArrayList<Hotel> hotels){
+        JPanel chooseHotelPanel = new JPanel();
+
+        chooseHotelPanel.add(new JLabel("Choose hotel:"));
+
+        ArrayList<String> hotelNames = new ArrayList<String>();
+
+        for(Hotel hotel : hotels){
+            hotelNames.add(hotel.getName());
+        }
+        hotelListField = new JComboBox<>(hotelNames.toArray());
+        chooseHotelPanel.add(hotelListField);
+
+        setContentPane(chooseHotelPanel);
+
+        addWindowListener( new WindowAdapter()
+        {
+            public void windowResized(WindowEvent evt)
+            {
+                // add img elements here
+            }
+        });
+
+        int result = JOptionPane.showConfirmDialog(null, chooseHotelPanel,
+                "Make a new room", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            //System.out.println("Floor: " + roomFloorField.getText());
+            //System.out.println("Number: " + roomNumberField.getText());
+            //System.out.println("Type: ", (String) roomTypeField.getItemAt(roomTypeField.getSelectedIndex()));
+        }
+
+        //setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
+    }
     /**
      * Adds a listener to the Main Menu button.
      * @param listener the set of actions to be done when the button is clicked
