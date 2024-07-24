@@ -1,13 +1,12 @@
 package main;
 
 import Model.CentralModel;
-import Model.Hotel;
 import mainMenu.MainMenuModel;
+import shared.PopupScreen;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 // this does NOT get replicated, only one frame ever.
 public class MainFrame extends JFrame {

@@ -36,6 +36,7 @@ public class MainMenuView extends AbstractView {
     private JLabel logoLabel;
 
     public MainMenuView(){
+        super(null);
 
         // background image
         try {

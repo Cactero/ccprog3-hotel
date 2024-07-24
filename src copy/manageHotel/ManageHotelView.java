@@ -37,25 +37,7 @@ public class ManageHotelView extends AbstractView {
     private JButton mainMenuButton;
 
     public ManageHotelView(){
-        // background image
-        try {
-            bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
-            contentHolder = new JPanel(new BorderLayout()) {
-                @Override public void paintComponent(Graphics g) {
-                    g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
-                }
-            };
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // app name image
-        headerHolder = new JPanel();
-        headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/MANAGE_HOTEL_NAME.png"));
-        headerLabel = new TemplateHeaderLabel(headerImage, headerHolder);
-        headerHolder.add(headerLabel, BorderLayout.CENTER);
-        contentHolder.add(headerHolder, BorderLayout.NORTH);
+        super("/assets/MANAGE_HOTEL_NAME.png");
 
         optionsHolder = new JPanel();
         optionsHolder.setOpaque(false);

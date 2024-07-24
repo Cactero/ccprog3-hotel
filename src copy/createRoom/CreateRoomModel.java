@@ -5,18 +5,13 @@ import Model.Hotel;
 import Model.Room;
 import main.AbstractModel;
 import main.MainFrame;
-import mainMenu.MainMenuController;
-import mainMenu.MainMenuModel;
-import manageHotel.ManageHotelModel;
-
-import javax.swing.*;
-import java.util.ArrayList;
+import shared.SelectableHotel;
 
 /**
  * The Model for Create Room
  * @author Angela Domingo
  */
-public class CreateRoomModel extends AbstractModel {
+public class CreateRoomModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
     private boolean fromCreateHotel;

@@ -2,17 +2,12 @@ package chooseHotel;
 
 import Model.CentralModel;
 import Model.Hotel;
-import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
-import enterHotelName.EnterHotelNameModel;
 import main.AbstractModel;
 import main.MainFrame;
-import mainMenu.MainMenuController;
-import mainMenu.MainMenuModel;
-import manageHotel.ManageHotelModel;
+import shared.SelectableHotel;
 
-import javax.swing.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The Model for Choose Hotel
@@ -21,8 +16,6 @@ import java.util.ArrayList;
 public class ChooseHotelModel extends AbstractModel {
 
     private String source;
-
-    private AbstractModel addRooms, removeRooms, changeHotelName, updateBasePrice, removeReservation, removeHotel, changeRoomType;
 
     //manage hotel macros
     public static final String ADD_ROOMS = "Add Rooms";
@@ -36,11 +29,15 @@ public class ChooseHotelModel extends AbstractModel {
     public static final String CREATE_RESERVATION = "Create Reservation";
     public static final String VIEW_HOTEL = "View Hotel";
 
+    private HashMap<String, AbstractModel> models;
+
     public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new ChooseHotelController(this, frame);
 
-        addRooms = new CreateRoomModel(centralModel, frame, false);
+        models = new HashMap<>();
+
+        models.put(ADD_ROOMS, new CreateRoomModel(centralModel, frame, false));
 //        removeRooms = new RemoveRoomModel();
 //        changeHotelName = new EnterHotelNameModel(centralModel, frame);
 //        updateBasePrice = new UpdateBasePriceModel();
@@ -80,41 +77,9 @@ public class ChooseHotelModel extends AbstractModel {
         return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
-//    /**
-//     * The Model of Create Reservation that is created when the user clicks the Choose Hotel button
-//     * @param hotel the chosen Hotel
-//     */
-//    public AbstractModel createReservation(Hotel hotel){
-//
-//
-//
-//        return cre
-//    }
-//
-//    /**
-//     * The Model of Enter Hotel Name that is created when the user clicks the Choose Hotel button
-//     */
-//    public void changeHotelName(){
-//        new EnterHotelNameModel(hotels, true);
-//    }
-//
-////    public void createRoom(Hotel selectedHotel){
-////        new CreateRoomModel(hotels, selectedHotel, false);
-////    }
-////
-////    public void removeRoom(Hotel selectedHotel){
-////        new RemoveRoomModel(hotels, selectedHotel);
-////    }
-////
-////    public void updateBasePrice(Hotel selectedHotel){
-////        new UpdateBasePriceModel(hotels, selectedHotel);
-////    }
-////
-////    public void removeReservation(Hotel selectedHotel){
-////        new RemoveReservationModel(hotels, selectedHotel);
-////    }
-////
-////    public void changeRoomType(Hotel selectedHotel){
-////        new ChangeRoomTypeModel(hotels, selectedHotel);
-////    }
+    public AbstractModel getModel(Hotel selectedHotel, String key){
+        SelectableHotel currentModel = (SelectableHotel) this.models.get(key);
+        currentModel.setSelectedHotel(selectedHotel);
+        return (AbstractModel) currentModel;
+    }
 }

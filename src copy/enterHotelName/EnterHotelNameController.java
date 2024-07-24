@@ -5,7 +5,7 @@ import javax.swing.*;
 import Model.*;
 import main.AbstractController;
 import main.MainFrame;
-import main.PopupScreen;
+import shared.PopupScreen;
 
 import java.util.ArrayList;
 
