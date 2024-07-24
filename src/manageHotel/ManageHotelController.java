@@ -1,6 +1,6 @@
 package manageHotel;
 
-import app.Hotel;
+import Model.Hotel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,6 +1,6 @@
 package manageHotel;
 
-import app.Hotel;
+import Model.Hotel;
 import chooseHotel.ChooseHotelModel;
 import mainMenu.MainMenuModel;
 

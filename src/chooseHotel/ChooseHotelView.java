@@ -1,6 +1,6 @@
 package chooseHotel;
 
-import app.Hotel;
+import Model.Hotel;
 import shared.Button;
 import shared.HeaderLabel;
 

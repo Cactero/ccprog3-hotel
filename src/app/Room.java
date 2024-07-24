@@ -1,4 +1,4 @@
-package app;
+package Model;
 
 /**
  * Room class, where details of a Hotel's Room is

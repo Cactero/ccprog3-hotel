@@ -1,6 +1,6 @@
 package chooseHotel;
 
-import app.Hotel;
+import Model.Hotel;
 import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
 import enterHotelName.EnterHotelNameModel;

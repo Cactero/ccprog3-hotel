@@ -1,7 +1,7 @@
 package createRoom;
 
-import app.Hotel;
-import app.Room;
+import Model.Hotel;
+import Model.Room;
 import mainMenu.MainMenuModel;
 import manageHotel.ManageHotelModel;
 

@@ -2,7 +2,7 @@ package main;
 
 import TEMPLATE_MVC_FILES_NEW.Controller;
 import TEMPLATE_MVC_FILES_NEW.Controller2;
-import app.Hotel;
+import Model.Hotel;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;

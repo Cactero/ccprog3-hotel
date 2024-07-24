@@ -1,7 +1,6 @@
 package createRoom;
 
-import app.ManageHotel;
-import app.Room;
+import Model.Room;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

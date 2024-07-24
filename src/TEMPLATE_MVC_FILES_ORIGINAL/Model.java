@@ -1,6 +1,6 @@
 package TEMPLATE_MVC_FILES_ORIGINAL;
 
-import app.Hotel;
+import Model.Hotel;
 import mainMenu.MainMenuModel;
 
 import java.util.ArrayList;

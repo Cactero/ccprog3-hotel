@@ -1,7 +1,7 @@
 package createReservation;
 
-import app.Hotel;
-import app.Room;
+import Model.Hotel;
+import Model.Room;
 import shared.Button;
 import shared.HeaderLabel;
 

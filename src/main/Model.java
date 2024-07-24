@@ -1,6 +1,6 @@
 package main;
 
-import app.Hotel;
+import Model.Hotel;
 
 import java.util.ArrayList;
 

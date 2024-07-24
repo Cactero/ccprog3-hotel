@@ -1,6 +1,6 @@
 package viewHotel;
 
-import app.Hotel;
+import Model.Hotel;
 import shared.HeaderLabel;
 
 import javax.imageio.ImageIO;

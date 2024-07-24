@@ -1,7 +1,7 @@
 package createReservation;
 
-import app.Client;
-import app.Hotel;
+import Model.Client;
+import Model.Hotel;
 import mainMenu.MainMenuModel;
 import manageHotel.ManageHotelModel;
 

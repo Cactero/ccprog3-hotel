@@ -1,9 +1,9 @@
 package createReservation;
 
-import app.Client;
-import app.Hotel;
-import app.Room;
-import app.Utilities;
+import Model.Client;
+import Model.Hotel;
+import Model.Room;
+import Model.Utilities;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

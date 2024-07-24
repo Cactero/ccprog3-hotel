@@ -1,6 +1,6 @@
-package app;
+package Model;
 
-import discount.*;
+import Model.discount.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -250,14 +250,14 @@ public class ManageHotel {
             Client client = new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom);
             bookedHotel.addClient(client);
 
-            System.out.println("Do you have a discount code?");
+            System.out.println("Do you have a app.discount code?");
             System.out.println("[Y]es or [N]o?");
             System.out.print(": ");
             option = sc.nextLine();
             if (option.equalsIgnoreCase("Y")) {
                 boolean isValid = false;
                 do {
-                    System.out.print("Enter discount code: ");
+                    System.out.print("Enter app.discount code: ");
                     discountCode = sc.nextLine();
                     discount = getDiscountCode(discountCode);
 
@@ -265,7 +265,7 @@ public class ManageHotel {
 
                         if (discountCode.equals("I_WORK_HERE")) {
                             System.out.println("Discount valid!");
-                            System.out.println("You get a flat 10% discount to the final price of your reservation!");
+                            System.out.println("You get a flat 10% app.discount to the final price of your reservation!");
                             //isValid = true;
                             break;
                         } else if (discountCode.equals("STAY4_GET1")) {
@@ -278,7 +278,7 @@ public class ManageHotel {
                         } else {
                             if (Utilities.isPaydayDay(client)) {
                                 System.out.println("Discount valid!");
-                                System.out.println("You get a 7% discount to your overall price!");
+                                System.out.println("You get a 7% app.discount to your overall price!");
                                 //isValid = true;
                                 break;
                             }

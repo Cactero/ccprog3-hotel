@@ -1,7 +1,7 @@
-package app;
+package Model;
 
 import com.sun.tools.javac.Main;
-import discount.DatePriceModifier;
+import Model.discount.DatePriceModifier;
 import mainMenu.MainMenuController;
 import mainMenu.MainMenuModel;
 

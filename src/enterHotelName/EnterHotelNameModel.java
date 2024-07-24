@@ -1,6 +1,6 @@
 package enterHotelName;
 
-import app.*;
+import Model.*;
 import createRoom.CreateRoomModel;
 import mainMenu.MainMenuModel;
 
