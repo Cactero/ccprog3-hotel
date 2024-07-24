@@ -23,7 +23,7 @@ public abstract class AbstractModel {
         return controller.getContentHolder();
     }
 
-    protected void setSource(String source) {
-
+    public AbstractController getController() {
+        return controller;
     }
 }

@@ -23,7 +23,7 @@ public class EnterHotelNameModel extends AbstractModel {
         super(centralModel);
         createRoomModel = new CreateRoomModel(centralModel, frame);
         createRoomModel.setFromCreateHotel(true);
-        new EnterHotelNameController(this, frame);
+        controller = new EnterHotelNameController(this, frame);
     }
 
     public void setFromCreateHotel(boolean fromCreateHotel) {

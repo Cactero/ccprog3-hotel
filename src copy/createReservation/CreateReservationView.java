@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class CreateReservationView extends AbstractView {
-    private JPanel contentHolder;
+
     private Image bgImage;
 
     private JPanel headerHolder;

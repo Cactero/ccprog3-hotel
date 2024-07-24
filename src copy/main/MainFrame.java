@@ -42,9 +42,23 @@ public class MainFrame extends JFrame {
 
         contentHolder = model.getContentHolder();
         setContentPane(contentHolder);
+        contentHolder.setVisible(true);
         revalidate();
         repaint();
 
+        SwingUtilities.invokeLater(() -> {
+
+            AbstractController controller = model.getController();
+
+            if (controller instanceof PopupScreen) {
+                ((PopupScreen) controller).promptUser();
+            }
+            contentHolder.setVisible(true);
+        });
+
     }
 
+    public JPanel getContentHolder() {
+        return contentHolder;
+    }
 }

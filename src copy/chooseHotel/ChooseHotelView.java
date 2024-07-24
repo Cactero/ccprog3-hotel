@@ -16,7 +16,6 @@ import java.util.ArrayList;
  */
 public class ChooseHotelView extends AbstractView {
 
-    private JPanel contentHolder;
     private Image bgImage;
 
     private JPanel headerHolder;

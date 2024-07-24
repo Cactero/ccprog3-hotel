@@ -19,7 +19,12 @@ public class CreateRoomController extends AbstractController {
         super(model, frame);
         this.view = new CreateRoomView(model.isFromCreateHotel());
 
+        ((CreateRoomView) view).addMainMenuButtonListener(_ -> mainMenu());
         ((CreateRoomView) view).addMainMenuButtonListener(_ -> createRoom());
+    }
+
+    private void mainMenu(){
+
     }
 
     private void createRoom(){

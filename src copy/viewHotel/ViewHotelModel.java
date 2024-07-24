@@ -22,7 +22,7 @@ public class ViewHotelModel extends AbstractModel {
 
     public ViewHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
-        new ViewHotelController(this, frame);
+        controller = new ViewHotelController(this, frame);
     }
 
     public void setSelectedHotel(Hotel selectedHotel) {

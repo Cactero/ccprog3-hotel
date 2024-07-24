@@ -22,7 +22,7 @@ public class CreateReservationModel extends AbstractModel {
     public CreateReservationModel(CentralModel centralModel, MainFrame frame, Hotel selectedHotel){
         super(centralModel);
         this.selectedHotel = selectedHotel;
-        new CreateReservationController(this, frame);
+        controller = new CreateReservationController(this, frame);
     }
 
     /**

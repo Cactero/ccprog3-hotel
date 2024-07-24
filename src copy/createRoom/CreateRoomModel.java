@@ -23,7 +23,7 @@ public class CreateRoomModel extends AbstractModel {
 
     public CreateRoomModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
-        new CreateRoomController(this, frame);
+        controller = new CreateRoomController(this, frame);
     }
 
     public void setFromCreateHotel(boolean fromCreateHotel) {

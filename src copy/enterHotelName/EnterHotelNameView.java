@@ -6,7 +6,7 @@ import shared.TemplateHeaderLabel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 /**
@@ -15,7 +15,6 @@ import java.io.IOException;
  */
 public class EnterHotelNameView extends AbstractView {
 
-    private JPanel contentHolder;
     private Image bgImage;
 
     private JPanel headerHolder;
@@ -51,9 +50,6 @@ public class EnterHotelNameView extends AbstractView {
         headerLabel = new TemplateHeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);
-
-//        // text field for hotel name input
-//        hotelName = JOptionPane.showInputDialog("Enter your hotel name:");
 
     }
 
