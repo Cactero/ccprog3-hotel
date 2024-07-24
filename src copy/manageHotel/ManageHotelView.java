@@ -2,29 +2,15 @@ package manageHotel;
 
 import main.AbstractView;
 import shared.TemplateButton;
-import shared.TemplateHeaderLabel;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 /**
  *
  */
 public class ManageHotelView extends AbstractView {
 
-    private JPanel contentHolder;
-    private Image bgImage;
-
-    private JPanel headerHolder;
-    private JLabel headerLabel;
-    private ImageIcon headerImage;
-
-    private JPanel optionsHolder;
     private JButton changeHotelName;
     private JButton addRooms;
     private JButton removeRooms;
@@ -33,13 +19,12 @@ public class ManageHotelView extends AbstractView {
     private JButton removeHotel;
     private JButton changeRoomType;
 
-    private JPanel buttonsHolder;
     private JButton mainMenuButton;
 
     public ManageHotelView(){
         super("/assets/MANAGE_HOTEL_NAME.png");
 
-        optionsHolder = new JPanel();
+        JPanel optionsHolder = new JPanel();
         optionsHolder.setOpaque(false);
         changeHotelName = new TemplateButton("Change Hotel Name");
         addRooms = new TemplateButton("Add Rooms");
@@ -59,7 +44,7 @@ public class ManageHotelView extends AbstractView {
 
 
         // cancel room creation and create room buttons
-        buttonsHolder = new JPanel();
+        JPanel buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
         mainMenuButton = new TemplateButton("Cancel");
         buttonsHolder.add(mainMenuButton);

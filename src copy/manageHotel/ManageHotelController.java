@@ -3,12 +3,6 @@ package manageHotel;
 import chooseHotel.ChooseHotelModel;
 import main.AbstractController;
 import main.MainFrame;
-import mainMenu.MainMenuModel;
-import mainMenu.MainMenuView;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The Controller for Manage Hotel.
@@ -21,20 +15,14 @@ public class ManageHotelController extends AbstractController {
         this.view = new ManageHotelView();
 
         ((ManageHotelView) view).addMainMenuButtonListener(_ -> cancel());
-
         ((ManageHotelView) view).addAddRoomsButtonListener(_ -> addRooms());
-
         ((ManageHotelView) view).addRemoveRoomsButtonListener(_ -> removeRooms());
-
         ((ManageHotelView) view).addChangeHotelNameButtonListener(_ -> changeHotelName());
-
         ((ManageHotelView) view).addUpdateBasePriceButtonListener(_ -> updateBasePrice());
-
         ((ManageHotelView) view).addRemoveReservationButtonListener(_ -> removeReservation());
-
         ((ManageHotelView) view).addRemoveHotelButtonListener(_ -> removeHotel());
-
         ((ManageHotelView) view).addChangeRoomTypeButtonListener(_ -> changeRoomType());
+
     }
 
     public void cancel(){
