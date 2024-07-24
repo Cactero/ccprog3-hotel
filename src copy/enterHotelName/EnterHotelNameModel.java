@@ -21,8 +21,7 @@ public class EnterHotelNameModel extends AbstractModel {
 
     public EnterHotelNameModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
-        createRoomModel = new CreateRoomModel(centralModel, frame);
-        createRoomModel.setFromCreateHotel(true);
+        createRoomModel = new CreateRoomModel(centralModel, frame, true);
         controller = new EnterHotelNameController(this, frame);
     }
 

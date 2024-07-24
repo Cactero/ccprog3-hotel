@@ -40,7 +40,7 @@ public class ChooseHotelModel extends AbstractModel {
         super(centralModel);
         controller = new ChooseHotelController(this, frame);
 
-        addRooms = new CreateRoomModel(centralModel, frame);
+        addRooms = new CreateRoomModel(centralModel, frame, false);
 //        removeRooms = new RemoveRoomModel();
 //        changeHotelName = new EnterHotelNameModel(centralModel, frame);
 //        updateBasePrice = new UpdateBasePriceModel();

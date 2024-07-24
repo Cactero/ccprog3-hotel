@@ -27,7 +27,9 @@ public class MainMenuModel extends AbstractModel {
      * The Model of Enter Hotel Name that is created when the user clicks the Create Hotel button
      */
     public AbstractModel createHotel(){
-        return centralModel.getModel(CentralModel.CREATE_HOTEL);
+        EnterHotelNameModel CHModel = (EnterHotelNameModel) centralModel.getModel(CentralModel.CREATE_HOTEL);
+        CHModel.setFromCreateHotel(true);
+        return CHModel;
     }
 
     /**

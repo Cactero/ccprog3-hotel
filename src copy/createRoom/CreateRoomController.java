@@ -20,11 +20,11 @@ public class CreateRoomController extends AbstractController {
         this.view = new CreateRoomView(model.isFromCreateHotel());
 
         ((CreateRoomView) view).addMainMenuButtonListener(_ -> mainMenu());
-        ((CreateRoomView) view).addMainMenuButtonListener(_ -> createRoom());
+        ((CreateRoomView) view).addCreateRoomButtonListener(_ -> createRoom());
     }
 
     private void mainMenu(){
-
+        frame.switchView(((CreateRoomModel) model).mainMenu());
     }
 
     private void createRoom(){
@@ -48,16 +48,16 @@ public class CreateRoomController extends AbstractController {
                 newRoom.setRoomType(newRoomType);
                 ((CreateRoomModel) model).addRoom(newRoom);
                 JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
-                ((CreateRoomView) view).resetInputFields();
+
+                if (((CreateRoomModel) model).isFromCreateHotel())
+                    frame.switchView(((CreateRoomModel) model).mainMenu());
+                else
+                    ((CreateRoomView) view).resetInputFields();
             } else {
                 JOptionPane.showMessageDialog(null, "A room with the same name was found.", "Duplicate room name found", JOptionPane.PLAIN_MESSAGE);
                 ((CreateRoomView) view).resetInputFields();
             }
 
-            if (((CreateRoomModel) model).isFromCreateHotel()){
-                JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
-                frame.switchView(((CreateRoomModel) model).mainMenu());
-            }
         } catch (NumberFormatException _){
             JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE);
         }
