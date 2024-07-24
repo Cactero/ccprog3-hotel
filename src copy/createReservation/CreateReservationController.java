@@ -59,8 +59,7 @@ public class CreateReservationController extends AbstractController {
             Client newClient = new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom);
             ((CreateReservationModel) model).addClient(newClient);
             JOptionPane.showMessageDialog(null, "Successfully added new client!", "New client added", JOptionPane.PLAIN_MESSAGE);
-            createReservationView.dispose();
-            ((CreateReservationModel) model).mainMenu();
+            frame.switchView(((CreateReservationModel) model).mainMenu());
         }
     }
 

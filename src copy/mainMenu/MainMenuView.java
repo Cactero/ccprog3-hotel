@@ -20,7 +20,6 @@ import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
  */
 public class MainMenuView extends AbstractView {
 
-    private JPanel contentHolder;
     private JPanel rightSide;
 
     private Image bgImage;
@@ -157,7 +156,7 @@ public class MainMenuView extends AbstractView {
             }
         });
 
-        contentHolder.add(logoLabel);
+        contentHolder.add(hotelLabel);
         contentHolder.add(rightSide);
 
     }

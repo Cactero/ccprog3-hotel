@@ -21,10 +21,13 @@ public class CreateRoomModel extends AbstractModel {
     private Hotel selectedHotel;
     private boolean fromCreateHotel;
 
-    public CreateRoomModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
+    public CreateRoomModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
-        this.fromCreateHotel = fromCreateHotel;
         new CreateRoomController(this, frame);
+    }
+
+    public void setFromCreateHotel(boolean fromCreateHotel) {
+        this.fromCreateHotel = fromCreateHotel;
     }
 
     public boolean isFromCreateHotel() {

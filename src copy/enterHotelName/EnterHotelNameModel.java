@@ -16,9 +16,22 @@ import java.util.ArrayList;
  */
 public class EnterHotelNameModel extends AbstractModel {
 
+    private boolean fromCreateHotel;
+    private CreateRoomModel createRoomModel;
+
     public EnterHotelNameModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
+        createRoomModel = new CreateRoomModel(centralModel, frame);
+        createRoomModel.setFromCreateHotel(true);
         new EnterHotelNameController(this, frame);
+    }
+
+    public void setFromCreateHotel(boolean fromCreateHotel) {
+        this.fromCreateHotel = fromCreateHotel;
+    }
+
+    public boolean isFromCreateHotel() {
+        return fromCreateHotel;
     }
 
     /**
@@ -26,26 +39,23 @@ public class EnterHotelNameModel extends AbstractModel {
      * @param hotel the new Hotel to be added
      */
     public void addHotel(Hotel hotel){
-        this.hotels.add(hotel);
+        centralModel.addHotel(hotel);
     }
 
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
      */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
     /**
      * The Model of Create Room that is created when the user clicks the Create Hotel button
      * @param hotel the new Hotel created
-     * @param fromCreateHotel checks if the call is made from Create Room MVC
      */
-    public void createRoom(Hotel hotel, boolean fromCreateHotel){
-        new CreateRoomModel(this.hotels, hotel, fromCreateHotel);
+    public AbstractModel createRoom(Hotel hotel){
+        createRoomModel.setSelectedHotel(hotel);
+        return createRoomModel;
     }
 
-    public void enterHotelName(){
-
-    }
 }

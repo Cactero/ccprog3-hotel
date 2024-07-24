@@ -18,9 +18,15 @@ import java.util.ArrayList;
  */
 public class ViewHotelModel extends AbstractModel {
 
+    private Hotel selectedHotel;
+
     public ViewHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         new ViewHotelController(this, frame);
+    }
+
+    public void setSelectedHotel(Hotel selectedHotel) {
+        this.selectedHotel = selectedHotel;
     }
 
     /**
@@ -34,15 +40,8 @@ public class ViewHotelModel extends AbstractModel {
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
      */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
-    }
-
-    /**
-     * The Model of Manage Hotel that is created when the user clicks the Cancel button
-     */
-    public void manageHotel(){
-        new ManageHotelModel(hotels);
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
 }

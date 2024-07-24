@@ -2,6 +2,7 @@ package main;
 
 import Model.CentralModel;
 import Model.Hotel;
+import mainMenu.MainMenuModel;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -16,7 +17,8 @@ public class MainFrame extends JFrame {
     public MainFrame(){
 
         CentralModel database = new CentralModel(this);
-        contentHolder = database.getModel(CentralModel.MAIN_MENU).getContentHolder();
+        MainMenuModel model = (MainMenuModel) database.getModel(CentralModel.MAIN_MENU);
+        contentHolder = model.getContentHolder();
 
         setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
         setContentPane(contentHolder);

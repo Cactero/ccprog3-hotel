@@ -24,6 +24,7 @@ public class ChooseHotelModel extends AbstractModel {
 
     private AbstractModel addRooms, removeRooms, changeHotelName, updateBasePrice, removeReservation, removeHotel, changeRoomType;
 
+    //manage hotel macros
     public static final String ADD_ROOMS = "Add Rooms";
     public static final String REMOVE_ROOMS = "Remove Room";
     public static final String CHANGE_HOTEL_NAME = "Change Hotel Name";
@@ -32,11 +33,20 @@ public class ChooseHotelModel extends AbstractModel {
     public static final String REMOVE_HOTEL = "Remove Hotel";
     public static final String CHANGE_ROOM_TYPE = "Change Room Type";
 
+    public static final String CREATE_RESERVATION = "Create Reservation";
+    public static final String VIEW_HOTEL = "View Hotel";
+
     public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         new ChooseHotelController(this, frame);
 
         addRooms = new CreateRoomModel(centralModel, frame);
+//        removeRooms = new RemoveRoomModel();
+//        changeHotelName = new EnterHotelNameModel(centralModel, frame);
+//        updateBasePrice = new UpdateBasePriceModel();
+//        removeReservation = new RemoveReservationModel();
+//        removeHotel = new RemoveHotelModel();
+//        changeRoomType = new ChangeRoomTypeModel();
 
     }
 
@@ -57,51 +67,54 @@ public class ChooseHotelModel extends AbstractModel {
     }
 
     /**
+     * The Model of Main Menu that is created when the user clicks the Cancel button
+     */
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
+    }
+
+    /**
      * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
      */
     public AbstractModel manageHotel(){
-        return
+        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
-    /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
-     */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
-    }
-
-    /**
-     * The Model of Create Reservation that is created when the user clicks the Choose Hotel button
-     * @param hotel the chosen Hotel
-     */
-    public void createReservation(Hotel hotel){
-        new CreateReservationModel(hotels, hotel);
-    }
-
-    /**
-     * The Model of Enter Hotel Name that is created when the user clicks the Choose Hotel button
-     */
-    public void changeHotelName(){
-        new EnterHotelNameModel(hotels, true);
-    }
-
-//    public void createRoom(Hotel selectedHotel){
-//        new CreateRoomModel(hotels, selectedHotel, false);
+//    /**
+//     * The Model of Create Reservation that is created when the user clicks the Choose Hotel button
+//     * @param hotel the chosen Hotel
+//     */
+//    public AbstractModel createReservation(Hotel hotel){
+//
+//
+//
+//        return cre
 //    }
 //
-//    public void removeRoom(Hotel selectedHotel){
-//        new RemoveRoomModel(hotels, selectedHotel);
+//    /**
+//     * The Model of Enter Hotel Name that is created when the user clicks the Choose Hotel button
+//     */
+//    public void changeHotelName(){
+//        new EnterHotelNameModel(hotels, true);
 //    }
 //
-//    public void updateBasePrice(Hotel selectedHotel){
-//        new UpdateBasePriceModel(hotels, selectedHotel);
-//    }
-//
-//    public void removeReservation(Hotel selectedHotel){
-//        new RemoveReservationModel(hotels, selectedHotel);
-//    }
-//
-//    public void changeRoomType(Hotel selectedHotel){
-//        new ChangeRoomTypeModel(hotels, selectedHotel);
-//    }
+////    public void createRoom(Hotel selectedHotel){
+////        new CreateRoomModel(hotels, selectedHotel, false);
+////    }
+////
+////    public void removeRoom(Hotel selectedHotel){
+////        new RemoveRoomModel(hotels, selectedHotel);
+////    }
+////
+////    public void updateBasePrice(Hotel selectedHotel){
+////        new UpdateBasePriceModel(hotels, selectedHotel);
+////    }
+////
+////    public void removeReservation(Hotel selectedHotel){
+////        new RemoveReservationModel(hotels, selectedHotel);
+////    }
+////
+////    public void changeRoomType(Hotel selectedHotel){
+////        new ChangeRoomTypeModel(hotels, selectedHotel);
+////    }
 }

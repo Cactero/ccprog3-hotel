@@ -52,11 +52,11 @@ public class ChooseHotelView extends AbstractView {
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);
 
-        String[] hotelNames = hotels.stream()
-        .map(Hotel::getName)
-        .toArray(String[]::new);
-
-        selectedHotelName = (String) JOptionPane.showInputDialog(null, "Select a hotel", "Choose Hotel", JOptionPane.PLAIN_MESSAGE, null, hotelNames, hotelNames[0]);
+//        String[] hotelNames = hotels.stream()
+//        .map(Hotel::getName)
+//        .toArray(String[]::new);
+//
+//        selectedHotelName = (String) JOptionPane.showInputDialog(null, "Select a hotel", "Choose Hotel", JOptionPane.PLAIN_MESSAGE, null, hotelNames, hotelNames[0]);
 
 //        inputHolder = new JPanel();
 //        inputHolder.setOpaque(false);

@@ -58,6 +58,8 @@ public class CreateRoomView extends AbstractView {
         roomInfoHolder = new JPanel(new FlowLayout());
         roomFloorField = new JTextField(10);
         roomNumberField = new JTextField(10);
+        String[] roomTypes = new String[] {"Standard", "Deluxe", "Executive"};
+        roomTypeField = new JComboBox<>(roomTypes);
 
         roomInfoHolder.add(roomFloorField);
         roomInfoHolder.add(roomNumberField);

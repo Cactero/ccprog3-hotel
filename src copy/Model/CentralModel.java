@@ -29,7 +29,7 @@ public class CentralModel {
 
     public CentralModel(MainFrame frame){
         this.hotels = new ArrayList<>();
-        models = new HashMap<String, AbstractModel>();
+        models = new HashMap<>();
         this.frame = frame;
 
         // initalizes the most used models in the program that have the most "unique" states
@@ -42,6 +42,14 @@ public class CentralModel {
 
     public ArrayList<Hotel> getHotels() {
         return hotels;
+    }
+
+    public void addHotel(Hotel hotel){
+        this.hotels.add(hotel);
+    }
+
+    public void removeHotel(Hotel hotel){
+        this.hotels.remove(hotel);
     }
 
     public AbstractModel getModel(String key){
