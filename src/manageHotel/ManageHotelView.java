@@ -51,7 +51,7 @@ public class ManageHotelView extends JFrame {
         // app name image
         headerHolder = new JPanel();
         headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/MANAGE_HOTEL_NAME.png"));
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/LABELS/MANAGE_HOTEL.png"));
         headerLabel = new HeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel, BorderLayout.CENTER);
         contentHolder.add(headerHolder, BorderLayout.NORTH);

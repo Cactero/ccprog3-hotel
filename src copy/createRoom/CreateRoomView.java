@@ -2,25 +2,16 @@ package createRoom;
 
 import main.AbstractView;
 import shared.TemplateButton;
-import shared.TemplateHeaderLabel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * The View of Create Room.
  * @author Angela Domingo
  */
 public class CreateRoomView extends AbstractView {
-
-    private Image bgImage;
-
-    private JPanel headerHolder;
-    private JLabel headerLabel;
-    private ImageIcon headerImage;
 
     private JPanel roomInfoHolder;
     private JTextField roomFloorField;
@@ -32,7 +23,7 @@ public class CreateRoomView extends AbstractView {
     private JButton createRoomButton;
 
     public CreateRoomView(boolean fromCreateHotel) {
-        super("/assets/CREATE_ROOM.png");
+        super("/assets/LABELS/CREATE_ROOM.png");
 
         roomInfoHolder = new JPanel(new FlowLayout());
         roomInfoHolder.setOpaque(false);
@@ -92,7 +83,7 @@ public class CreateRoomView extends AbstractView {
      * @return the string currently inside roomTypeField
      */
     public String getRoomType() {
-        return (String) roomTypeField.getItemAt(roomTypeField.getSelectedIndex());
+        return roomTypeField.getItemAt(roomTypeField.getSelectedIndex());
     }
 
     /**

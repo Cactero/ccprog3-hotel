@@ -26,7 +26,7 @@ public class Hotel {
         this.roomCount = 0;
         this.rooms = new Room[50];
         this.basePrice = 1299; //default as stated in specs
-        this.clients = new ArrayList<Client>();
+        this.clients = new ArrayList<>();
         this.clientCount = 0;
         this.datePriceModifier = new DatePriceModifier();
     }
@@ -88,14 +88,13 @@ public class Hotel {
 
     /**
      * Removes a Room from the Hotel.
-     * @param hotel the Hotel
      * @param room the Room to be removed
      */
-    public void removeRoom(Hotel hotel, Room room){
+    public void removeRoom(Room room){
         boolean noReservations = true;
 
         for(int i = 0; i < 31; i++){
-            if(Utilities.isRoomOccupied(hotel, room, i+1)){
+            if(Utilities.isRoomOccupied(this, room, i+1)){
                 noReservations = false;
             }
         }

@@ -49,7 +49,7 @@ public class ViewHotelView extends JFrame{
 
         headerHolder = new JPanel();
         headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/CHOOSE_HOTEL_NAME.png"));
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/CHOOSE_HOTEL.png"));
         headerLabel = new HeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);

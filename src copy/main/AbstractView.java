@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 
 public abstract class AbstractView {
     protected JPanel contentHolder;
@@ -15,7 +16,7 @@ public abstract class AbstractView {
         if (headerImageSource != null){
             // background image
             try {
-                Image bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
+                Image bgImage = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png")));
                 contentHolder = new JPanel(new BorderLayout()) {
                     @Override public void paintComponent(Graphics g) {
                         g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -27,7 +28,7 @@ public abstract class AbstractView {
 
             JPanel headerHolder = new JPanel();
             headerHolder.setOpaque(false);
-            ImageIcon headerImage = new ImageIcon(this.getClass().getResource("/assets/CHOOSE_HOTEL_NAME.png"));
+            ImageIcon headerImage = new ImageIcon(Objects.requireNonNull(this.getClass().getResource(headerImageSource)));
             JLabel headerLabel = new TemplateHeaderLabel(headerImage, headerHolder);
             headerHolder.add(headerLabel);
             contentHolder.add(headerHolder, BorderLayout.NORTH);

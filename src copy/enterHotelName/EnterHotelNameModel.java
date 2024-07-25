@@ -4,24 +4,21 @@ import Model.*;
 import createRoom.CreateRoomModel;
 import main.AbstractModel;
 import main.MainFrame;
-import mainMenu.MainMenuController;
-import mainMenu.MainMenuModel;
-
-import javax.swing.*;
-import java.util.ArrayList;
+import shared.SelectableHotel;
 
 /**
  * The Model for Enter Hotel Name
  * @author Angela Domingo
  */
-public class EnterHotelNameModel extends AbstractModel {
+public class EnterHotelNameModel extends AbstractModel implements SelectableHotel {
 
     private boolean fromCreateHotel;
     private CreateRoomModel createRoomModel;
+    private Hotel selectedHotel;
 
-    public EnterHotelNameModel(CentralModel centralModel, MainFrame frame){
+    public EnterHotelNameModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
         super(centralModel);
-        createRoomModel = new CreateRoomModel(centralModel, frame, true);
+        createRoomModel = new CreateRoomModel(centralModel, frame, fromCreateHotel);
         controller = new EnterHotelNameController(this, frame);
     }
 
@@ -41,11 +38,23 @@ public class EnterHotelNameModel extends AbstractModel {
         centralModel.addHotel(hotel);
     }
 
+    public void renameHotel(String newName){
+        int index = centralModel.getHotels().indexOf(selectedHotel);
+        centralModel.getHotels().get(index).setName(newName);
+    }
+
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
      */
     public AbstractModel mainMenu(){
         return centralModel.getModel(CentralModel.MAIN_MENU);
+    }
+
+    /**
+     * The Model of Main Menu that is created when the user clicks the Cancel button
+     */
+    public AbstractModel manageHotel(){
+        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
@@ -57,4 +66,21 @@ public class EnterHotelNameModel extends AbstractModel {
         return createRoomModel;
     }
 
+    /**
+     * Sets the selected hotel the user chose previously in the Choose Hotel screen
+     * @param hotel the selected Hotel
+     */
+    @Override
+    public void setSelectedHotel(Hotel hotel) {
+        this.selectedHotel = hotel;
+    }
+
+    /**
+     * Gets the selected hotel the user chose previously in the Choose Hotel screen
+     * @return the selected Hotel
+     */
+    @Override
+    public Hotel getSelectedHotel() {
+        return selectedHotel;
+    }
 }

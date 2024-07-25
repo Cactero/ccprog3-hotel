@@ -4,29 +4,21 @@ import Model.Hotel;
 import Model.Room;
 import main.AbstractView;
 import shared.TemplateButton;
-import shared.TemplateHeaderLabel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class CreateReservationView extends AbstractView {
-
-    private Image bgImage;
-
-    private JPanel headerHolder;
-    private JLabel headerLabel;
-    private ImageIcon headerImage;
 
     private JPanel inputHolder;
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JSpinner checkInDayField;
     private JSpinner checkOutDayField;
-    private JComboBox roomListField;
+    private JComboBox<String> roomListField;
     private JTextField discountField;
 
     private JPanel buttonsHolder;
@@ -34,7 +26,7 @@ public class CreateReservationView extends AbstractView {
     private JButton createClientButton;
 
     public CreateReservationView(Hotel selectedHotel){
-        super("/assets/CREATE_RESERVATION_NAME.png");
+        super("/assets/LABELS/CREATE_RESERVATION.png");
 
         inputHolder = new JPanel();
         inputHolder.setOpaque(false);
@@ -45,7 +37,7 @@ public class CreateReservationView extends AbstractView {
         SpinnerNumberModel checkOutDayOptions = new SpinnerNumberModel(2, 2, 31, 1);
         checkOutDayField = new JSpinner(checkOutDayOptions);
         String[] roomNames = Arrays.stream(selectedHotel.getRooms())
-                .filter(room -> room != null) // filter out null rooms
+                .filter(Objects::nonNull) // filter out null rooms
                 .map(Room::getFormattedName)
                 .toArray(String[]::new);
 

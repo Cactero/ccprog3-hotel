@@ -50,7 +50,7 @@ public class CreateReservationView extends JFrame {
         // app name image
         headerHolder = new JPanel();
         headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/CREATE_RESERVATION_NAME.png"));
+        headerImage = new ImageIcon(this.getClass().getResource("/assets/LABELS/CREATE_RESERVATION.png"));
         headerLabel = new HeaderLabel(headerImage, headerHolder);
         headerHolder.add(headerLabel);
         contentHolder.add(headerHolder, BorderLayout.NORTH);

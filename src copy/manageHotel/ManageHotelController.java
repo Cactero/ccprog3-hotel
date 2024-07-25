@@ -22,6 +22,7 @@ public class ManageHotelController extends AbstractController {
         ((ManageHotelView) view).addRemoveReservationButtonListener(_ -> removeReservation());
         ((ManageHotelView) view).addRemoveHotelButtonListener(_ -> removeHotel());
         ((ManageHotelView) view).addChangeRoomTypeButtonListener(_ -> changeRoomType());
+        ((ManageHotelView) view).addDPMButtonListener(_ -> datePriceModifier());
 
     }
 
@@ -55,6 +56,10 @@ public class ManageHotelController extends AbstractController {
 
     public void changeRoomType() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.CHANGE_ROOM_TYPE));
+    }
+
+    public void datePriceModifier() {
+        frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.DATE_PRICE_MODIFIER));
     }
 
 }

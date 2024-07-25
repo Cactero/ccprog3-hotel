@@ -3,9 +3,12 @@ package chooseHotel;
 import Model.CentralModel;
 import Model.Hotel;
 import createRoom.CreateRoomModel;
+import enterHotelName.EnterHotelNameModel;
 import main.AbstractModel;
 import main.MainFrame;
+import removeRoom.RemoveRoomModel;
 import shared.SelectableHotel;
+import viewHotel.ViewHotelModel;
 
 import java.util.HashMap;
 
@@ -25,6 +28,7 @@ public class ChooseHotelModel extends AbstractModel {
     public static final String REMOVE_RESERVATION = "Remove Reservation";
     public static final String REMOVE_HOTEL = "Remove Hotel";
     public static final String CHANGE_ROOM_TYPE = "Change Room Type";
+    public static final String DATE_PRICE_MODIFIER = "Date Price Modifier";
 
     public static final String CREATE_RESERVATION = "Create Reservation";
     public static final String VIEW_HOTEL = "View Hotel";
@@ -34,16 +38,18 @@ public class ChooseHotelModel extends AbstractModel {
     public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new ChooseHotelController(this, frame);
-
         models = new HashMap<>();
 
         models.put(ADD_ROOMS, new CreateRoomModel(centralModel, frame, false));
-//        removeRooms = new RemoveRoomModel();
-//        changeHotelName = new EnterHotelNameModel(centralModel, frame);
-//        updateBasePrice = new UpdateBasePriceModel();
-//        removeReservation = new RemoveReservationModel();
-//        removeHotel = new RemoveHotelModel();
-//        changeRoomType = new ChangeRoomTypeModel();
+        models.put(REMOVE_ROOMS, new RemoveRoomModel(centralModel, frame));
+        models.put(CHANGE_HOTEL_NAME, new EnterHotelNameModel(centralModel, frame, false));
+        models.put(UPDATE_BASE_PRICE, new CreateRoomModel(centralModel, frame, false));
+        models.put(REMOVE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
+        models.put(REMOVE_HOTEL, new CreateRoomModel(centralModel, frame, false));
+        models.put(CHANGE_ROOM_TYPE, new CreateRoomModel(centralModel, frame, false));
+        models.put(DATE_PRICE_MODIFIER, new CreateRoomModel(centralModel, frame, false));
+        models.put(CREATE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
+        models.put(VIEW_HOTEL, new ViewHotelModel(centralModel, frame));
 
     }
 

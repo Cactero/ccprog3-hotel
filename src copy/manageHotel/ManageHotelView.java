@@ -18,11 +18,12 @@ public class ManageHotelView extends AbstractView {
     private JButton removeReservation;
     private JButton removeHotel;
     private JButton changeRoomType;
+    private JButton datePriceModifier;
 
     private JButton mainMenuButton;
 
     public ManageHotelView(){
-        super("/assets/MANAGE_HOTEL_NAME.png");
+        super("/assets/LABELS/MANAGE_HOTEL.png");
 
         JPanel optionsHolder = new JPanel();
         optionsHolder.setOpaque(false);
@@ -33,6 +34,7 @@ public class ManageHotelView extends AbstractView {
         removeReservation = new TemplateButton("Remove Reservation");
         removeHotel = new TemplateButton("Remove Hotel");
         changeRoomType = new TemplateButton("Change Room Type");
+        datePriceModifier = new TemplateButton("Add Date Price Modifier");
         optionsHolder.add(changeHotelName);
         optionsHolder.add(addRooms);
         optionsHolder.add(removeRooms);
@@ -40,6 +42,7 @@ public class ManageHotelView extends AbstractView {
         optionsHolder.add(removeReservation);
         optionsHolder.add(removeHotel);
         optionsHolder.add(changeRoomType);
+        optionsHolder.add(datePriceModifier);
         contentHolder.add(optionsHolder);
 
 
@@ -60,5 +63,6 @@ public class ManageHotelView extends AbstractView {
     public void addRemoveReservationButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
     public void addRemoveHotelButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
     public void addChangeRoomTypeButtonListener(ActionListener listener) { changeRoomType.addActionListener(listener); }
+    public void addDPMButtonListener(ActionListener listener) { datePriceModifier.addActionListener(listener); }
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
 }

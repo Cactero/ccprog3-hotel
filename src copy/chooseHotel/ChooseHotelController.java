@@ -14,18 +14,16 @@ import java.util.ArrayList;
  */
 public class ChooseHotelController extends AbstractController implements PopupScreen {
 
-    private String selectedHotelName;
 
     public ChooseHotelController(ChooseHotelModel model, MainFrame frame) {
         super(model, frame);
         this.view = new ChooseHotelView();
-
-        selectedHotelName = ((ChooseHotelView) view).getHotelName();
     }
 
     @Override
     public void promptUser(){
 
+        String selectedHotelName;
         ArrayList<Hotel> hotels = model.getHotels();
 
         String[] hotelNames = hotels.stream()

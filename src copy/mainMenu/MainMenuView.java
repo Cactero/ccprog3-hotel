@@ -94,7 +94,7 @@ public class MainMenuView extends AbstractView {
         rightSide.setOpaque(false);
 
         // app name image
-        logoImage = new ImageIcon(this.getClass().getResource("/assets/MAIN_MENU_NAME.png"));
+        logoImage = new ImageIcon(this.getClass().getResource("/assets/LABELS/MAIN_MENU.png"));
         logoLabel = new JLabel(logoImage) {
             @Override
             protected void paintComponent(Graphics g) {

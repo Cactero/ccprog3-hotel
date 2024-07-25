@@ -3,23 +3,15 @@ package viewHotel;
 import main.AbstractView;
 import shared.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * The View of Create Room.
  * @author Angela Domingo
  */
 public class ViewHotelView extends AbstractView {
-
-    private Image bgImage;
-
-    private JPanel headerHolder;
-    private JLabel headerLabel;
-    private ImageIcon headerImage;
 
     private JPanel centerHolder;
     private JLabel textDisplay;
@@ -30,7 +22,7 @@ public class ViewHotelView extends AbstractView {
 
 
     public ViewHotelView(){
-        super("/assets/CHOOSE_HOTEL_NAME.png");
+        super("/assets/LABELS/CHOOSE_HOTEL.png");
 
         // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();

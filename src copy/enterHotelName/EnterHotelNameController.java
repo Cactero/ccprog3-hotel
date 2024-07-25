@@ -7,8 +7,6 @@ import main.AbstractController;
 import main.MainFrame;
 import shared.PopupScreen;
 
-import java.util.ArrayList;
-
 /**
  * The Controller for Enter Hotel Name
  * @author Angela Domingo
@@ -26,18 +24,32 @@ public class EnterHotelNameController extends AbstractController implements Popu
         String hotelName = JOptionPane.showInputDialog("Enter your hotel name:");
 
         if (hotelName == null){
-            frame.switchView(((EnterHotelNameModel) model).mainMenu());
+            if (((EnterHotelNameModel) model).isFromCreateHotel())
+                frame.switchView(((EnterHotelNameModel) model).mainMenu());
+            else
+                frame.switchView(((EnterHotelNameModel) model).manageHotel());
+
         } else if (hotelName.isEmpty()){
             JOptionPane.showMessageDialog(null, "Enter a hotel name.", "No hotel name", JOptionPane.PLAIN_MESSAGE);
             promptUser();
+
         } else {
-            ArrayList<Hotel> hotels = model.getHotels();
-            hasConflict = hotels.stream().anyMatch(hotel -> hotel.getName().equals(hotelName));
+            hasConflict = model.getHotels().stream().anyMatch(hotel -> hotel.getName().equals(hotelName));
 
             if (!hasConflict){
-                Hotel hotel = new Hotel(hotelName);
-                ((EnterHotelNameModel) model).addHotel(hotel);
-                frame.switchView(((EnterHotelNameModel) model).createRoom(hotel));
+                if (((EnterHotelNameModel) model).isFromCreateHotel()){
+                    Hotel hotel = new Hotel(hotelName);
+                    ((EnterHotelNameModel) model).addHotel(hotel);
+                    JOptionPane.showMessageDialog(null, "Successfully added new hotel!", "Hotel " + hotelName + " added", JOptionPane.PLAIN_MESSAGE);
+                    frame.switchView(((EnterHotelNameModel) model).createRoom(hotel));
+                } else {
+                    String originalName = ((EnterHotelNameModel) model).getSelectedHotel().getName();
+                    ((EnterHotelNameModel) model).renameHotel(hotelName);
+                    String message = String.format("Successfully renamed Hotel %s to %s!", originalName, hotelName);
+                    JOptionPane.showMessageDialog(null, message, "Renamed hotel", JOptionPane.PLAIN_MESSAGE);
+                    frame.switchView(((EnterHotelNameModel) model).manageHotel());
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "A hotel with the same name already exists.", "Invalid Hotel Name", JOptionPane.PLAIN_MESSAGE);
                 promptUser();

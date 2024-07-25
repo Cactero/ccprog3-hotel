@@ -34,7 +34,7 @@ public class CentralModel {
 
         // initalizes the most used models in the program that have the most "unique" states
         models.put(MAIN_MENU, new MainMenuModel(this, frame));
-        models.put(CREATE_HOTEL, new EnterHotelNameModel(this, frame));
+        models.put(CREATE_HOTEL, new EnterHotelNameModel(this, frame, true));
         models.put(CHOOSE_HOTEL, new ChooseHotelModel(this, frame));
         models.put(MANAGE_HOTEL, new ManageHotelModel(this, frame));
 
@@ -50,6 +50,10 @@ public class CentralModel {
 
     public void removeHotel(Hotel hotel){
         this.hotels.remove(hotel);
+    }
+
+    public Hotel getHotel(int index){
+        return this.hotels.get(index);
     }
 
     public AbstractModel getModel(String key){
