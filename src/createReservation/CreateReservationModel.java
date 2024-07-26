@@ -6,17 +6,20 @@ import Model.Hotel;
 import main.AbstractModel;
 import main.MainFrame;
 import shared.SelectableHotel;
+import main.AbstractModel;
+import main.MainFrame;
 
 /**
  * The Model for Create Reservation
  * @author Angela Domingo
  */
-public class CreateReservationModel extends AbstractModel implements SelectableHotel {
+public class CreateReservationModel extends AbstractModel {
 
     private Hotel selectedHotel;
 
-    public CreateReservationModel(CentralModel centralModel, MainFrame frame){
+    public CreateReservationModel(CentralModel centralModel, MainFrame frame, Hotel selectedHotel){
         super(centralModel);
+        this.selectedHotel = selectedHotel;
         controller = new CreateReservationController(this, frame);
     }
 

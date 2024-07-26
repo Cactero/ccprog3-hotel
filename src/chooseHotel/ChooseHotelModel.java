@@ -2,7 +2,6 @@ package chooseHotel;
 
 import Model.CentralModel;
 import Model.Hotel;
-import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
 import enterHotelName.EnterHotelNameModel;
 import main.AbstractModel;
@@ -37,6 +36,26 @@ public class ChooseHotelModel extends AbstractModel {
 
     private HashMap<String, AbstractModel> models;
 
+    //manage hotel macros
+    public static final String ADD_ROOMS = "Add Rooms";
+    public static final String REMOVE_ROOMS = "Remove Room";
+    public static final String CHANGE_HOTEL_NAME = "Change Hotel Name";
+    public static final String UPDATE_BASE_PRICE = "Update Base Price";
+    public static final String REMOVE_RESERVATION = "Remove Reservation";
+    public static final String REMOVE_HOTEL = "Remove Hotel";
+    public static final String CHANGE_ROOM_TYPE = "Change Room Type";
+    public static final String DATE_PRICE_MODIFIER = "Date Price Modifier";
+    public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
+        super(centralModel);
+        controller = new ChooseHotelController(this, frame);
+        models = new HashMap<>();
+
+    // miscellaneous macros for screens that require hotel selection
+    public static final String CREATE_RESERVATION = "Create Reservation";
+    public static final String VIEW_HOTEL = "View Hotel";
+
+    private HashMap<String, AbstractModel> models;
+
     public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new ChooseHotelController(this, frame);
@@ -45,20 +64,19 @@ public class ChooseHotelModel extends AbstractModel {
         models.put(ADD_ROOMS, new CreateRoomModel(centralModel, frame, false));
         models.put(REMOVE_ROOMS, new RemoveRoomModel(centralModel, frame));
         models.put(CHANGE_HOTEL_NAME, new EnterHotelNameModel(centralModel, frame, false));
-        // TODO: update base price MVC
         models.put(UPDATE_BASE_PRICE, new CreateRoomModel(centralModel, frame, false));
-        // TODO: remove reservation MVC
         models.put(REMOVE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
-        // TODO: remove hotel MVC
         models.put(REMOVE_HOTEL, new CreateRoomModel(centralModel, frame, false));
-        // TODO: change room type MVC
         models.put(CHANGE_ROOM_TYPE, new CreateRoomModel(centralModel, frame, false));
-        // TODO: dpm MVC
         models.put(DATE_PRICE_MODIFIER, new CreateRoomModel(centralModel, frame, false));
-
-        models.put(CREATE_RESERVATION, new CreateReservationModel(centralModel, frame));
+        models.put(CREATE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
         models.put(VIEW_HOTEL, new ViewHotelModel(centralModel, frame));
 
+        // TODO: update base price MVC
+        // TODO: remove reservation MVC
+        // TODO: remove hotel MVC
+        // TODO: change room type MVC
+        // TODO: dpm MVC
     }
 
     /**
