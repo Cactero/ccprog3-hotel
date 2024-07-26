@@ -2,6 +2,7 @@ package chooseHotel;
 
 import Model.CentralModel;
 import Model.Hotel;
+import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
 import enterHotelName.EnterHotelNameModel;
 import main.AbstractModel;
@@ -44,12 +45,18 @@ public class ChooseHotelModel extends AbstractModel {
         models.put(ADD_ROOMS, new CreateRoomModel(centralModel, frame, false));
         models.put(REMOVE_ROOMS, new RemoveRoomModel(centralModel, frame));
         models.put(CHANGE_HOTEL_NAME, new EnterHotelNameModel(centralModel, frame, false));
+        // TODO: update base price MVC
         models.put(UPDATE_BASE_PRICE, new CreateRoomModel(centralModel, frame, false));
+        // TODO: remove reservation MVC
         models.put(REMOVE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
+        // TODO: remove hotel MVC
         models.put(REMOVE_HOTEL, new CreateRoomModel(centralModel, frame, false));
+        // TODO: change room type MVC
         models.put(CHANGE_ROOM_TYPE, new CreateRoomModel(centralModel, frame, false));
+        // TODO: dpm MVC
         models.put(DATE_PRICE_MODIFIER, new CreateRoomModel(centralModel, frame, false));
-        models.put(CREATE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
+
+        models.put(CREATE_RESERVATION, new CreateReservationModel(centralModel, frame));
         models.put(VIEW_HOTEL, new ViewHotelModel(centralModel, frame));
 
     }

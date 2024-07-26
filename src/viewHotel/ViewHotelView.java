@@ -14,9 +14,6 @@ import java.awt.event.ActionListener;
  */
 public class ViewHotelView extends AbstractView {
 
-    private JPanel centerHolder;
-    private JLabel textDisplay;
-
     private JPanel buttonsHolder;
     private JButton mainMenuButton;
     private JButton highLevelButton;
