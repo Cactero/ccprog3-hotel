@@ -1,32 +1,23 @@
 package createReservation;
 
+import Model.CentralModel;
 import Model.Client;
 import Model.Hotel;
-import mainMenu.MainMenuModel;
-import manageHotel.ManageHotelModel;
-
-import java.util.ArrayList;
+import main.AbstractModel;
+import main.MainFrame;
 
 /**
  * The Model for Create Reservation
  * @author Angela Domingo
  */
-public class CreateReservationModel {
-    private ArrayList<Hotel> hotels;
+public class CreateReservationModel extends AbstractModel {
+
     private Hotel selectedHotel;
 
-    public CreateReservationModel(ArrayList<Hotel> hotels, Hotel selectedHotel){
-        this.hotels = hotels;
+    public CreateReservationModel(CentralModel centralModel, MainFrame frame, Hotel selectedHotel){
+        super(centralModel);
         this.selectedHotel = selectedHotel;
-        new CreateReservationController(this);
-    }
-
-    /**
-     * Returns an ArrayList of hotels present in the system.
-     * @return the ArrayList of hotels
-     */
-    public ArrayList<Hotel> getHotels(){
-        return this.hotels;
+        controller = new CreateReservationController(this, frame);
     }
 
     /**
@@ -42,14 +33,18 @@ public class CreateReservationModel {
      * @param client the Client to be added
      */
     public void addClient(Client client){
-        selectedHotel.addClient(client);
+        for (Hotel hotel : centralModel.getHotels()){
+            if (hotel.equals(selectedHotel))
+                hotel.addClient(client);
+        }
     }
 
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
+     * @return the Model of Main Menu
      */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
 }

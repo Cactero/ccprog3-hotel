@@ -1,50 +1,45 @@
 package chooseHotel;
 
 import Model.Hotel;
+import main.AbstractController;
+import main.MainFrame;
+import shared.PopupScreen;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * The Controller for Choose Hotel.
  * @author Angela Domingo
  */
-public class ChooseHotelController {
+public class ChooseHotelController extends AbstractController implements PopupScreen {
 
-    private ChooseHotelModel chooseHotelModel;
-    private ChooseHotelView chooseHotelView;
 
-    public ChooseHotelController(ChooseHotelModel chooseHotelModel, boolean fromCreateReservation){
-        this.chooseHotelModel = chooseHotelModel;
-        chooseHotelView = new ChooseHotelView(this.chooseHotelModel.getHotels());
+    public ChooseHotelController(ChooseHotelModel model, MainFrame frame) {
+        super(model, frame);
+        this.view = new ChooseHotelView();
+    }
 
-        chooseHotelView.addChooseHotelButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Hotel selectedHotel = null;
-                String selectedHotelName = chooseHotelView.getHotelName();
-                for (Hotel hotel : chooseHotelModel.getHotels()){
-                    if (hotel.getName().equals(selectedHotelName))
-                        selectedHotel = hotel;
-                }
+    /**
+     * The implementation of promptUser in PopupScreen for Choose Hotel.
+     */
+    @Override
+    public void promptUser(){
 
-                chooseHotelView.dispose();
-                if (fromCreateReservation)
-                    chooseHotelModel.createReservation(selectedHotel);
-            }
-        });
+        String selectedHotelName;
+        ArrayList<Hotel> hotels = model.getHotels();
 
-        chooseHotelView.addMainMenuButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chooseHotelView.dispose();
-                if (fromCreateReservation)
-                    chooseHotelModel.mainMenu();
-                else
-                    chooseHotelModel.manageHotel();
-            }
-        });
+        String[] hotelNames = hotels.stream()
+        .map(Hotel::getName)
+        .toArray(String[]::new);
 
+        selectedHotelName = (String) JOptionPane.showInputDialog(null, "Select a hotel", "Choose Hotel", JOptionPane.PLAIN_MESSAGE, null, hotelNames, hotelNames[0]);
+        Hotel selectedHotel = hotels.stream()
+                .filter(hotel -> hotel.getName().equals(selectedHotelName))
+                .findFirst()
+                .orElse(null);
+
+        frame.switchView(((ChooseHotelModel) model).getModel(selectedHotel, ((ChooseHotelModel) model).getSource()));
     }
 
 }

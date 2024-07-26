@@ -1,29 +1,17 @@
 package manageHotel;
 
-import shared.Button;
-import shared.HeaderLabel;
-
-import javax.imageio.ImageIO;
+import main.AbstractView;
+import shared.TemplateButton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 /**
- *
+ * The View for Manage Hotel.
+ * @author Angela Domingo
  */
-public class ManageHotelView extends JFrame {
+public class ManageHotelView extends AbstractView {
 
-    private JPanel contentHolder;
-    private Image bgImage;
-
-    private JPanel headerHolder;
-    private JLabel headerLabel;
-    private ImageIcon headerImage;
-
-    private JPanel optionsHolder;
     private JButton changeHotelName;
     private JButton addRooms;
     private JButton removeRooms;
@@ -31,40 +19,23 @@ public class ManageHotelView extends JFrame {
     private JButton removeReservation;
     private JButton removeHotel;
     private JButton changeRoomType;
+    private JButton datePriceModifier;
 
-    private JPanel buttonsHolder;
     private JButton mainMenuButton;
 
     public ManageHotelView(){
-        // background image
-        try {
-            bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
-            contentHolder = new JPanel(new BorderLayout()) {
-                @Override public void paintComponent(Graphics g) {
-                    g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
-                }
-            };
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        super("/assets/LABELS/MANAGE_HOTEL.png");
 
-        // app name image
-        headerHolder = new JPanel();
-        headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/LABELS/MANAGE_HOTEL.png"));
-        headerLabel = new HeaderLabel(headerImage, headerHolder);
-        headerHolder.add(headerLabel, BorderLayout.CENTER);
-        contentHolder.add(headerHolder, BorderLayout.NORTH);
-
-        optionsHolder = new JPanel();
+        JPanel optionsHolder = new JPanel();
         optionsHolder.setOpaque(false);
-        changeHotelName = new Button("Change Hotel Name");
-        addRooms = new Button("Add Rooms");
-        removeRooms = new Button("Remove Rooms");
-        updateBasePrice = new Button("Update Base Price");
-        removeReservation = new Button("Remove Reservation");
-        removeHotel = new Button("Remove Hotel");
-        changeRoomType = new Button("Change Room Type");
+        changeHotelName = new TemplateButton("Change Hotel Name");
+        addRooms = new TemplateButton("Add Rooms");
+        removeRooms = new TemplateButton("Remove Rooms");
+        updateBasePrice = new TemplateButton("Update Base Price");
+        removeReservation = new TemplateButton("Remove Reservation");
+        removeHotel = new TemplateButton("Remove Hotel");
+        changeRoomType = new TemplateButton("Change Room Type");
+        datePriceModifier = new TemplateButton("Add Date Price Modifier");
         optionsHolder.add(changeHotelName);
         optionsHolder.add(addRooms);
         optionsHolder.add(removeRooms);
@@ -72,38 +43,72 @@ public class ManageHotelView extends JFrame {
         optionsHolder.add(removeReservation);
         optionsHolder.add(removeHotel);
         optionsHolder.add(changeRoomType);
+        optionsHolder.add(datePriceModifier);
         contentHolder.add(optionsHolder);
 
 
         // cancel room creation and create room buttons
-        buttonsHolder = new JPanel();
+        JPanel buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new Button("Cancel");
+        mainMenuButton = new TemplateButton("Cancel");
         buttonsHolder.add(mainMenuButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
-        setContentPane(contentHolder);
-        addWindowListener( new WindowAdapter()
-        {
-            public void windowResized(WindowEvent evt)
-            {
-                // add img elements here
-            }
-        });
-        setSize(1280, 720);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
 
     }
 
+    /**
+     * Adds a listener to the Add Rooms button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addAddRoomsButtonListener(ActionListener listener) { addRooms.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Remove Rooms button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addRemoveRoomsButtonListener(ActionListener listener) { removeRooms.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Change Hotel Name button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addChangeHotelNameButtonListener(ActionListener listener) { changeHotelName.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Update Base Price button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addUpdateBasePriceButtonListener(ActionListener listener) { updateBasePrice.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Remove Reservation button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addRemoveReservationButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
-    public void addRemoveHotelButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Remove Hotel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
+    public void addRemoveHotelButtonListener(ActionListener listener) { removeHotel.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Change Room Type button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addChangeRoomTypeButtonListener(ActionListener listener) { changeRoomType.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Date Price Modifier button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
+    public void addDPMButtonListener(ActionListener listener) { datePriceModifier.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Main Menu button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
+
 }

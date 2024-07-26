@@ -1,42 +1,37 @@
 package manageHotel;
 
-import Model.Hotel;
+import Model.CentralModel;
 import chooseHotel.ChooseHotelModel;
-import mainMenu.MainMenuModel;
-
-import java.util.ArrayList;
+import main.AbstractModel;
+import main.MainFrame;
 
 /**
  * The Model for Manage Hotel
  * @author Angela Domingo
  */
-public class ManageHotelModel {
-    private ArrayList<Hotel> hotels;
+public class ManageHotelModel extends AbstractModel {
 
-    public ManageHotelModel(ArrayList<Hotel> hotels){
-        this.hotels = hotels;
-        new ManageHotelController(this);
+    public ManageHotelModel(CentralModel centralModel, MainFrame frame){
+        super(centralModel);
+        new ManageHotelController(this, frame);
     }
 
     /**
-     * Returns an ArrayList of hotels present in the system.
-     * @return the ArrayList of hotels
+     * The Model of Main Menu that is retrieved when the user clicks the Cancel button
+     * @return the Model of Main Menu
      */
-    public ArrayList<Hotel> getHotels(){
-        return this.hotels;
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
     /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
+     * The desired Choose Hotel Model object that is retrieved when the user clicks one of the buttons.
+     * @param source where Choose Hotel will lead to once the Choose Hotel View is passed
+     * @return the desired Choose Hotel Model object with the appropriate source
      */
-    public void mainMenu(){
-        new MainMenuModel(hotels);
-    }
-
-    /**
-     * The Model of Choose Hotel that is created when the user clicks one of the buttons
-     */
-    public void chooseHotel(){
-        new ChooseHotelModel(hotels, false);
+    public AbstractModel chooseHotel(String source){
+        ChooseHotelModel model = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
+        model.setSource(source);
+        return model;
     }
 }

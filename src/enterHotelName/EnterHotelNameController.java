@@ -1,89 +1,63 @@
 package enterHotelName;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import Model.*;
+import main.AbstractController;
+import main.MainFrame;
+import shared.PopupScreen;
 
 /**
  * The Controller for Enter Hotel Name
  * @author Angela Domingo
  */
-public class EnterHotelNameController {
-    private EnterHotelNameModel enterHotelNameModel;
-    private EnterHotelNameView enterHotelNameView;
+public class EnterHotelNameController extends AbstractController implements PopupScreen {
 
-    public EnterHotelNameController(EnterHotelNameModel enterHotelNameModel, boolean fromChangeHotelName){
-        this.enterHotelNameModel = enterHotelNameModel;
-        enterHotelNameView = new EnterHotelNameView();
-        addHotelName();
-
-        /*
-        enterHotelNameView.addCreateHotelButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                /*
-                boolean hasConflict = false;
-                String hotelName = enterHotelNameView.getHotelName();
-
-                if (hotelName.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Enter a hotel name.", "No hotel name", JOptionPane.PLAIN_MESSAGE);
-                    enterHotelNameView.resetInputFields();
-                } else {
-                    for (Hotel hotel : enterHotelNameModel.getHotels()){
-                        if (hotel.getName().equals(hotelName)){
-                            hasConflict = true;
-                        }
-                    }
-
-                    if (!hasConflict){
-                        Hotel hotel = new Hotel(hotelName);
-                        enterHotelNameModel.addHotel(hotel);
-                        enterHotelNameView.dispose();
-                        enterHotelNameModel.createRoom(hotel,true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "A hotel with the same name already exists.", "Invalid Hotel Name", JOptionPane.PLAIN_MESSAGE);
-                    }
-                }
-
-            }
-        });
-
-        enterHotelNameView.addMainMenuButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enterHotelNameView.dispose();
-                enterHotelNameModel.mainMenu();
-            }
-        });
-        */
+    public EnterHotelNameController(EnterHotelNameModel model, MainFrame frame) {
+        super(model, frame);
+        this.view = new EnterHotelNameView();
     }
 
-    public void addHotelName(){
-        boolean hasConflict = false;
-        String hotelName = enterHotelNameView.getHotelName();
+    /**
+     * The implementation of promptUser in PopupScreen for Enter Hotel Name.
+     */
+    @Override
+    public void promptUser(){
+        String hotelName = JOptionPane.showInputDialog("Enter your hotel name:");
 
-        if (hotelName.isEmpty()){
+        if (hotelName == null){ // if user clicks cancel or exits the popup
+            if (((EnterHotelNameModel) model).isFromCreateHotel())
+                frame.switchView(((EnterHotelNameModel) model).mainMenu());
+            else
+                frame.switchView(((EnterHotelNameModel) model).manageHotel());
+
+        } else if (hotelName.isEmpty()){ // if user clicks OK but entered nothing in the text box
             JOptionPane.showMessageDialog(null, "Enter a hotel name.", "No hotel name", JOptionPane.PLAIN_MESSAGE);
-            enterHotelNameView.resetInputFields();
+            promptUser();
+
         } else {
-            for (Hotel hotel : enterHotelNameModel.getHotels()){
-                if (hotel.getName().equals(hotelName)){
-                    hasConflict = true;
-                }
-            }
+            // checks for conflict with existing hotel names
+            boolean hasConflict = model.getHotels().stream().anyMatch(hotel -> hotel.getName().equals(hotelName));
 
             if (!hasConflict){
-                Hotel hotel = new Hotel(hotelName);
-                enterHotelNameModel.addHotel(hotel);
-                enterHotelNameView.dispose();
-                enterHotelNameModel.createRoom(hotel,true);
+                if (((EnterHotelNameModel) model).isFromCreateHotel()){
+                    Hotel hotel = new Hotel(hotelName);
+                    ((EnterHotelNameModel) model).addHotel(hotel);
+                    JOptionPane.showMessageDialog(null, "Successfully added new hotel!", "Hotel " + hotelName + " added", JOptionPane.PLAIN_MESSAGE);
+                    frame.switchView(((EnterHotelNameModel) model).createRoom(hotel));
+                } else {
+                    String originalName = ((EnterHotelNameModel) model).getSelectedHotel().getName();
+                    ((EnterHotelNameModel) model).renameHotel(hotelName);
+                    String message = String.format("Successfully renamed Hotel %s to %s!", originalName, hotelName);
+                    JOptionPane.showMessageDialog(null, message, "Renamed hotel", JOptionPane.PLAIN_MESSAGE);
+                    frame.switchView(((EnterHotelNameModel) model).manageHotel());
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "A hotel with the same name already exists.", "Invalid Hotel Name", JOptionPane.PLAIN_MESSAGE);
+                promptUser();
             }
         }
     }
-
 
 }

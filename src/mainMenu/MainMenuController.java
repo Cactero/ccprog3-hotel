@@ -1,79 +1,82 @@
 package mainMenu;
 
+import main.AbstractController;
+import main.MainFrame;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The Controller for Main Menu
  * @author Angela Domingo
  * @author Ryan Gemal
  */
-public class MainMenuController {
-    private MainMenuModel mainMenuModel;
-    private MainMenuView mainMenuView;
+public class MainMenuController extends AbstractController {
 
-    public MainMenuController(MainMenuModel mainMenuModel) {
-        this.mainMenuModel = mainMenuModel;
-        this.mainMenuView = new MainMenuView();
+    public MainMenuController(MainMenuModel model, MainFrame frame) {
+        super(model, frame);
+        this.view = new MainMenuView();
 
-        mainMenuView.addCreateHotelButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //mainMenuView.dispose();
-                mainMenuModel.createHotel();
-            }
-        });
-
-        mainMenuView.addViewHotelButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
-
-                if (!hotelListEmpty){
-                    mainMenuModel.viewHotel();
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-
-        mainMenuView.addManageHotelButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
-
-                if (!hotelListEmpty){
-                    mainMenuModel.manageHotel();
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-
-        mainMenuView.addCreateReservationButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean hotelListEmpty = mainMenuModel.getHotels().isEmpty();
-
-                if (!hotelListEmpty){
-                    mainMenuModel.createReservation();
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-
-        mainMenuView.addExitButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        ((MainMenuView) view).addCreateHotelButtonListener(_ -> createHotel());
+        ((MainMenuView) view).addViewHotelButtonListener(_ -> viewHotel());
+        ((MainMenuView) view).addManageHotelButtonListener(_ -> manageHotel());
+        ((MainMenuView) view).addCreateReservationButtonListener(_ -> createReservation());
+        ((MainMenuView) view).addExitButtonListener(_ -> exit());
     }
 
+    /**
+     * Switches to the Create Hotel view.
+     */
+    public void createHotel(){
+        frame.switchView(((MainMenuModel) this.model).createHotel());
+    }
+
+    /**
+     * Switches to the View Hotel view.
+     */
+    public void viewHotel(){
+        boolean hotelListEmpty = model.getHotels().isEmpty();
+
+        if (!hotelListEmpty){
+            frame.switchView(((MainMenuModel) model).viewHotel());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    /**
+     * Switches to the Manage Hotel view.
+     */
+    public void manageHotel(){
+        boolean hotelListEmpty = model.getHotels().isEmpty();
+
+        if (!hotelListEmpty){
+            frame.switchView(((MainMenuModel) model).manageHotel());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    /**
+     * Switches to the Create Reservation view.
+     */
+    public void createReservation(){
+        boolean hotelListEmpty = model.getHotels().isEmpty();
+
+        if (!hotelListEmpty){
+            frame.switchView(((MainMenuModel) model).createReservation());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No hotel exists in the system, please make a new one first.", "No hotels found", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    /**
+     * Exits the program through the exit program button.
+     */
+    public void exit(){
+        System.exit(0);
+    }
 
 }

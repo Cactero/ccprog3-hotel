@@ -2,28 +2,40 @@ package enterHotelName;
 
 import Model.*;
 import createRoom.CreateRoomModel;
-import mainMenu.MainMenuModel;
-
-import java.util.ArrayList;
+import main.AbstractModel;
+import main.MainFrame;
+import shared.SelectableHotel;
 
 /**
  * The Model for Enter Hotel Name
  * @author Angela Domingo
  */
-public class EnterHotelNameModel {
-    private ArrayList<Hotel> hotels;
+public class EnterHotelNameModel extends AbstractModel implements SelectableHotel {
 
-    public EnterHotelNameModel(ArrayList<Hotel> hotels, boolean fromChangeHotelName){
-        this.hotels = hotels;
-        new EnterHotelNameController(this, fromChangeHotelName);
+    private boolean fromCreateHotel;
+    private CreateRoomModel createRoomModel;
+    private Hotel selectedHotel;
+
+    public EnterHotelNameModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
+        super(centralModel);
+        createRoomModel = new CreateRoomModel(centralModel, frame, fromCreateHotel);
+        controller = new EnterHotelNameController(this, frame);
     }
 
     /**
-     * Returns an ArrayList of hotels present in the system.
-     * @return the ArrayList of hotels
+     * Checks if the Create Room instance is from Create Hotel.
+     * @param fromCreateHotel true if the current context is from Create Hotel; false otherwise.
      */
-    public ArrayList<Hotel> getHotels(){
-        return this.hotels;
+    public void setFromCreateHotel(boolean fromCreateHotel) {
+        this.fromCreateHotel = fromCreateHotel;
+    }
+
+    /**
+     * Checks if the Create Room instance is from Create Hotel.
+     * @return true if the current context is from Create Hotel; false otherwise.
+     */
+    public boolean isFromCreateHotel() {
+        return fromCreateHotel;
     }
 
     /**
@@ -31,26 +43,54 @@ public class EnterHotelNameModel {
      * @param hotel the new Hotel to be added
      */
     public void addHotel(Hotel hotel){
-        this.hotels.add(hotel);
+        centralModel.addHotel(hotel);
+    }
+
+    public void renameHotel(String newName){
+        int index = centralModel.getHotels().indexOf(selectedHotel);
+        centralModel.getHotels().get(index).setName(newName);
     }
 
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
+     * @return the Model of Main Menu
      */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
+    }
+
+    /**
+     * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
+     * @return the Model of Manage Hotel
+     */
+    public AbstractModel manageHotel(){
+        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
      * The Model of Create Room that is created when the user clicks the Create Hotel button
      * @param hotel the new Hotel created
-     * @param fromCreateHotel checks if the call is made from Create Room MVC
      */
-    public void createRoom(Hotel hotel, boolean fromCreateHotel){
-        new CreateRoomModel(this.hotels, hotel, fromCreateHotel);
+    public AbstractModel createRoom(Hotel hotel){
+        createRoomModel.setSelectedHotel(hotel);
+        return createRoomModel;
     }
 
-    public void enterHotelName(){
+    /**
+     * Sets the selected hotel the user chose previously in the Choose Hotel screen
+     * @param hotel the selected Hotel
+     */
+    @Override
+    public void setSelectedHotel(Hotel hotel) {
+        this.selectedHotel = hotel;
+    }
 
+    /**
+     * Gets the selected hotel the user chose previously in the Choose Hotel screen
+     * @return the selected Hotel
+     */
+    @Override
+    public Hotel getSelectedHotel() {
+        return selectedHotel;
     }
 }
