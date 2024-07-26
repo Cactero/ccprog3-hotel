@@ -7,6 +7,7 @@ import main.MainFrame;
 import mainMenu.MainMenuController;
 import mainMenu.MainMenuModel;
 import manageHotel.ManageHotelModel;
+import shared.SelectableHotel;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @author Angela Domingo
  * @author Ryan Gemal
  */
-public class ViewHotelModel extends AbstractModel {
+public class ViewHotelModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
 

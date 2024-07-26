@@ -1,5 +1,6 @@
 package viewHotel;
 
+import Model.Hotel;
 import main.AbstractView;
 import shared.*;
 
@@ -18,23 +19,28 @@ public class ViewHotelView extends AbstractView {
 
     private JPanel buttonsHolder;
     private JButton mainMenuButton;
+    private JButton highLevelButton;
     private JButton lowLevelOptionsButton;
 
-
-    public ViewHotelView(){
-        super("/assets/LABELS/CHOOSE_HOTEL.png");
+    public ViewHotelView(Hotel hotel){
+        super("/assets/LABELS/VIEW_HOTEL.png");
 
         // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new TemplateButton("Exit");
+
+        highLevelButton = new TemplateButton("Show High Level");
         lowLevelOptionsButton = new TemplateButton("Show Low Level");
-        buttonsHolder.add(mainMenuButton);
+        mainMenuButton = new TemplateButton("Exit");
+
+        buttonsHolder.add(highLevelButton);
         buttonsHolder.add(lowLevelOptionsButton);
+        buttonsHolder.add(mainMenuButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
     }
 
+    public void addHighLevelButtonListener(ActionListener listener) { highLevelButton.addActionListener(listener); }
     public void addLowLevelButtonListener(ActionListener listener) { lowLevelOptionsButton.addActionListener(listener); }
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
 }
