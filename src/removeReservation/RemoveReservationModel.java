@@ -1,6 +1,7 @@
-package removeRoom;
+package removeReservation;
 
 import Model.CentralModel;
+import Model.Client;
 import Model.Hotel;
 import Model.Room;
 import main.AbstractModel;
@@ -11,18 +12,18 @@ import shared.SelectableHotel;
  * The Model for Remove Room.
  * @author Angela Domingo
  */
-public class RemoveRoomModel extends AbstractModel implements SelectableHotel {
+public class RemoveReservationModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
 
-    public RemoveRoomModel(CentralModel centralModel, MainFrame frame) {
+    public RemoveReservationModel(CentralModel centralModel, MainFrame frame) {
         super(centralModel);
-        controller = new RemoveRoomController(this, frame);
+        controller = new RemoveReservationController(this, frame);
     }
 
-    public void removeRoom(Room room){
+    public void removeReservation(Client client){
         int index = centralModel.getHotels().indexOf(selectedHotel);
-        centralModel.getHotel(index).removeRoom(room);
+        centralModel.getHotel(index).removeClient(client);
     }
 
     public AbstractModel manageHotel(){

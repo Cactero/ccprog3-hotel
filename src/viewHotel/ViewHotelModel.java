@@ -5,21 +5,22 @@ import Model.Hotel;
 import main.AbstractModel;
 import main.MainFrame;
 import shared.SelectableHotel;
-import viewRoomAvailability.ViewRoomAvailabilityModel;
+import viewHotel.viewLowLevel.ViewLowLevelModel;
 
 /**
  * The Model for View Hotel
- *
  * @author Angela Domingo
- * @uthor Ryan Gemal
+ * @author Ryan Gemal
  */
 public class ViewHotelModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
+    private ViewLowLevelModel lowLevelModel;
 
     public ViewHotelModel(CentralModel centralModel, MainFrame frame) {
         super(centralModel);
         controller = new ViewHotelController(this, frame);
+        lowLevelModel = new ViewLowLevelModel(this, centralModel, frame);
     }
 
     public void setSelectedHotel(Hotel selectedHotel) {
@@ -46,9 +47,8 @@ public class ViewHotelModel extends AbstractModel implements SelectableHotel {
      * The Model of View Room Availability that is retrieved when the user clicks
      * one of the buttons
      */
-    public AbstractModel viewRoomAvailability() {
-        ViewRoomAvailabilityModel model = (ViewRoomAvailabilityModel) centralModel.getModel(CentralModel.VIEW_ROOM_AVAILABILITY);
-        model.setSelectedHotel(selectedHotel);
-        return model;
+    public AbstractModel viewLowLevel() {
+        lowLevelModel.setSelectedHotel(selectedHotel);
+        return lowLevelModel;
     }
 }

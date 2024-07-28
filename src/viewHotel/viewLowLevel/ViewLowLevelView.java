@@ -1,4 +1,4 @@
-package viewLowLevel;
+package viewHotel.viewLowLevel;
 
 import main.AbstractView;
 import shared.TemplateButton;
@@ -17,13 +17,13 @@ public class ViewLowLevelView extends AbstractView {
     private JButton viewReservation;
 
     private JButton mainMenuButton;
-    private JLabel hotelName = new JLabel();
 
     public ViewLowLevelView(){
         super("/assets/LABELS/VIEW_HOTEL.png");
 
         JPanel viewRoomPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         viewRoomPanel.add(new JLabel("Hotel name: "));
+        JLabel hotelName = new JLabel();
         viewRoomPanel.add(hotelName);
 
         JPanel optionsHolder = new JPanel();

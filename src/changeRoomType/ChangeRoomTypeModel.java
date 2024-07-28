@@ -23,13 +23,6 @@ public class ChangeRoomTypeModel extends AbstractModel implements SelectableHote
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
      */
-    public AbstractModel mainMenu(){
-        return centralModel.getModel(CentralModel.MAIN_MENU);
-    }
-
-    /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
-     */
     public AbstractModel manageHotel(){
         return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }

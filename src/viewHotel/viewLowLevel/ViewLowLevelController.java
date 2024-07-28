@@ -1,4 +1,4 @@
-package viewLowLevel;
+package viewHotel.viewLowLevel;
 
 import Model.Client;
 import Model.Hotel;
@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * The Controller for View Room Availability.
@@ -44,11 +45,8 @@ public class ViewLowLevelController extends AbstractController {
         JSpinner date = new JSpinner(sModel);
 
         int option = JOptionPane.showOptionDialog(null, date, "Enter date", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (option == JOptionPane.CANCEL_OPTION)
-        {
-            // do nothing
-        }
-        else if (option == JOptionPane.OK_OPTION) {
+
+        if (option == JOptionPane.OK_OPTION) {
             // user entered a number
             //return option;
 
@@ -74,32 +72,15 @@ public class ViewLowLevelController extends AbstractController {
         Hotel hotel = ((ViewLowLevelModel) model).getSelectedHotel();
 
         Room[] roomsArray = hotel.getRooms();
-        if (roomsArray == null) {
-            JOptionPane.showMessageDialog(null, "No rooms available", "Error", JOptionPane.ERROR_MESSAGE);
-            //frame.switchView(((viewLowLevelModel) model).viewHotel());
-            return;
-        }
 
         ArrayList<Room> rooms = new ArrayList<>(Arrays.asList(roomsArray));
 
         String[] roomNames = rooms.stream()
-                .filter(room -> room != null)
+                .filter(Objects::nonNull)
                 .map(Room::getFormattedName)
                 .toArray(String[]::new);
 
-        if (roomNames.length == 0) {
-            JOptionPane.showMessageDialog(null, "No rooms available", "Error", JOptionPane.ERROR_MESSAGE);
-            //frame.switchView(((viewLowLevelModel) model).viewHotel());
-            return;
-        }
-
         selectedRoomName = (String) JOptionPane.showInputDialog(null, "Select a room", "Choose Room", JOptionPane.PLAIN_MESSAGE, null, roomNames, roomNames[0]);
-
-        if (selectedRoomName == null) {
-            // User canceled the input dialog
-            //frame.switchView(((viewLowLevelModel) model).viewHotel());
-            return;
-        }
 
         Room selectedRoom = Arrays.stream(roomsArray)
                 .filter(room -> room != null && room.getFormattedName().equals(selectedRoomName))

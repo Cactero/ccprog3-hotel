@@ -26,65 +26,38 @@ public class ManageHotelController extends AbstractController {
 
     }
 
-    /**
-     * Switches to the Main Menu view.
-     */
     public void cancel(){
         frame.switchView(((ManageHotelModel) model).mainMenu());
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Add Rooms source.
-     */
     public void addRooms() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.ADD_ROOMS));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Remove Rooms source.
-     */
     public void removeRooms() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.REMOVE_ROOMS));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Change Hotel Name source.
-     */
     public void changeHotelName() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.CHANGE_HOTEL_NAME));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Update Base Price source.
-     */
     public void updateBasePrice() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.UPDATE_BASE_PRICE));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Remove Reservation source.
-     */
     public void removeReservation() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.REMOVE_RESERVATION));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Remove Hotel source.
-     */
     public void removeHotel() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.REMOVE_HOTEL));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Change Room Type source.
-     */
     public void changeRoomType() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.CHANGE_ROOM_TYPE));
     }
 
-    /**
-     * Switches to the Choose Hotel view with the Date Price Modifier source.
-     */
     public void datePriceModifier() {
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.DATE_PRICE_MODIFIER));
     }

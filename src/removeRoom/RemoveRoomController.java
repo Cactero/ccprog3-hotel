@@ -24,7 +24,7 @@ public class RemoveRoomController extends AbstractController implements PopupScr
     }
 
     /**
-     * The implementation of promptUser in PopupScreen for Remove Room.
+     * The implementation of promptUser in PopupScreen for Remove Reservation.
      */
     @Override
     public void promptUser() {

@@ -7,8 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * The View for Manage Hotel.
- * @author Angela Domingo
+ *
  */
 public class ManageHotelView extends AbstractView {
 
@@ -57,58 +56,13 @@ public class ManageHotelView extends AbstractView {
 
     }
 
-    /**
-     * Adds a listener to the Add Rooms button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addAddRoomsButtonListener(ActionListener listener) { addRooms.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Remove Rooms button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addRemoveRoomsButtonListener(ActionListener listener) { removeRooms.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Change Hotel Name button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addChangeHotelNameButtonListener(ActionListener listener) { changeHotelName.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Update Base Price button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addUpdateBasePriceButtonListener(ActionListener listener) { updateBasePrice.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Remove Reservation button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addRemoveReservationButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Remove Hotel button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addRemoveHotelButtonListener(ActionListener listener) { removeHotel.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Change Room Type button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addChangeRoomTypeButtonListener(ActionListener listener) { changeRoomType.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Date Price Modifier button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addDPMButtonListener(ActionListener listener) { datePriceModifier.addActionListener(listener); }
-
-    /**
-     * Adds a listener to the Main Menu button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
-
 }

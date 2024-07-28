@@ -6,9 +6,12 @@ import Model.Room;
 import Model.Utilities;
 import main.AbstractController;
 import main.MainFrame;
+import mainMenu.MainMenuModel;
+import mainMenu.MainMenuView;
 
 import javax.swing.*;
-import java.util.Arrays;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The Controller for Create Reservation.
@@ -21,15 +24,13 @@ public class CreateReservationController extends AbstractController {
         this.view = new CreateReservationView(model.getSelectedHotel());
 
         ((CreateReservationView) view).addCreateClientButtonListener(_ -> createClient());
+
         ((CreateReservationView) view).addMainMenuButtonListener(_ -> cancel());
+
     }
 
-    // TODO: add discount code implementation
-    // TODO: add date price modifier implementation
-    /**
-     * The logic behind clicking the Create Client button
-     */
     public void createClient(){
+
         String firstName = ((CreateReservationView) view).getFirstName();
         String lastName = ((CreateReservationView) view).getLastName();
         int checkInDay = ((CreateReservationView) view).getCheckInDay();
@@ -38,10 +39,20 @@ public class CreateReservationController extends AbstractController {
         String discountCode = ((CreateReservationView) view).getDiscountCode();
 
         Hotel bookedHotel = ((CreateReservationModel) model).getSelectedHotel();
-        Room bookedRoom = Arrays.stream(bookedHotel.getRooms())
-                .filter(room -> room.getFormattedName().equals(bookedRoomName))
-                .findFirst()
-                .orElseThrow(); // Throws NoSuchElementException if not found
+        if (bookedHotel == null) {
+            JOptionPane.showMessageDialog(null, "No hotel selected", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Room bookedRoom = null;
+        for (Room room : bookedHotel.getRooms()){
+            if (room != null){
+                String roomName = String.format("%s%d", room.getRoomFloor(), room.getRoomNumber());
+                if (roomName.equals(bookedRoomName))
+                    bookedRoom = room;
+            }
+        }
+
 
         if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
             System.out.println("Your booking dates are not valid, please try again!");
@@ -59,9 +70,6 @@ public class CreateReservationController extends AbstractController {
         }
     }
 
-    /**
-     * Brings the user back to the Main Menu screen when the Cancel button is clicked.
-     */
     public void cancel(){
         frame.switchView(((CreateReservationModel) model).mainMenu());
     }

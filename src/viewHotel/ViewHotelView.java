@@ -19,20 +19,23 @@ public class ViewHotelView extends AbstractView {
     private JButton highLevelButton;
     private JButton lowLevelOptionsButton;
 
-    public ViewHotelView(){
+    public ViewHotelView(Hotel hotel){
         super("/assets/LABELS/VIEW_HOTEL.png");
+
+        JPanel centerHolder = new JPanel();
+        centerHolder.setOpaque(false);
+        highLevelButton = new TemplateButton("Show High Level");
+        lowLevelOptionsButton = new TemplateButton("Show Low Level");
+        centerHolder.add(highLevelButton);
+        centerHolder.add(lowLevelOptionsButton);
 
         // cancel hotel creation and create hotel buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-
-        highLevelButton = new TemplateButton("Show High Level");
-        lowLevelOptionsButton = new TemplateButton("Show Low Level");
         mainMenuButton = new TemplateButton("Exit");
-
-        buttonsHolder.add(highLevelButton);
-        buttonsHolder.add(lowLevelOptionsButton);
         buttonsHolder.add(mainMenuButton);
+
+        contentHolder.add(centerHolder, BorderLayout.CENTER);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
     }

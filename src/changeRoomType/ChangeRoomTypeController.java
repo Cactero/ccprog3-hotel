@@ -2,17 +2,14 @@ package changeRoomType;
 
 import Model.Hotel;
 import Model.Room;
-import Model.Utilities;
 import main.AbstractController;
 import main.MainFrame;
-import removeRoom.RemoveRoomModel;
 import shared.PopupScreen;
-import viewLowLevel.ViewLowLevelModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * The Controller for Change Room Type
@@ -43,7 +40,7 @@ public class ChangeRoomTypeController extends AbstractController implements Popu
         ArrayList<Room> rooms = new ArrayList<>(Arrays.asList(roomsArray));
 
         String[] roomNames = rooms.stream()
-                .filter(room -> room != null)
+                .filter(Objects::nonNull)
                 .map(Room::getFormattedName)
                 .toArray(String[]::new);
 
@@ -58,7 +55,6 @@ public class ChangeRoomTypeController extends AbstractController implements Popu
         if (selectedRoomName == null) {
             // User canceled the input dialog
             frame.switchView(((ChangeRoomTypeModel) model).manageHotel());
-            return;
         }
 
         Room selectedRoom = Arrays.stream(roomsArray)
@@ -69,7 +65,6 @@ public class ChangeRoomTypeController extends AbstractController implements Popu
         if (selectedRoom == null) {
             JOptionPane.showMessageDialog(null, "Room not found", "Error", JOptionPane.ERROR_MESSAGE);
             frame.switchView(((ChangeRoomTypeModel) model).manageHotel());
-            return;
         }
 
         String[] roomTypes = {"Standard", "Deluxe", "Executive"};

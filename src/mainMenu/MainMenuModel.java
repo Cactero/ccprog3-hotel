@@ -1,10 +1,15 @@
 package mainMenu;
 
 import Model.CentralModel;
+import Model.Hotel;
 import chooseHotel.ChooseHotelModel;
 import enterHotelName.EnterHotelNameModel;
 import main.AbstractModel;
 import main.MainFrame;
+import manageHotel.ManageHotelModel;
+
+import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * The Model for Main Menu.
@@ -20,17 +25,13 @@ public class MainMenuModel extends AbstractModel {
 
     /**
      * The Model of Enter Hotel Name that is created when the user clicks the Create Hotel button
-     * @return the Model of Enter Hotel Name
      */
     public AbstractModel createHotel(){
-        EnterHotelNameModel CHModel = (EnterHotelNameModel) centralModel.getModel(CentralModel.CREATE_HOTEL);
-        CHModel.setFromCreateHotel(true);
-        return CHModel;
+        return centralModel.getModel(CentralModel.CREATE_HOTEL);
     }
 
     /**
      * The Model of Choose Hotel that is created when the user clicks the View Hotel button
-     * @return the Model of Choose Hotel
      */
     public AbstractModel viewHotel(){
         ChooseHotelModel model = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
@@ -40,7 +41,6 @@ public class MainMenuModel extends AbstractModel {
 
     /**
      * The Model of Manage Hotel that is created when the user clicks the Manage Hotel button
-     * @return the Model of Manage Hotel
      */
     public AbstractModel manageHotel(){
         return centralModel.getModel(CentralModel.MANAGE_HOTEL);
@@ -48,7 +48,6 @@ public class MainMenuModel extends AbstractModel {
 
     /**
      * The Model of Choose Hotel that is created when the user clicks the Create Reservation button
-     * @return the Model of Choose Hotel
      */
     public AbstractModel createReservation(){
         ChooseHotelModel model = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
