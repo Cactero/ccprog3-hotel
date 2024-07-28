@@ -51,6 +51,7 @@ public class ManageHotelController extends AbstractController {
     }
 
     public void removeHotel() {
+
         frame.switchView(((ManageHotelModel) model).chooseHotel(ChooseHotelModel.REMOVE_HOTEL));
     }
 

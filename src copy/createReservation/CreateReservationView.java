@@ -36,10 +36,15 @@ public class CreateReservationView extends AbstractView {
         checkInDayField = new JSpinner(checkInDayOptions);
         SpinnerNumberModel checkOutDayOptions = new SpinnerNumberModel(2, 2, 31, 1);
         checkOutDayField = new JSpinner(checkOutDayOptions);
-        String[] roomNames = Arrays.stream(selectedHotel.getRooms())
-                .filter(Objects::nonNull) // filter out null rooms
-                .map(Room::getFormattedName)
-                .toArray(String[]::new);
+
+        // Check if selectedHotel is not null before accessing its rooms
+        String[] roomNames = {};
+        if (selectedHotel != null && selectedHotel.getRooms() != null) {
+            roomNames = Arrays.stream(selectedHotel.getRooms())
+                    .filter(Objects::nonNull) // Filter out null rooms
+                    .map(Room::getFormattedName)
+                    .toArray(String[]::new);
+        }
 
         roomListField = new JComboBox<>(roomNames);
         discountField = new JTextField(10);
@@ -51,7 +56,6 @@ public class CreateReservationView extends AbstractView {
         inputHolder.add(discountField);
         contentHolder.add(inputHolder);
 
-        // cancel room creation and create room buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
         mainMenuButton = new TemplateButton("Cancel");
@@ -59,9 +63,8 @@ public class CreateReservationView extends AbstractView {
         createClientButton = new TemplateButton("Create");
         buttonsHolder.add(createClientButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
-
-
     }
+
 
     /**
      * Adds a listener to the Main Menu button.

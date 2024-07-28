@@ -4,24 +4,20 @@ import Model.CentralModel;
 import Model.Hotel;
 import main.AbstractModel;
 import main.MainFrame;
-import mainMenu.MainMenuController;
-import mainMenu.MainMenuModel;
-import manageHotel.ManageHotelModel;
 import shared.SelectableHotel;
-
-import javax.swing.*;
-import java.util.ArrayList;
+import viewRoomAvailability.ViewRoomAvailabilityModel;
 
 /**
  * The Model for View Hotel
+ *
  * @author Angela Domingo
- * @author Ryan Gemal
+ * @uthor Ryan Gemal
  */
 public class ViewHotelModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
 
-    public ViewHotelModel(CentralModel centralModel, MainFrame frame){
+    public ViewHotelModel(CentralModel centralModel, MainFrame frame) {
         super(centralModel);
         controller = new ViewHotelController(this, frame);
     }
@@ -32,17 +28,27 @@ public class ViewHotelModel extends AbstractModel implements SelectableHotel {
 
     /**
      * Return the user's selected Hotel.
+     *
      * @return the Hotel the user selected
      */
-    public Hotel getSelectedHotel(){
+    public Hotel getSelectedHotel() {
         return selectedHotel;
     }
 
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
      */
-    public AbstractModel mainMenu(){
+    public AbstractModel mainMenu() {
         return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
+    /**
+     * The Model of View Room Availability that is retrieved when the user clicks
+     * one of the buttons
+     */
+    public AbstractModel viewRoomAvailability() {
+        ViewRoomAvailabilityModel model = (ViewRoomAvailabilityModel) centralModel.getModel(CentralModel.VIEW_ROOM_AVAILABILITY);
+        model.setSelectedHotel(selectedHotel);
+        return model;
+    }
 }

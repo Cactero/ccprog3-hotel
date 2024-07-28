@@ -1,42 +1,46 @@
-package removeRoom;
+package viewRoomAvailability;
 
 import Model.Hotel;
 import Model.Room;
+import chooseHotel.ChooseHotelModel;
 import main.AbstractController;
-import main.AbstractModel;
 import main.MainFrame;
-import shared.PopupScreen;
+import removeRoom.RemoveRoomModel;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
 
-public class RemoveRoomController extends AbstractController implements PopupScreen {
-    public RemoveRoomController(AbstractModel model, MainFrame frame) {
+/**
+ * The Controller for View Room Availability.
+ * @author Ryan Gemal
+ */
+public class ViewRoomAvailabilityController extends AbstractController {
+
+    public ViewRoomAvailabilityController(ViewRoomAvailabilityModel model, MainFrame frame) {
         super(model, frame);
-        this.view = new RemoveRoomView();
+        this.view = new ViewRoomAvailabilityView();
+
+        ((ViewRoomAvailabilityView) view).addMainMenuButtonListener(_ -> mainMenu());
+        ((ViewRoomAvailabilityView) view).addViewCalendarButtonListener(_ -> promptUser());
     }
 
-    /**
-     *
-     */
-    @Override
+    public void mainMenu(){
+        frame.switchView(((ViewRoomAvailabilityModel) model).mainMenu());
+    }
+
+    public void viewCalendar() {
+
+    }
+
     public void promptUser() {
         String selectedRoomName;
-        Hotel hotel = ((RemoveRoomModel) model).getSelectedHotel();
+        Hotel hotel = ((ViewRoomAvailabilityModel) model).getSelectedHotel();
 
         Room[] roomsArray = hotel.getRooms();
         if (roomsArray == null) {
             JOptionPane.showMessageDialog(null, "No rooms available", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((RemoveRoomModel) model).manageHotel());
-            return;
-        }
-
-        else if(hotel.getRoomCount() == 1){
-            JOptionPane.showMessageDialog(null, "You cannot remove this room because it is the only room!", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((RemoveRoomModel) model).manageHotel());
+            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
             return;
         }
 
@@ -49,7 +53,7 @@ public class RemoveRoomController extends AbstractController implements PopupScr
 
         if (roomNames.length == 0) {
             JOptionPane.showMessageDialog(null, "No rooms available", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((RemoveRoomModel) model).manageHotel());
+            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
             return;
         }
 
@@ -57,7 +61,7 @@ public class RemoveRoomController extends AbstractController implements PopupScr
 
         if (selectedRoomName == null) {
             // User canceled the input dialog
-            frame.switchView(((RemoveRoomModel) model).manageHotel());
+            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
             return;
         }
 
@@ -68,12 +72,12 @@ public class RemoveRoomController extends AbstractController implements PopupScr
 
         if (selectedRoom == null) {
             JOptionPane.showMessageDialog(null, "Room not found", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((RemoveRoomModel) model).manageHotel());
+            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
             return;
         }
 
-        ((RemoveRoomModel) model).removeRoom(selectedRoom);
-        JOptionPane.showMessageDialog(null, "Successfully removed " + selectedRoomName, "Room removed", JOptionPane.PLAIN_MESSAGE);
-        frame.switchView(((RemoveRoomModel) model).manageHotel());
+        ((ViewRoomAvailabilityModel) model).viewRoom(selectedRoom);
+        //JOptionPane.showMessageDialog(null, "Successfully removed " + selectedRoomName, "Room removed", JOptionPane.PLAIN_MESSAGE);
+        frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
     }
 }

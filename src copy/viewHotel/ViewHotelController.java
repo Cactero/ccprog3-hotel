@@ -1,5 +1,6 @@
 package viewHotel;
 
+import Model.Client;
 import Model.Hotel;
 import Model.Room;
 import Model.Utilities;
@@ -9,8 +10,12 @@ import main.AbstractController;
 import main.MainFrame;
 import mainMenu.MainMenuModel;
 import mainMenu.MainMenuView;
+import manageHotel.ManageHotelModel;
+import removeRoom.RemoveRoomModel;
+import viewRoomAvailability.ViewRoomAvailabilityModel;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -37,9 +42,11 @@ public class ViewHotelController extends AbstractController {
         int option = chooseLowLevelOption();
         if(option == 0) {
             System.out.println("Number of available and booked rooms");
+            int date = viewSelectedDate();
         }
         else if(option == 1){
             System.out.println("Selected room");
+            viewRoomAvailability();
         }
         else if(option == 2){
             System.out.println("Selected reservation");
@@ -82,13 +89,55 @@ public class ViewHotelController extends AbstractController {
         highLevelPanel.add(new JLabel("Estimated monthly earnings: "));
         highLevelPanel.add(new JLabel(String.format("$%.2f", selectedHotel.getTotalReservationPrices())));
 
-        /*
-        System.out.printf("Base Price: $%.2f\n", hotel.getBasePrice());
-        System.out.printf("Client Count: %d\n", hotel.getClientCount());
-        System.out.printf("Estimated earnings for the month: $%.2f\n\n", hotel.getTotalReservationPrices());
-        */
-
         JOptionPane.showMessageDialog(null,highLevelPanel,"High-level Information",JOptionPane.INFORMATION_MESSAGE);
 
     }
+
+    public int viewSelectedDate(){
+        Hotel hotel = ((ViewHotelModel) model).getSelectedHotel();
+        int bookedRooms = 0;
+
+        JPanel viewDatePanel = new JPanel(new GridLayout(3,2));
+        viewDatePanel.add(new JLabel("Hotel name: "));
+        viewDatePanel.add(new JLabel(hotel.getName()));
+
+        SpinnerNumberModel sModel = new SpinnerNumberModel(1, 1, 31, 1);
+        JSpinner date = new JSpinner(sModel);
+
+        int option = JOptionPane.showOptionDialog(null, date, "Enter date", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (option == JOptionPane.CANCEL_OPTION)
+        {
+            return 0;
+        }
+        else if (option == JOptionPane.OK_OPTION)
+        {
+            // user entered a number
+            //return option;
+
+            for (Client client : hotel.getClients()) {
+                if ((client.getCheckInDay() <= option && option <= client.getCheckOutDay())) {
+                    bookedRooms++;
+                }
+            }
+
+            viewDatePanel.add(new JLabel("Available Rooms: "));
+            viewDatePanel.add(new JLabel(Integer.toString(hotel.getRoomCount() - bookedRooms)));
+
+            viewDatePanel.add(new JLabel("Booked Rooms: "));
+            viewDatePanel.add(new JLabel(Integer.toString(bookedRooms)));
+
+            JOptionPane.showMessageDialog(null,viewDatePanel,"Selected date",JOptionPane.INFORMATION_MESSAGE);
+
+            return option;
+        }
+        return 0;
+    }
+
+    public void viewRoomAvailability() {
+        ViewHotelModel viewHotelModel = (ViewHotelModel) model;
+        ViewRoomAvailabilityModel viewRoomAvailabilityModel = (ViewRoomAvailabilityModel) viewHotelModel.viewRoomAvailability();
+        viewRoomAvailabilityModel.setSelectedHotel(viewHotelModel.getSelectedHotel());
+        frame.switchView(viewRoomAvailabilityModel);
+    }
+
 }

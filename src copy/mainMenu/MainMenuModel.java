@@ -28,7 +28,7 @@ public class MainMenuModel extends AbstractModel {
      */
     public AbstractModel createHotel(){
         EnterHotelNameModel CHModel = (EnterHotelNameModel) centralModel.getModel(CentralModel.CREATE_HOTEL);
-        CHModel.setFromCreateHotel(true);
+        CHModel.setFromCreateHotel(1);
         return CHModel;
     }
 

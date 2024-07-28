@@ -30,6 +30,7 @@ public class CreateReservationController extends AbstractController {
     }
 
     public void createClient(){
+
         String firstName = ((CreateReservationView) view).getFirstName();
         String lastName = ((CreateReservationView) view).getLastName();
         int checkInDay = ((CreateReservationView) view).getCheckInDay();
@@ -38,6 +39,11 @@ public class CreateReservationController extends AbstractController {
         String discountCode = ((CreateReservationView) view).getDiscountCode();
 
         Hotel bookedHotel = ((CreateReservationModel) model).getSelectedHotel();
+        if (bookedHotel == null) {
+            JOptionPane.showMessageDialog(null, "No hotel selected", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         Room bookedRoom = null;
         for (Room room : bookedHotel.getRooms()){
             if (room != null){
@@ -46,6 +52,7 @@ public class CreateReservationController extends AbstractController {
                     bookedRoom = room;
             }
         }
+
 
         if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
             System.out.println("Your booking dates are not valid, please try again!");
@@ -64,7 +71,7 @@ public class CreateReservationController extends AbstractController {
     }
 
     public void cancel(){
-
+        frame.switchView(((CreateReservationModel) model).mainMenu());
     }
 
 }

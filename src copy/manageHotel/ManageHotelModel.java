@@ -3,6 +3,7 @@ package manageHotel;
 import Model.CentralModel;
 import Model.Hotel;
 import chooseHotel.ChooseHotelModel;
+import enterHotelName.EnterHotelNameModel;
 import main.AbstractModel;
 import main.MainFrame;
 import mainMenu.MainMenuController;
@@ -19,7 +20,7 @@ public class ManageHotelModel extends AbstractModel {
 
     public ManageHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
-        new ManageHotelController(this, frame);
+        controller = new ManageHotelController(this, frame);
     }
 
     /**
@@ -35,6 +36,12 @@ public class ManageHotelModel extends AbstractModel {
     public AbstractModel chooseHotel(String source){
         ChooseHotelModel model = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
         model.setSource(source);
+        return model;
+    }
+
+    public AbstractModel removeHotel(){
+        EnterHotelNameModel model = (EnterHotelNameModel) centralModel.getModel(CentralModel.REMOVE_HOTEL);
+        model.setFromCreateHotel(2);
         return model;
     }
 }

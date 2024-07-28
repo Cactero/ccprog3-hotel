@@ -22,7 +22,7 @@ public class CreateRoomView extends AbstractView {
     private JButton mainMenuButton;
     private JButton createRoomButton;
 
-    public CreateRoomView(boolean fromCreateHotel) {
+    public CreateRoomView(int fromCreateHotel) {
         super("/assets/LABELS/CREATE_ROOM.png");
 
         roomInfoHolder = new JPanel(new FlowLayout());
@@ -42,7 +42,7 @@ public class CreateRoomView extends AbstractView {
         buttonsHolder.setOpaque(false);
 
         // Only add mainMenuButton if fromCreateHotel is false
-        if (!fromCreateHotel) {
+        if (fromCreateHotel == 1) {
             mainMenuButton = new TemplateButton("Cancel");
             buttonsHolder.add(mainMenuButton);
         }

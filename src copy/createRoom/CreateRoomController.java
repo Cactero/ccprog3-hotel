@@ -49,7 +49,7 @@ public class CreateRoomController extends AbstractController {
                 ((CreateRoomModel) model).addRoom(newRoom);
                 JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
 
-                if (((CreateRoomModel) model).isFromCreateHotel())
+                if (((CreateRoomModel) model).isFromCreateHotel() == 1)
                     frame.switchView(((CreateRoomModel) model).mainMenu());
                 else
                     ((CreateRoomView) view).resetInputFields();

@@ -61,7 +61,7 @@ public class ManageHotelView extends AbstractView {
     public void addChangeHotelNameButtonListener(ActionListener listener) { changeHotelName.addActionListener(listener); }
     public void addUpdateBasePriceButtonListener(ActionListener listener) { updateBasePrice.addActionListener(listener); }
     public void addRemoveReservationButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
-    public void addRemoveHotelButtonListener(ActionListener listener) { removeReservation.addActionListener(listener); }
+    public void addRemoveHotelButtonListener(ActionListener listener) { removeHotel.addActionListener(listener); }
     public void addChangeRoomTypeButtonListener(ActionListener listener) { changeRoomType.addActionListener(listener); }
     public void addDPMButtonListener(ActionListener listener) { datePriceModifier.addActionListener(listener); }
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }

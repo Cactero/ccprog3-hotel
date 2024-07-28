@@ -14,16 +14,16 @@ import shared.SelectableHotel;
 public class CreateRoomModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
-    private boolean fromCreateHotel;
+    private int status;
 
-    public CreateRoomModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
+    public CreateRoomModel(CentralModel centralModel, MainFrame frame, int status){
         super(centralModel);
-        this.fromCreateHotel = fromCreateHotel;
+        this.status = status;
         controller = new CreateRoomController(this, frame);
     }
 
-    public boolean isFromCreateHotel() {
-        return fromCreateHotel;
+    public int isFromCreateHotel() {
+        return status;
     }
 
     /**

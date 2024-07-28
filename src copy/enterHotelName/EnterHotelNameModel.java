@@ -12,22 +12,23 @@ import shared.SelectableHotel;
  */
 public class EnterHotelNameModel extends AbstractModel implements SelectableHotel {
 
-    private boolean fromCreateHotel;
+    private int status; // 1 = fromCreateHotel, 2 = removeHotel, 0 otherwise.
     private CreateRoomModel createRoomModel;
     private Hotel selectedHotel;
 
-    public EnterHotelNameModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
+    public EnterHotelNameModel(CentralModel centralModel, MainFrame frame, int status){
         super(centralModel);
-        createRoomModel = new CreateRoomModel(centralModel, frame, fromCreateHotel);
+        this.status = status;
+        createRoomModel = new CreateRoomModel(centralModel, frame, status);
         controller = new EnterHotelNameController(this, frame);
     }
 
-    public void setFromCreateHotel(boolean fromCreateHotel) {
-        this.fromCreateHotel = fromCreateHotel;
+    public void setFromCreateHotel(int status) {
+        this.status = status;
     }
 
-    public boolean isFromCreateHotel() {
-        return fromCreateHotel;
+    public int isFromCreateHotel() {
+        return status;
     }
 
     /**
@@ -41,6 +42,11 @@ public class EnterHotelNameModel extends AbstractModel implements SelectableHote
     public void renameHotel(String newName){
         int index = centralModel.getHotels().indexOf(selectedHotel);
         centralModel.getHotels().get(index).setName(newName);
+    }
+
+    public void removeHotel(String hotelName){
+        int index = centralModel.getHotels().indexOf(selectedHotel);
+        centralModel.getHotels().remove(index);
     }
 
     /**

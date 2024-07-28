@@ -5,38 +5,49 @@ import Model.Client;
 import Model.Hotel;
 import main.AbstractModel;
 import main.MainFrame;
-import mainMenu.MainMenuController;
-import mainMenu.MainMenuModel;
+import shared.SelectableHotel;
 
-import javax.swing.*;
-import java.util.ArrayList;
-
-/**
- * The Model for Create Reservation
- * @author Angela Domingo
- */
-public class CreateReservationModel extends AbstractModel {
+public class CreateReservationModel extends AbstractModel implements SelectableHotel {
 
     private Hotel selectedHotel;
 
-    public CreateReservationModel(CentralModel centralModel, MainFrame frame, Hotel selectedHotel){
+    public CreateReservationModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
-        this.selectedHotel = selectedHotel;
+
+        // Attempt to get the selected hotel, if available
+        this.selectedHotel = getSelectedHotel();
+
+        // Handle case where no hotel is available
+        if (this.selectedHotel == null) {
+            // Consider how your application should behave in this case
+            System.out.println("No hotels available for reservation.");
+            // You might want to set a flag, throw an exception, or navigate to a different view
+        } else {
+            // Proceed with the usual flow if a hotel is available
+        }
         controller = new CreateReservationController(this, frame);
     }
 
-    /**
-     * Return the user's selected Hotel.
-     * @return the Hotel the user selected
-     */
-    public Hotel getSelectedHotel(){
-        return selectedHotel;
+    @Override
+    public void setSelectedHotel(Hotel selectedHotel) {
+        this.selectedHotel = selectedHotel;
     }
 
-    /**
-     * Adds a Client to the selected Hotel.
-     * @param client the Client to be added
-     */
+    @Override
+    public Hotel getSelectedHotel(){
+        if (selectedHotel != null) {
+            return selectedHotel;
+        }
+
+        // Check if there are any hotels available
+        if (centralModel.getHotels().isEmpty()) {
+            return null; // No hotels available
+        }
+
+        // Fallback to the first hotel in the list if selectedHotel is not set
+        return centralModel.getHotels().get(0);
+    }
+
     public void addClient(Client client){
         for (Hotel hotel : centralModel.getHotels()){
             if (hotel.equals(selectedHotel))
@@ -44,11 +55,7 @@ public class CreateReservationModel extends AbstractModel {
         }
     }
 
-    /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
-     */
     public AbstractModel mainMenu(){
         return centralModel.getModel(CentralModel.MAIN_MENU);
     }
-
 }
