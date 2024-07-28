@@ -36,26 +36,6 @@ public class ChooseHotelModel extends AbstractModel {
 
     private HashMap<String, AbstractModel> models;
 
-    //manage hotel macros
-    public static final String ADD_ROOMS = "Add Rooms";
-    public static final String REMOVE_ROOMS = "Remove Room";
-    public static final String CHANGE_HOTEL_NAME = "Change Hotel Name";
-    public static final String UPDATE_BASE_PRICE = "Update Base Price";
-    public static final String REMOVE_RESERVATION = "Remove Reservation";
-    public static final String REMOVE_HOTEL = "Remove Hotel";
-    public static final String CHANGE_ROOM_TYPE = "Change Room Type";
-    public static final String DATE_PRICE_MODIFIER = "Date Price Modifier";
-    public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
-        super(centralModel);
-        controller = new ChooseHotelController(this, frame);
-        models = new HashMap<>();
-
-    // miscellaneous macros for screens that require hotel selection
-    public static final String CREATE_RESERVATION = "Create Reservation";
-    public static final String VIEW_HOTEL = "View Hotel";
-
-    private HashMap<String, AbstractModel> models;
-
     public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new ChooseHotelController(this, frame);

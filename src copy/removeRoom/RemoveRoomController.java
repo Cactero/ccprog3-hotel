@@ -1,46 +1,46 @@
-package viewRoomAvailability;
+package removeRoom;
 
 import Model.Hotel;
 import Model.Room;
-import chooseHotel.ChooseHotelModel;
 import main.AbstractController;
+import main.AbstractModel;
 import main.MainFrame;
-import removeRoom.RemoveRoomModel;
+import shared.PopupScreen;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
- * The Controller for View Room Availability.
- * @author Ryan Gemal
+ * The Controller for Remove Room
+ * @author Angela Domingo
  */
-public class ViewRoomAvailabilityController extends AbstractController {
-
-    public ViewRoomAvailabilityController(ViewRoomAvailabilityModel model, MainFrame frame) {
+public class RemoveRoomController extends AbstractController implements PopupScreen {
+    public RemoveRoomController(AbstractModel model, MainFrame frame) {
         super(model, frame);
-        this.view = new ViewRoomAvailabilityView();
-
-        ((ViewRoomAvailabilityView) view).addMainMenuButtonListener(_ -> mainMenu());
-        ((ViewRoomAvailabilityView) view).addViewCalendarButtonListener(_ -> promptUser());
+        this.view = new RemoveRoomView();
     }
 
-    public void mainMenu(){
-        frame.switchView(((ViewRoomAvailabilityModel) model).mainMenu());
-    }
-
-    public void viewCalendar() {
-
-    }
-
+    /**
+     * The implementation of promptUser in PopupScreen for Remove Room.
+     */
+    @Override
     public void promptUser() {
         String selectedRoomName;
-        Hotel hotel = ((ViewRoomAvailabilityModel) model).getSelectedHotel();
+        Hotel hotel = ((RemoveRoomModel) model).getSelectedHotel();
 
         Room[] roomsArray = hotel.getRooms();
         if (roomsArray == null) {
             JOptionPane.showMessageDialog(null, "No rooms available", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
+            frame.switchView(((RemoveRoomModel) model).manageHotel());
+            return;
+        }
+
+        else if(hotel.getRoomCount() == 1){
+            JOptionPane.showMessageDialog(null, "You cannot remove this room because it is the only room!", "Error", JOptionPane.ERROR_MESSAGE);
+            frame.switchView(((RemoveRoomModel) model).manageHotel());
             return;
         }
 
@@ -53,7 +53,7 @@ public class ViewRoomAvailabilityController extends AbstractController {
 
         if (roomNames.length == 0) {
             JOptionPane.showMessageDialog(null, "No rooms available", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
+            frame.switchView(((RemoveRoomModel) model).manageHotel());
             return;
         }
 
@@ -61,7 +61,7 @@ public class ViewRoomAvailabilityController extends AbstractController {
 
         if (selectedRoomName == null) {
             // User canceled the input dialog
-            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
+            frame.switchView(((RemoveRoomModel) model).manageHotel());
             return;
         }
 
@@ -72,12 +72,12 @@ public class ViewRoomAvailabilityController extends AbstractController {
 
         if (selectedRoom == null) {
             JOptionPane.showMessageDialog(null, "Room not found", "Error", JOptionPane.ERROR_MESSAGE);
-            frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
+            frame.switchView(((RemoveRoomModel) model).manageHotel());
             return;
         }
 
-        ((ViewRoomAvailabilityModel) model).viewRoom(selectedRoom);
-        //JOptionPane.showMessageDialog(null, "Successfully removed " + selectedRoomName, "Room removed", JOptionPane.PLAIN_MESSAGE);
-        frame.switchView(((ViewRoomAvailabilityModel) model).viewHotel());
+        ((RemoveRoomModel) model).removeRoom(selectedRoom);
+        JOptionPane.showMessageDialog(null, "Successfully removed " + selectedRoomName, "Room removed", JOptionPane.PLAIN_MESSAGE);
+        frame.switchView(((RemoveRoomModel) model).manageHotel());
     }
 }
