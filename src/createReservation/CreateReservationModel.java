@@ -1,39 +1,40 @@
 package createReservation;
 
+import Model.CentralModel;
 import Model.Client;
 import Model.Hotel;
-import mainMenu.MainMenuModel;
-import manageHotel.ManageHotelModel;
-
-import java.util.ArrayList;
+import main.AbstractModel;
+import main.MainFrame;
+import shared.SelectableHotel;
 
 /**
  * The Model for Create Reservation
  * @author Angela Domingo
  */
-public class CreateReservationModel {
-    private ArrayList<Hotel> hotels;
+public class CreateReservationModel extends AbstractModel implements SelectableHotel {
+
     private Hotel selectedHotel;
 
-    public CreateReservationModel(ArrayList<Hotel> hotels, Hotel selectedHotel){
-        this.hotels = hotels;
-        this.selectedHotel = selectedHotel;
-        new CreateReservationController(this);
+    public CreateReservationModel(CentralModel centralModel, MainFrame frame){
+        super(centralModel);
+        controller = new CreateReservationController(this, frame);
     }
 
     /**
-     * Returns an ArrayList of hotels present in the system.
-     * @return the ArrayList of hotels
+     * Sets the selected hotel the user chose previously in the Choose Hotel screen
+     * @param hotel the selected Hotel
      */
-    public ArrayList<Hotel> getHotels(){
-        return this.hotels;
+    @Override
+    public void setSelectedHotel(Hotel hotel) {
+        this.selectedHotel = hotel;
     }
 
     /**
-     * Return the user's selected Hotel.
-     * @return the Hotel the user selected
+     * Gets the selected hotel the user chose previously in the Choose Hotel screen
+     * @return the selected Hotel
      */
-    public Hotel getSelectedHotel(){
+    @Override
+    public Hotel getSelectedHotel() {
         return selectedHotel;
     }
 
@@ -42,14 +43,18 @@ public class CreateReservationModel {
      * @param client the Client to be added
      */
     public void addClient(Client client){
-        selectedHotel.addClient(client);
+        for (Hotel hotel : centralModel.getHotels()){
+            if (hotel.equals(selectedHotel))
+                hotel.addClient(client);
+        }
     }
 
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
+     * @return the Model of Main Menu
      */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
 }

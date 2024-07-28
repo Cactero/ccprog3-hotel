@@ -1,81 +1,107 @@
 package chooseHotel;
 
+import Model.CentralModel;
 import Model.Hotel;
 import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
 import enterHotelName.EnterHotelNameModel;
-import mainMenu.MainMenuModel;
-import manageHotel.ManageHotelModel;
+import main.AbstractModel;
+import main.MainFrame;
+import removeRoom.RemoveRoomModel;
+import shared.SelectableHotel;
+import viewHotel.ViewHotelModel;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The Model for Choose Hotel
  * @author Angela Domingo
  */
-public class ChooseHotelModel {
+public class ChooseHotelModel extends AbstractModel {
 
-    private ArrayList<Hotel> hotels;
+    private String source;
 
-    public ChooseHotelModel(ArrayList<Hotel> hotels, boolean fromCreateReservation){
-        this.hotels = hotels;
-        new ChooseHotelController(this, fromCreateReservation);
+    //manage hotel macros
+    public static final String ADD_ROOMS = "Add Rooms";
+    public static final String REMOVE_ROOMS = "Remove Room";
+    public static final String CHANGE_HOTEL_NAME = "Change Hotel Name";
+    public static final String UPDATE_BASE_PRICE = "Update Base Price";
+    public static final String REMOVE_RESERVATION = "Remove Reservation";
+    public static final String REMOVE_HOTEL = "Remove Hotel";
+    public static final String CHANGE_ROOM_TYPE = "Change Room Type";
+    public static final String DATE_PRICE_MODIFIER = "Date Price Modifier";
+
+    // miscellaneous macros for screens that require hotel selection
+    public static final String CREATE_RESERVATION = "Create Reservation";
+    public static final String VIEW_HOTEL = "View Hotel";
+
+    private HashMap<String, AbstractModel> models;
+
+    public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
+        super(centralModel);
+        controller = new ChooseHotelController(this, frame);
+        models = new HashMap<>();
+
+        models.put(ADD_ROOMS, new CreateRoomModel(centralModel, frame, false));
+        models.put(REMOVE_ROOMS, new RemoveRoomModel(centralModel, frame));
+        models.put(CHANGE_HOTEL_NAME, new EnterHotelNameModel(centralModel, frame, false));
+        // TODO: update base price MVC
+        models.put(UPDATE_BASE_PRICE, new CreateRoomModel(centralModel, frame, false));
+        // TODO: remove reservation MVC
+        models.put(REMOVE_RESERVATION, new CreateRoomModel(centralModel, frame, false));
+        // TODO: remove hotel MVC
+        models.put(REMOVE_HOTEL, new CreateRoomModel(centralModel, frame, false));
+        // TODO: change room type MVC
+        models.put(CHANGE_ROOM_TYPE, new CreateRoomModel(centralModel, frame, false));
+        // TODO: dpm MVC
+        models.put(DATE_PRICE_MODIFIER, new CreateRoomModel(centralModel, frame, false));
+
+        models.put(CREATE_RESERVATION, new CreateReservationModel(centralModel, frame));
+        models.put(VIEW_HOTEL, new ViewHotelModel(centralModel, frame));
+
     }
 
     /**
-     * Returns an ArrayList of hotels present in the system.
-     * @return the ArrayList of hotels
+     * A setter for the source of where Choose Hotel was triggered.
+     * @param source the source where Choose Hotel was triggered, used by passing through static final variables found inside Choose Model
      */
-    public ArrayList<Hotel> getHotels(){
-        return this.hotels;
+    public void setSource(String source) {
+        this.source = source;
     }
 
     /**
-     * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
+     * A getter for the source of where Choose Hotel was triggered.
+     * @return the source where Choose Hotel was triggered
      */
-    public void manageHotel(){
-        new ManageHotelModel(hotels);
+    public String getSource() {
+        return source;
     }
 
     /**
      * The Model of Main Menu that is created when the user clicks the Cancel button
+     * @return the Model of Main Menu
      */
-    public void mainMenu(){
-        new MainMenuModel(this.hotels);
+    public AbstractModel mainMenu(){
+        return centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
     /**
-     * The Model of Create Reservation that is created when the user clicks the Choose Hotel button
-     * @param hotel the chosen Hotel
+     * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
+     * @return the Model of Manage Hotel
      */
-    public void createReservation(Hotel hotel){
-        new CreateReservationModel(hotels, hotel);
+    public AbstractModel manageHotel(){
+        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
-     * The Model of Enter Hotel Name that is created when the user clicks the Choose Hotel button
+     * Retrieves the desired Model from a HashMap created in Choose Hotel Model
+     * @param selectedHotel the Hotel selected by the user
+     * @param key lookup value for desired Model, uses ChooseHotelModel macros
+     * @return the desired Model depending on the passed key value
      */
-    public void changeHotelName(){
-        new EnterHotelNameModel(hotels, true);
+    public AbstractModel getModel(Hotel selectedHotel, String key){
+        SelectableHotel currentModel = (SelectableHotel) this.models.get(key);
+        currentModel.setSelectedHotel(selectedHotel);
+        return (AbstractModel) currentModel;
     }
-
-//    public void createRoom(Hotel selectedHotel){
-//        new CreateRoomModel(hotels, selectedHotel, false);
-//    }
-//
-//    public void removeRoom(Hotel selectedHotel){
-//        new RemoveRoomModel(hotels, selectedHotel);
-//    }
-//
-//    public void updateBasePrice(Hotel selectedHotel){
-//        new UpdateBasePriceModel(hotels, selectedHotel);
-//    }
-//
-//    public void removeReservation(Hotel selectedHotel){
-//        new RemoveReservationModel(hotels, selectedHotel);
-//    }
-//
-//    public void changeRoomType(Hotel selectedHotel){
-//        new ChangeRoomTypeModel(hotels, selectedHotel);
-//    }
 }

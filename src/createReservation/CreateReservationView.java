@@ -2,32 +2,27 @@ package createReservation;
 
 import Model.Hotel;
 import Model.Room;
-import shared.Button;
-import shared.HeaderLabel;
+import main.AbstractView;
+import shared.TemplateButton;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
-public class CreateReservationView extends JFrame {
-    private JPanel contentHolder;
-    private Image bgImage;
-
-    private JPanel headerHolder;
-    private JLabel headerLabel;
-    private ImageIcon headerImage;
+/**
+ * The View for Create Reservation.
+ * @author Angela Domingo
+ */
+public class CreateReservationView extends AbstractView {
 
     private JPanel inputHolder;
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JSpinner checkInDayField;
     private JSpinner checkOutDayField;
-    private JComboBox roomListField;
+    private JComboBox<String> roomListField;
     private JTextField discountField;
 
     private JPanel buttonsHolder;
@@ -35,25 +30,7 @@ public class CreateReservationView extends JFrame {
     private JButton createClientButton;
 
     public CreateReservationView(Hotel selectedHotel){
-        // background image
-        try {
-            bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
-            contentHolder = new JPanel(new BorderLayout()) {
-                @Override public void paintComponent(Graphics g) {
-                    g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
-                }
-            };
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // app name image
-        headerHolder = new JPanel();
-        headerHolder.setOpaque(false);
-        headerImage = new ImageIcon(this.getClass().getResource("/assets/LABELS/CREATE_RESERVATION.png"));
-        headerLabel = new HeaderLabel(headerImage, headerHolder);
-        headerHolder.add(headerLabel);
-        contentHolder.add(headerHolder, BorderLayout.NORTH);
+        super("/assets/LABELS/CREATE_RESERVATION.png");
 
         inputHolder = new JPanel();
         inputHolder.setOpaque(false);
@@ -63,12 +40,12 @@ public class CreateReservationView extends JFrame {
         checkInDayField = new JSpinner(checkInDayOptions);
         SpinnerNumberModel checkOutDayOptions = new SpinnerNumberModel(2, 2, 31, 1);
         checkOutDayField = new JSpinner(checkOutDayOptions);
-        ArrayList<String> roomNames = new ArrayList<>();
-        for (Room room : selectedHotel.getRooms()){
-            if (room != null)
-                roomNames.add(room.getRoomFloor() + room.getRoomNumber());
-        }
-        roomListField = new JComboBox<>(roomNames.toArray());
+        String[] roomNames = Arrays.stream(selectedHotel.getRooms())
+                .filter(Objects::nonNull) // filter out null rooms
+                .map(Room::getFormattedName)
+                .toArray(String[]::new);
+
+        roomListField = new JComboBox<>(roomNames);
         discountField = new JTextField(10);
         inputHolder.add(firstNameField);
         inputHolder.add(lastNameField);
@@ -81,33 +58,14 @@ public class CreateReservationView extends JFrame {
         // cancel room creation and create room buttons
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
-        mainMenuButton = new Button("Cancel");
+        mainMenuButton = new TemplateButton("Cancel");
         buttonsHolder.add(mainMenuButton);
-        createClientButton = new Button("Create");
+        createClientButton = new TemplateButton("Create");
         buttonsHolder.add(createClientButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
-        setContentPane(contentHolder);
-        addWindowListener( new WindowAdapter()
-        {
-            public void windowResized(WindowEvent evt)
-            {
-                // add img elements here
-            }
-        });
-        setSize(1280, 720);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
 
     }
-
-    /**
-     * Adds a listener to the Main Menu button.
-     * @param listener the set of actions to be done when the button is clicked
-     */
-    public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
 
     /**
      * Returns the current content of firstNameField
@@ -134,6 +92,14 @@ public class CreateReservationView extends JFrame {
     public int getCheckOutDay() { return (int) checkOutDayField.getValue(); }
 
     /**
+     * Returns the current content of discountField
+     * @return the text currently inside discountField
+     */
+    public String getDiscountCode() {
+        return discountField.getText();
+    }
+
+    /**
      * Returns the current content of roomListField
      * @return the name of the Room currently inside roomListField
      */
@@ -156,4 +122,10 @@ public class CreateReservationView extends JFrame {
      * @param listener the set of actions to be done when the button is clicked
      */
     public void addCreateClientButtonListener(ActionListener listener) { createClientButton.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Main Menu button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
+    public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
 }

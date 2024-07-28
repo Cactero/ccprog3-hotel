@@ -1,59 +1,59 @@
 package mainMenu;
 
-import Model.Hotel;
+import Model.CentralModel;
 import chooseHotel.ChooseHotelModel;
 import enterHotelName.EnterHotelNameModel;
-import manageHotel.ManageHotelModel;
-
-import java.util.ArrayList;
+import main.AbstractModel;
+import main.MainFrame;
 
 /**
  * The Model for Main Menu.
  * @author Angela Domingo
  * @author Ryan Gemal
  */
-public class MainMenuModel {
-    private ArrayList<Hotel> hotels;
+public class MainMenuModel extends AbstractModel {
 
-    public MainMenuModel(ArrayList<Hotel> hotels){
-        this.hotels = hotels;
-        new MainMenuController(this);
-    }
-
-    /**
-     * Returns an ArrayList of hotels present in the system.
-     * @return the ArrayList of hotels
-     */
-    public ArrayList<Hotel> getHotels(){
-        return this.hotels;
+    public MainMenuModel(CentralModel centralModel, MainFrame frame){
+        super(centralModel);
+        controller = new MainMenuController(this, frame);
     }
 
     /**
      * The Model of Enter Hotel Name that is created when the user clicks the Create Hotel button
+     * @return the Model of Enter Hotel Name
      */
-    public void createHotel(){
-        new EnterHotelNameModel(hotels, false);
+    public AbstractModel createHotel(){
+        EnterHotelNameModel CHModel = (EnterHotelNameModel) centralModel.getModel(CentralModel.CREATE_HOTEL);
+        CHModel.setFromCreateHotel(true);
+        return CHModel;
     }
 
     /**
      * The Model of Choose Hotel that is created when the user clicks the View Hotel button
+     * @return the Model of Choose Hotel
      */
-    public void viewHotel(){
-        new ChooseHotelModel(hotels, false);
+    public AbstractModel viewHotel(){
+        ChooseHotelModel model = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
+        model.setSource(ChooseHotelModel.VIEW_HOTEL);
+        return model;
     }
 
     /**
      * The Model of Manage Hotel that is created when the user clicks the Manage Hotel button
+     * @return the Model of Manage Hotel
      */
-    public void manageHotel(){
-        new ManageHotelModel(hotels);
+    public AbstractModel manageHotel(){
+        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
      * The Model of Choose Hotel that is created when the user clicks the Create Reservation button
+     * @return the Model of Choose Hotel
      */
-    public void createReservation(){
-         new ChooseHotelModel(hotels, true);
+    public AbstractModel createReservation(){
+        ChooseHotelModel model = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
+        model.setSource(ChooseHotelModel.CREATE_RESERVATION);
+        return model;
     }
 
 }

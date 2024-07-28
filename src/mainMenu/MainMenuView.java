@@ -1,6 +1,7 @@
 package mainMenu;
 
-import shared.Button;
+import main.AbstractView;
+import shared.TemplateButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,13 +12,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+
 /**
  * The View of Main Menu.
  * @author Angela Domingo
  */
-public class MainMenuView extends JFrame{
+public class MainMenuView extends AbstractView {
 
-    private JPanel contentHolder;
     private JPanel rightSide;
 
     private Image bgImage;
@@ -34,6 +36,7 @@ public class MainMenuView extends JFrame{
     private JLabel logoLabel;
 
     public MainMenuView(){
+        super(null);
 
         // background image
         try {
@@ -129,11 +132,11 @@ public class MainMenuView extends JFrame{
         rightSide.add(logoLabel);
 
         // buttons
-        createHotelButton = new Button("Create Hotel");
-        viewHotelButton = new Button("View Hotel");
-        manageHotelButton = new Button("Manage Hotel");
-        createReservationButton = new Button("Make Reservation");
-        exitButton = new Button("Exit Program");
+        createHotelButton = new TemplateButton("Create Hotel");
+        viewHotelButton = new TemplateButton("View Hotel");
+        manageHotelButton = new TemplateButton("Manage Hotel");
+        createReservationButton = new TemplateButton("Make Reservation");
+        exitButton = new TemplateButton("Exit Program");
         JPanel buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
         buttonsHolder.setLayout(new BoxLayout(buttonsHolder, BoxLayout.Y_AXIS));
@@ -145,11 +148,6 @@ public class MainMenuView extends JFrame{
         rightSide.add(Box.createVerticalStrut(450));
         rightSide.add(buttonsHolder);
 
-
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
-        contentHolder.add(hotelLabel);
-        contentHolder.add(rightSide);
-        setContentPane(contentHolder);
         addWindowListener( new WindowAdapter()
         {
             public void windowResized(WindowEvent evt)
@@ -158,12 +156,9 @@ public class MainMenuView extends JFrame{
                 logoLabel.repaint();
             }
         });
-        setSize(1280, 720);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        hotelLabel.repaint();
-        logoLabel.repaint();
+
+        contentHolder.add(hotelLabel);
+        contentHolder.add(rightSide);
 
     }
 
