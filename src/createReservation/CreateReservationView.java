@@ -2,7 +2,7 @@ package createReservation;
 
 import Model.Hotel;
 import Model.Room;
-import main.AbstractView;
+import shared.AbstractView;
 import shared.TemplateButton;
 
 import javax.swing.*;

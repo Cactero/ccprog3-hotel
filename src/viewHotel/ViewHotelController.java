@@ -1,8 +1,8 @@
 package viewHotel;
 
 import Model.Hotel;
-import main.AbstractController;
-import main.MainFrame;
+import shared.AbstractController;
+import Model.MainFrame;
 import viewHotel.viewLowLevel.ViewLowLevelModel;
 
 import javax.swing.*;

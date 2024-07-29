@@ -1,6 +1,4 @@
-package main;
-
-import shared.TemplateHeaderLabel;
+package shared;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

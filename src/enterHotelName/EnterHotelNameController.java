@@ -3,8 +3,8 @@ package enterHotelName;
 import javax.swing.*;
 
 import Model.*;
-import main.AbstractController;
-import main.MainFrame;
+import shared.AbstractController;
+import Model.MainFrame;
 import shared.PopupScreen;
 
 /**

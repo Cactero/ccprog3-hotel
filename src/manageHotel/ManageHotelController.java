@@ -1,8 +1,8 @@
 package manageHotel;
 
 import chooseHotel.ChooseHotelModel;
-import main.AbstractController;
-import main.MainFrame;
+import shared.AbstractController;
+import Model.MainFrame;
 
 /**
  * The Controller for Manage Hotel.

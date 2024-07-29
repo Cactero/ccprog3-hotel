@@ -1,6 +1,6 @@
 package manageHotel;
 
-import main.AbstractView;
+import shared.AbstractView;
 import shared.TemplateButton;
 import javax.swing.*;
 import java.awt.*;

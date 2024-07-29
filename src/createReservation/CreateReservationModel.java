@@ -3,8 +3,8 @@ package createReservation;
 import Model.CentralModel;
 import Model.Client;
 import Model.Hotel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
 import shared.SelectableHotel;
 
 public class CreateReservationModel extends AbstractModel implements SelectableHotel {

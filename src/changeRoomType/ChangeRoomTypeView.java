@@ -1,6 +1,6 @@
 package changeRoomType;
 
-import main.AbstractView;
+import shared.AbstractView;
 
 /**
  * The View for Change Room Type.

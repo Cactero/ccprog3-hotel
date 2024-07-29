@@ -5,12 +5,9 @@ import java.util.HashMap;
 
 import chooseHotel.ChooseHotelModel;
 import enterHotelName.EnterHotelNameModel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
 import mainMenu.MainMenuModel;
 import manageHotel.ManageHotelModel;
-import viewHotel.ViewHotelModel;
-import viewHotel.viewLowLevel.ViewLowLevelModel;
 
 /**
  * The database of the program.

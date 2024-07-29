@@ -1,4 +1,4 @@
-package main;
+package shared;
 
 import Model.CentralModel;
 import Model.Hotel;

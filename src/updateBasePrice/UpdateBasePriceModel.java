@@ -2,9 +2,8 @@ package updateBasePrice;
 
 import Model.CentralModel;
 import Model.Hotel;
-import createRoom.CreateRoomModel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
 import shared.SelectableHotel;
 
 /**

@@ -1,4 +1,6 @@
-package main;
+package shared;
+
+import Model.MainFrame;
 
 import javax.swing.*;
 

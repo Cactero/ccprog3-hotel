@@ -1,8 +1,8 @@
 package chooseHotel;
 
 import Model.Hotel;
-import main.AbstractController;
-import main.MainFrame;
+import shared.AbstractController;
+import Model.MainFrame;
 import shared.PopupScreen;
 
 import javax.swing.*;

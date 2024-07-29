@@ -4,8 +4,8 @@ import Model.Client;
 import Model.Hotel;
 import Model.Room;
 import Model.Utilities;
-import main.AbstractController;
-import main.MainFrame;
+import shared.AbstractController;
+import Model.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;

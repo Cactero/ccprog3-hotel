@@ -1,10 +1,6 @@
 package updateBasePrice;
 
-import main.AbstractView;
-import shared.TemplateButton;
-
-import javax.swing.*;
-import java.awt.*;
+import shared.AbstractView;
 
 /**
  * The View for Update Base Price.

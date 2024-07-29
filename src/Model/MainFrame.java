@@ -1,7 +1,8 @@
-package main;
+package Model;
 
-import Model.CentralModel;
 import mainMenu.MainMenuModel;
+import shared.AbstractController;
+import shared.AbstractModel;
 import shared.PopupScreen;
 
 import javax.swing.*;

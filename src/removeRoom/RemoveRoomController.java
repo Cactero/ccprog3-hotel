@@ -2,16 +2,14 @@ package removeRoom;
 
 import Model.Hotel;
 import Model.Room;
-import main.AbstractController;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractController;
+import shared.AbstractModel;
+import Model.MainFrame;
 import shared.PopupScreen;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * The Controller for Remove Room

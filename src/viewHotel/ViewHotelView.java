@@ -1,7 +1,7 @@
 package viewHotel;
 
 import Model.Hotel;
-import main.AbstractView;
+import shared.AbstractView;
 import shared.*;
 
 import javax.swing.*;

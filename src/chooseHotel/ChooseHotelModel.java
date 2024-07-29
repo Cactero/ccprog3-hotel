@@ -5,9 +5,11 @@ import Model.Hotel;
 import changeRoomType.ChangeRoomTypeModel;
 import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
+import datePriceModifier.DPMModel;
 import enterHotelName.EnterHotelNameModel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
+import removeHotel.RemoveHotelModel;
 import removeReservation.RemoveReservationModel;
 import removeRoom.RemoveRoomModel;
 import shared.SelectableHotel;
@@ -50,11 +52,9 @@ public class ChooseHotelModel extends AbstractModel {
         models.put(CHANGE_HOTEL_NAME, new EnterHotelNameModel(centralModel, frame, false));
         models.put(UPDATE_BASE_PRICE, new UpdateBasePriceModel(centralModel, frame));
         models.put(REMOVE_RESERVATION, new RemoveReservationModel(centralModel, frame));
-        // TODO: remove hotel MVC
-        models.put(REMOVE_HOTEL, new CreateRoomModel(centralModel, frame, false));
+        models.put(REMOVE_HOTEL, new RemoveHotelModel(centralModel, frame));
         models.put(CHANGE_ROOM_TYPE, new ChangeRoomTypeModel(centralModel, frame));
-        // TODO: dpm MVC
-        models.put(DATE_PRICE_MODIFIER, new CreateRoomModel(centralModel, frame, false));
+        models.put(DATE_PRICE_MODIFIER, new DPMModel(centralModel, frame));
 
         models.put(CREATE_RESERVATION, new CreateReservationModel(centralModel, frame));
         models.put(VIEW_HOTEL, new ViewHotelModel(centralModel, frame));

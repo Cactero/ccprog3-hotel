@@ -1,6 +1,6 @@
 package chooseHotel;
 
-import main.AbstractView;
+import shared.AbstractView;
 
 /**
  * The View for Choose Hotel

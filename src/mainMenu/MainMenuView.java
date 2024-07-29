@@ -1,6 +1,6 @@
 package mainMenu;
 
-import main.AbstractView;
+import shared.AbstractView;
 import shared.TemplateButton;
 
 import javax.imageio.ImageIO;

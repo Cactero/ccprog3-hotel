@@ -1,16 +1,9 @@
 package manageHotel;
 
 import Model.CentralModel;
-import Model.Hotel;
 import chooseHotel.ChooseHotelModel;
-import enterHotelName.EnterHotelNameModel;
-import main.AbstractModel;
-import main.MainFrame;
-import mainMenu.MainMenuController;
-import mainMenu.MainMenuModel;
-
-import javax.swing.*;
-import java.util.ArrayList;
+import shared.AbstractModel;
+import Model.MainFrame;
 
 /**
  * The Model for Manage Hotel

@@ -1,8 +1,4 @@
-import Model.Hotel;
-import main.MainFrame;
-import mainMenu.MainMenuModel;
-
-import java.util.ArrayList;
+import Model.MainFrame;
 
 public class DriverGUI {
     public static void main(String[] args) {

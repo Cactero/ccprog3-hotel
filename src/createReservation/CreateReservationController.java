@@ -4,14 +4,10 @@ import Model.Client;
 import Model.Hotel;
 import Model.Room;
 import Model.Utilities;
-import main.AbstractController;
-import main.MainFrame;
-import mainMenu.MainMenuModel;
-import mainMenu.MainMenuView;
+import shared.AbstractController;
+import Model.MainFrame;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The Controller for Create Reservation.

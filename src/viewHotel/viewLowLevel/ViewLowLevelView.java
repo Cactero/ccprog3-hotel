@@ -1,6 +1,6 @@
 package viewHotel.viewLowLevel;
 
-import main.AbstractView;
+import shared.AbstractView;
 import shared.TemplateButton;
 
 import javax.swing.*;

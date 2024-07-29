@@ -1,6 +1,6 @@
 package removeRoom;
 
-import main.AbstractView;
+import shared.AbstractView;
 
 /**
  * The View for Remove Room.

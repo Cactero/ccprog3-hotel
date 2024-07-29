@@ -1,6 +1,6 @@
 package enterHotelName;
 
-import main.AbstractView;
+import shared.AbstractView;
 
 /**
  * The View for Enter Hotel Name.

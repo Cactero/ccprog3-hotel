@@ -2,8 +2,8 @@ package enterHotelName;
 
 import Model.*;
 import createRoom.CreateRoomModel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
 import shared.SelectableHotel;
 
 /**
@@ -18,16 +18,9 @@ public class EnterHotelNameModel extends AbstractModel implements SelectableHote
 
     public EnterHotelNameModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
         super(centralModel);
+        this.fromCreateHotel = fromCreateHotel;
         createRoomModel = new CreateRoomModel(centralModel, frame, fromCreateHotel);
         controller = new EnterHotelNameController(this, frame);
-    }
-
-    /**
-     * Checks if the Create Room instance is from Create Hotel.
-     * @param fromCreateHotel true if the current context is from Create Hotel; false otherwise.
-     */
-    public void setFromCreateHotel(boolean fromCreateHotel) {
-        this.fromCreateHotel = fromCreateHotel;
     }
 
     /**

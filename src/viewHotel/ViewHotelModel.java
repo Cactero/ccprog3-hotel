@@ -2,8 +2,8 @@ package viewHotel;
 
 import Model.CentralModel;
 import Model.Hotel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
 import shared.SelectableHotel;
 import viewHotel.viewLowLevel.ViewLowLevelModel;
 

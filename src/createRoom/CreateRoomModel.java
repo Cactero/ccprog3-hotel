@@ -3,8 +3,8 @@ package createRoom;
 import Model.CentralModel;
 import Model.Hotel;
 import Model.Room;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
 import shared.SelectableHotel;
 
 /**

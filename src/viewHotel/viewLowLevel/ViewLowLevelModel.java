@@ -3,8 +3,8 @@ package viewHotel.viewLowLevel;
 import Model.CentralModel;
 import Model.Hotel;
 import chooseHotel.ChooseHotelModel;
-import main.AbstractModel;
-import main.MainFrame;
+import shared.AbstractModel;
+import Model.MainFrame;
 import viewHotel.ViewHotelModel;
 
 /**
