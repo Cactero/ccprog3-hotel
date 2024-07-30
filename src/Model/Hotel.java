@@ -195,4 +195,11 @@ public class Hotel {
         datePriceModifier.addAffectedDates(discountName, affectedDates, modifiedRate);
     }
 
+    /**
+     * Returns the Date Price Modifier object of the Hotel.
+     * @return the DPM object
+     */
+    public DatePriceModifier getDatePriceModifier() {
+        return datePriceModifier;
+    }
 }

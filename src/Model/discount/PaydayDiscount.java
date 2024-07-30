@@ -23,8 +23,8 @@ public class PaydayDiscount implements Discount {
      * @return the new reservation price of the Client
      */
     @Override
-    public float applyDiscount(Client client) {
-        float discount = client.getNormalPrice() * 0.07F;
+    public float applyDiscount(Client client, float price) {
+        float discount = client.getFinalPrice() * 0.07F;
 
         if(Utilities.isPaydayDay(client)){
             return discount;

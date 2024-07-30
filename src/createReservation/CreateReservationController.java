@@ -4,10 +4,15 @@ import Model.Client;
 import Model.Hotel;
 import Model.Room;
 import Model.Utilities;
+import Model.discount.Discount;
+import Model.discount.IWorkHereDiscount;
+import Model.discount.PaydayDiscount;
+import Model.discount.Stay4Get1Discount;
 import shared.AbstractController;
 import Model.MainFrame;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 /**
  * The Controller for Create Reservation.
@@ -38,18 +43,12 @@ public class CreateReservationController extends AbstractController {
         Hotel bookedHotel = ((CreateReservationModel) model).getSelectedHotel();
         if (bookedHotel == null) {
             JOptionPane.showMessageDialog(null, "No hotel selected", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
         }
 
-        Room bookedRoom = null;
-        for (Room room : bookedHotel.getRooms()){
-            if (room != null){
-                String roomName = String.format("%s%d", room.getRoomFloor(), room.getRoomNumber());
-                if (roomName.equals(bookedRoomName))
-                    bookedRoom = room;
-            }
-        }
-
+        Room bookedRoom = Arrays.stream(bookedHotel.getRooms())
+                .filter(room -> room != null && room.getFormattedName().equals(bookedRoomName))
+                .findFirst()
+                .orElse(null);
 
         if (!Utilities.isBookedDatesValid(bookedHotel, bookedRoom, checkInDay, checkOutDay)) {
             System.out.println("Your booking dates are not valid, please try again!");
@@ -61,10 +60,39 @@ public class CreateReservationController extends AbstractController {
             ((CreateReservationView) view).resetInputFields();
         } else {
             Client newClient = new Client(firstName, lastName, checkInDay, checkOutDay, bookedRoom);
+            computeDiscounts(newClient, discountCode);
             ((CreateReservationModel) model).addClient(newClient);
             JOptionPane.showMessageDialog(null, "Successfully added new client!", "New client added", JOptionPane.PLAIN_MESSAGE);
             frame.switchView(((CreateReservationModel) model).mainMenu());
         }
+    }
+    
+    private void computeDiscounts(Client client, String discountCode){
+
+        float finalPrice = client.getNormalPrice();
+        Discount discount;
+
+        if (discountCode.equals("STAY4_GET1")){
+            discount = new Stay4Get1Discount();
+            client.addDiscountsUsed(((Stay4Get1Discount) discount).getDiscountName());
+            finalPrice = discount.applyDiscount(client, finalPrice);
+        }
+
+        Hotel selectedHotel = ((CreateReservationModel) model).getSelectedHotel();
+        discount = selectedHotel.getDatePriceModifier();
+        finalPrice = discount.applyDiscount(client, finalPrice);
+
+        if (discountCode.equals("I_WORK_HERE")){
+            discount = new IWorkHereDiscount();
+            client.addDiscountsUsed(((IWorkHereDiscount) discount).getDiscountName());
+            finalPrice = discount.applyDiscount(client, finalPrice);
+        } else if (discountCode.equals("PAYDAY")) {
+            discount = new PaydayDiscount();
+            client.addDiscountsUsed(((PaydayDiscount) discount).getDiscountName());
+            finalPrice = discount.applyDiscount(client, finalPrice);
+        }
+
+        client.setFinalPrice(finalPrice);
     }
 
     public void cancel(){

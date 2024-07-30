@@ -24,7 +24,7 @@ public class IWorkHereDiscount implements Discount {
      * @return the new reservation price of the Client
      */
     @Override
-    public float applyDiscount(Client client) {
+    public float applyDiscount(Client client, float price) {
         return client.getFinalPrice() * 0.1F;
     }
 }

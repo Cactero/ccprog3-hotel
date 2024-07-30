@@ -50,12 +50,11 @@ public class DatePriceModifier implements Discount {
      * @return the new reservation price of the Client
      */
     @Override
-    public float applyDiscount(Client client){
-        float baseRate = client.getBookedRoom().getBasePrice();
+    public float applyDiscount(Client client, float price){
         float finalPrice = 0f;
 
         for (int i = client.getCheckInDay(); i < client.getCheckOutDay(); i++) {
-            finalPrice += (baseRate * modifiedRates[i-1]);
+            finalPrice += (price * modifiedRates[i-1]);
         }
 
         client.addDiscountsUsed(this.dpmNames);

@@ -77,6 +77,11 @@ public class Room {
      */
     public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
+        switch (this.type) {
+            case "Standard" -> this.basePrice *= 1.0F;
+            case "Deluxe" -> this.basePrice *= 1.2F;
+            case "Executive" -> this.basePrice *= 1.35F;
+        }
     }
 
     /**

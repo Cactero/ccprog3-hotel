@@ -11,7 +11,8 @@ public interface Discount {
     /**
      * Interface method for applying a discount.
      * @param client the Client where the discount will be applied to
+     * @param price the current calculated price before applying the discount
      * @return the new reservation price of the Client
      */
-    float applyDiscount(Client client);
+    float applyDiscount(Client client, float price);
 }
