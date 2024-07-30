@@ -34,12 +34,22 @@ public class ChooseHotelController extends AbstractController implements PopupSc
         .toArray(String[]::new);
 
         selectedHotelName = (String) JOptionPane.showInputDialog(null, "Select a hotel", "Choose Hotel", JOptionPane.PLAIN_MESSAGE, null, hotelNames, hotelNames[0]);
-        Hotel selectedHotel = hotels.stream()
-                .filter(hotel -> hotel.getName().equals(selectedHotelName))
-                .findFirst()
-                .orElse(null);
 
-        frame.switchView(((ChooseHotelModel) model).getModel(selectedHotel, ((ChooseHotelModel) model).getSource()));
+        if (selectedHotelName == null) {
+            if (((ChooseHotelModel) model).getSource().equals(ChooseHotelModel.VIEW_HOTEL) ||
+                    ((ChooseHotelModel) model).getSource().equals(ChooseHotelModel.CREATE_RESERVATION)) {
+                frame.switchView(((ChooseHotelModel) model).mainMenu());
+            } else {
+                frame.switchView(((ChooseHotelModel) model).manageHotel());
+            }
+        } else {
+            Hotel selectedHotel = hotels.stream()
+                    .filter(hotel -> hotel.getName().equals(selectedHotelName))
+                    .findFirst()
+                    .orElse(null);
+
+            frame.switchView(((ChooseHotelModel) model).getModel(selectedHotel, ((ChooseHotelModel) model).getSource()));
+        }
     }
 
 }

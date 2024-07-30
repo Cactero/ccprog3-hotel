@@ -2,7 +2,6 @@ package datePriceModifier;
 
 import Model.CentralModel;
 import Model.Hotel;
-import Model.discount.DatePriceModifier;
 import shared.AbstractModel;
 import Model.MainFrame;
 import shared.SelectableHotel;

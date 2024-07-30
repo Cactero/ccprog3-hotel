@@ -46,14 +46,6 @@ public class Client {
     }
 
     /**
-     * This is a setter for the variable bookedRoom
-     * @param bookedRoom the room the Client would like to book
-     */
-    public void setBookedRoom(Room bookedRoom) {
-        this.bookedRoom = bookedRoom;
-    }
-
-    /**
      * This is a getter for the variable firstName
      * @return the first name of the Client
      */
@@ -78,29 +70,11 @@ public class Client {
     }
 
     /**
-     * This is a setter for the variable checkInDay
-     * @param checkInDay the check in day of the Client
-     */
-    public void setCheckInDay(int checkInDay) {
-        this.checkInDay = checkInDay;
-        this.normalPrice = bookedRoom.getBasePrice() * getNightsBooked();
-    }
-
-    /**
      * This is a getter for the variable checkOutDay
      * @return the check out day of the Client
      */
     public int getCheckOutDay() {
         return checkOutDay;
-    }
-
-    /**
-     * This is a setter for the variable checkOutDay
-     * @param checkOutDay the check out day of the Client
-     */
-    public void setCheckOutDay(int checkOutDay) {
-        this.checkOutDay = checkOutDay;
-        this.normalPrice = bookedRoom.getBasePrice() * getNightsBooked();
     }
 
     /**

@@ -179,7 +179,7 @@ public class Hotel {
     public float getTotalReservationPrices(){
         float sum = 0;
         for(int i = 0; i < clientCount; i++){
-            sum += clients.get(i).getNormalPrice();
+            sum += clients.get(i).getFinalPrice();
         }
         return sum;
     }

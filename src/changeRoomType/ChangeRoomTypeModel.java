@@ -53,5 +53,4 @@ public class ChangeRoomTypeModel extends AbstractModel implements SelectableHote
         }
     }
 
-    public void setBasePrice(float basePrice) { selectedHotel.setBasePrice(basePrice); }
 }
