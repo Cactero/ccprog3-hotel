@@ -65,6 +65,6 @@ public class CreateRoomController extends AbstractController {
      * Brings the user back to the Main Menu screen when the Cancel button is clicked.
      */
     public void cancel(){
-        frame.switchView(((CreateReservationModel) model).mainMenu());
+        frame.switchView(((CreateRoomModel) model).mainMenu());
     }
 }

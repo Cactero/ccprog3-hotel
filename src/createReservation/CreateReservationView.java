@@ -127,4 +127,15 @@ public class CreateReservationView extends AbstractView {
      * @param listener the set of actions to be done when the button is clicked
      */
     public void addCreateClientButtonListener(ActionListener listener) { createClientButton.addActionListener(listener); }
+
+    public JComboBox<String> getRoomComboBox() {
+        return roomListField;
+    }
+
+    public void updateRoomList(String[] roomNames) {
+        roomListField.removeAllItems(); // Clear existing items
+        for (String roomName : roomNames) {
+            roomListField.addItem(roomName); // Add new items
+        }
+    }
 }

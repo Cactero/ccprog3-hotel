@@ -4,10 +4,13 @@ import Model.Client;
 import Model.Hotel;
 import Model.Room;
 import Model.Utilities;
+import chooseHotel.ChooseHotelModel;
 import shared.AbstractController;
 import Model.MainFrame;
+import viewHotel.viewReservation.ViewReservationModel;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +54,7 @@ public class ViewLowLevelController extends AbstractController {
             //return option;
 
             for (Client client : hotel.getClients()) {
-                if ((client.getCheckInDay() <= option && option <= client.getCheckOutDay())) {
+                if ((client.getCheckInDay() <= (Integer) date.getValue() && (Integer) date.getValue() <= client.getCheckOutDay())) {
                     bookedRooms++;
                 }
             }
@@ -149,6 +152,45 @@ public class ViewLowLevelController extends AbstractController {
     }
 
     public void viewReservation(){
+        Hotel hotel = ((ViewLowLevelModel) model).getSelectedHotel();
+        String firstName = "";
+        String lastName = "";
+        int checkInDay;
+        int checkOutDay;
+        String discountCode;
+        String room;
 
+        JPanel promptPanel = new JPanel(new GridLayout(4, 2));
+
+        JLabel firstNameLabel = new JLabel("First Name");
+        JTextField firstNameField = new JTextField();
+        promptPanel.add(firstNameLabel);
+        promptPanel.add(firstNameField);
+        JLabel lastNameLabel = new JLabel("Last Name");
+        JTextField lastNameField = new JTextField();
+        promptPanel.add(lastNameLabel);
+        promptPanel.add(lastNameField);
+
+        JOptionPane.showMessageDialog(null, promptPanel, "Enter reservation name", JOptionPane.INFORMATION_MESSAGE);
+
+        if(firstNameField.getText() != null && lastNameField.getText() != null){
+            Client selectedClient = hotel.getClients().stream()
+                    .filter(client -> (firstNameField.getText().equals(client.getFirstName()) && lastNameField.getText().equals(client.getLastName())))
+                    .findFirst()
+                    .orElse(null);
+
+            if(selectedClient == null){
+                JOptionPane.showMessageDialog(null, "Client not found, please try again.", "Invalid Client", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                frame.switchView(((ViewLowLevelModel) model).getModel(selectedClient, "View Reservation"));
+            }
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid client, try again.", "Invalid", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
+
 }

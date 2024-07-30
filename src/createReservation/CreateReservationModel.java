@@ -17,10 +17,12 @@ public class CreateReservationModel extends AbstractModel implements SelectableH
         // Attempt to get the selected hotel, if available
         this.selectedHotel = getSelectedHotel();
         controller = new CreateReservationController(this, frame);
+        setSelectedHotel(selectedHotel);
     }
 
     @Override
     public void setSelectedHotel(Hotel selectedHotel) {
+        ((CreateReservationController) controller).updateRoomComboBox();
         this.selectedHotel = selectedHotel;
     }
 

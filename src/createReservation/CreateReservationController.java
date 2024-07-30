@@ -13,6 +13,7 @@ import Model.MainFrame;
 
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * The Controller for Create Reservation.
@@ -97,6 +98,17 @@ public class CreateReservationController extends AbstractController {
 
     public void cancel(){
         frame.switchView(((CreateReservationModel) model).mainMenu());
+    }
+
+    public void updateRoomComboBox() {
+        Hotel selectedHotel = ((CreateReservationModel) model).getSelectedHotel();
+        if (selectedHotel != null) {
+            String[] roomNames = Arrays.stream(selectedHotel.getRooms())
+                    .filter(Objects::nonNull)
+                    .map(Room::getFormattedName)
+                    .toArray(String[]::new);
+            ((CreateReservationView) view).updateRoomList(roomNames);
+        }
     }
 
 }

@@ -45,13 +45,15 @@ public class RemoveReservationController extends AbstractController implements P
             frame.switchView(((RemoveReservationModel) model).manageHotel());
         }
 
-        Client selectedClient = clients.stream()
-                .filter(client -> (client.getLastName() + ", " + client.getFirstName()).equals(selectedClientName))
-                .findFirst()
-                .orElse(null);
+        else {
+            Client selectedClient = clients.stream()
+                    .filter(client -> (client.getLastName() + ", " + client.getFirstName()).equals(selectedClientName))
+                    .findFirst()
+                    .orElse(null);
 
-        ((RemoveReservationModel) model).removeReservation(selectedClient);
-        JOptionPane.showMessageDialog(null, "Successfully removed " + selectedClientName, "Client removed", JOptionPane.PLAIN_MESSAGE);
-        frame.switchView(((RemoveReservationModel) model).manageHotel());
+            ((RemoveReservationModel) model).removeReservation(selectedClient);
+            JOptionPane.showMessageDialog(null, "Successfully removed " + selectedClientName, "Client removed", JOptionPane.PLAIN_MESSAGE);
+            frame.switchView(((RemoveReservationModel) model).manageHotel());
+        }
     }
 }

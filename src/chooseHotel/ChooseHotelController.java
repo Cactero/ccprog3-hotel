@@ -1,9 +1,13 @@
 package chooseHotel;
 
 import Model.Hotel;
+import createReservation.CreateReservationController;
+import createReservation.CreateReservationModel;
 import shared.AbstractController;
 import Model.MainFrame;
 import shared.PopupScreen;
+import updateBasePrice.UpdateBasePriceController;
+import updateBasePrice.UpdateBasePriceModel;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -42,13 +46,20 @@ public class ChooseHotelController extends AbstractController implements PopupSc
             } else {
                 frame.switchView(((ChooseHotelModel) model).manageHotel());
             }
-        } else {
+        }
+        else {
+
             Hotel selectedHotel = hotels.stream()
                     .filter(hotel -> hotel.getName().equals(selectedHotelName))
                     .findFirst()
                     .orElse(null);
 
-            frame.switchView(((ChooseHotelModel) model).getModel(selectedHotel, ((ChooseHotelModel) model).getSource()));
+            if(selectedHotel.getClientCount() == 0 && ((ChooseHotelModel) model).getSource().equals("Manage Hotel")) {
+                JOptionPane.showMessageDialog(null, "No reservations found.", "Invalid option", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                frame.switchView(((ChooseHotelModel) model).getModel(selectedHotel, ((ChooseHotelModel) model).getSource()));
+            }
         }
     }
 
