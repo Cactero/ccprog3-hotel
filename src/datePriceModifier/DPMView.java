@@ -26,6 +26,7 @@ public class DPMView extends AbstractView {
         inputHolder.setOpaque(false);
         discountNameField = new JTextField(10);
         oneDayButtonField = new JRadioButton("Apply modifier to one day only");
+        oneDayButtonField.setSelected(true);
         rangeButtonField = new JRadioButton("Apply modifier to a range of dates");
         ButtonGroup bg = new ButtonGroup();
         bg.add(oneDayButtonField);
@@ -60,6 +61,52 @@ public class DPMView extends AbstractView {
     }
 
     public void resetInputFields(){
-
+        discountNameField.setText("");
+        discountMultiplierField.setText("");
+        oneDayButtonField.setSelected(true);
+        rangeButtonField.setSelected(false);
+        startRangeDayField.setValue(1);
+        endRangeDayField.setValue(1);
     }
+
+    /**
+     * Gets the text from the discount name field.
+     * @return the text currently displayed in the discount name field.
+     */
+    public String getDiscountName() {
+        return discountNameField.getText();
+    }
+
+    /**
+     * Checks if the range button is selected.
+     * @return true if the range button is selected, false otherwise.
+     */
+    public boolean isRangeSelected() {
+        return rangeButtonField.isSelected();
+    }
+
+    /**
+     * Gets the value from the start range day spinner.
+     * @return the value of the start range day as an integer.
+     */
+    public int getStartRangeDay() {
+        return (int) startRangeDayField.getValue();
+    }
+
+    /**
+     * Gets the value from the end range day spinner.
+     * @return the value of the end range day as an integer.
+     */
+    public int getEndRangeDay() {
+        return (int) endRangeDayField.getValue();
+    }
+
+    /**
+     * Gets the text from the discount multiplier field.
+     * @return the text currently displayed in the discount multiplier field.
+     */
+    public String getDiscountMultiplier() {
+        return discountMultiplierField.getText();
+    }
+
 }

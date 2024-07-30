@@ -2,9 +2,12 @@ package datePriceModifier;
 
 import Model.CentralModel;
 import Model.Hotel;
+import Model.discount.DatePriceModifier;
 import shared.AbstractModel;
 import Model.MainFrame;
 import shared.SelectableHotel;
+
+import java.util.ArrayList;
 
 public class DPMModel extends AbstractModel implements SelectableHotel {
 
@@ -35,5 +38,10 @@ public class DPMModel extends AbstractModel implements SelectableHotel {
     @Override
     public Hotel getSelectedHotel() {
         return selectedHotel;
+    }
+
+    public void addDPM(String discountName, ArrayList<Integer> affectedDates, float modifiedRate){
+        int index = getHotels().indexOf(selectedHotel);
+        centralModel.getHotel(index).addDPMAffectedDates(discountName, affectedDates, modifiedRate);
     }
 }

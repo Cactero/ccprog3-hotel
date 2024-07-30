@@ -25,6 +25,7 @@ public class CreateReservationController extends AbstractController {
 
     }
 
+    //TODO: implement discounts
     public void createClient(){
 
         String firstName = ((CreateReservationView) view).getFirstName();
