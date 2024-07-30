@@ -24,11 +24,11 @@ public class PaydayDiscount implements Discount {
      */
     @Override
     public float applyDiscount(Client client, float price) {
-        float discount = client.getFinalPrice() * 0.07F;
+        float discount = price * (1-0.07F);
 
         if(Utilities.isPaydayDay(client)){
             return discount;
         }
-        return 0F;
+        return price;
     }
 }

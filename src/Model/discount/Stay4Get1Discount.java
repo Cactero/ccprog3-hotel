@@ -24,10 +24,10 @@ public class Stay4Get1Discount implements Discount {
      */
     @Override
     public float applyDiscount(Client client, float price) {
-        float discount = client.getNormalPrice() - client.getBookedRoom().getBasePrice();
-        if(client.getNightsBooked() >= 5){
+        float discount = price - client.getBookedRoom().getBasePrice();
+        if(client.getNightsBooked() + 1 >= 5){
             return discount;
         }
-        return 0F;
+        return price;
     }
 }
