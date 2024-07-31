@@ -1,6 +1,5 @@
 package datePriceModifier;
 
-import createRoom.CreateRoomModel;
 import shared.AbstractController;
 import shared.AbstractModel;
 import Model.MainFrame;
@@ -31,7 +30,7 @@ public class DPMController extends AbstractController {
      * Brings the user back to the Manage Hotel screen when the Cancel button is clicked.
      */
     public void cancel(){
-        frame.switchView(((CreateRoomModel) model).manageHotel());
+        frame.switchView(((DPMModel) model).manageHotel());
     }
 
     /**
