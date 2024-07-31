@@ -53,7 +53,7 @@ public class CreateRoomView extends AbstractView {
 
         // Create and add components for roomTypeField
         JLabel roomTypeLabel = new JLabel("Room Type");
-        String[] roomTypes = new String[]{"Standard", "Deluxe", "Executive"};
+        String[] roomTypes = new String[]{"Standard (1.0x)", "Deluxe (1.2x)", "Executive (1.35x)"};
         roomTypeField = new JComboBox<>(roomTypes);
         roomInfoHolder.add(roomTypeLabel);
         roomInfoHolder.add(roomTypeField);
