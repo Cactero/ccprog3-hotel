@@ -3,6 +3,7 @@ package createRoom;
 import Model.CentralModel;
 import Model.Hotel;
 import Model.Room;
+import mainMenu.MainMenuModel;
 import shared.AbstractModel;
 import Model.MainFrame;
 import shared.SelectableHotel;
@@ -64,16 +65,16 @@ public class CreateRoomModel extends AbstractModel implements SelectableHotel {
      * The Model of Main Menu that is created when the user clicks the Cancel button
      * @return the Model of Main Menu
      */
-    public AbstractModel mainMenu(){
-        return centralModel.getModel(CentralModel.MAIN_MENU);
+    public MainMenuModel mainMenu(){
+        return (MainMenuModel) centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
     /**
      * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
      * @return the Model of Manage Hotel
      */
-    public AbstractModel manageHotel(){
-        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
+    public MainMenuModel manageHotel(){
+        return (MainMenuModel) centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
 }

@@ -54,7 +54,7 @@ public class RemoveHotelModel extends AbstractModel implements SelectableHotel {
      * Retrieves the model for choosing a hotel and sets its source to REMOVE_HOTEL.
      * @return the ChooseHotelModel object with the source set to REMOVE_HOTEL.
      */
-    public AbstractModel chooseHotel() {
+    public ChooseHotelModel chooseHotel() {
         ChooseHotelModel CHmodel = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
         CHmodel.setSource(ChooseHotelModel.REMOVE_HOTEL);
         return CHmodel;
