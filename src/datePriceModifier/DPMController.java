@@ -57,6 +57,7 @@ public class DPMController extends AbstractController {
                 JOptionPane.showMessageDialog(null, "Please enter a discount name.", "Empty discount name field", JOptionPane.PLAIN_MESSAGE);
             } else {
                 ((DPMModel) model).addDPM(discountName, range, discountMultiplier);
+                JOptionPane.showMessageDialog(null, "Added date price modifier " + discountName, "New DPM added", JOptionPane.PLAIN_MESSAGE);
                 ((DPMView) view).resetInputFields();
             }
 
