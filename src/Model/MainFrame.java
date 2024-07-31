@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
         MainMenuModel model = (MainMenuModel) database.getModel(CentralModel.MAIN_MENU);
         contentHolder = model.getContentHolder();
 
-        setTitle("CCPROG3 MCO: Hotel Reservation System (S27 Group 5)");
+        setTitle("CCPROG3 MCO2: Hotel Reservation System (S27 Group 5)");
         setContentPane(contentHolder);
         setSize(1280, 720);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
