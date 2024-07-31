@@ -25,9 +25,9 @@ public class Room {
         this.type = type;
 
         switch (this.type) {
-            case "Standard" -> this.basePrice *= 1.0F;
-            case "Deluxe" -> this.basePrice *= 1.2F;
-            case "Executive" -> this.basePrice *= 1.35F;
+            case "Standard (1.0x)" -> this.basePrice *= 1.0F;
+            case "Deluxe (1.2x)" -> this.basePrice *= 1.2F;
+            case "Executive (1.35x)" -> this.basePrice *= 1.35F;
         }
     }
 
