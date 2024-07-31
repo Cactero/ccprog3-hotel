@@ -76,6 +76,7 @@ public class ChangeRoomTypeController extends AbstractController implements Popu
 
         String selectedType = (String) JOptionPane.showInputDialog(null, "Select a room type", "Choose Room Type", JOptionPane.PLAIN_MESSAGE, null, roomTypes, roomTypes[0]);
 
+        assert selectedRoom != null;
         if(!selectedRoom.getType().equals(selectedType)){
             ((ChangeRoomTypeModel) model).setRoomType(selectedRoom, selectedType);
             JOptionPane.showMessageDialog(null, "Successfully changed " + selectedRoomName + "'s type to " + selectedType + ".", "Room type changed", JOptionPane.PLAIN_MESSAGE);

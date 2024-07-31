@@ -71,7 +71,7 @@ public class Client {
 
     /**
      * This is a getter for the variable checkOutDay
-     * @return the check out day of the Client
+     * @return the check-out day of the Client
      */
     public int getCheckOutDay() {
         return checkOutDay;

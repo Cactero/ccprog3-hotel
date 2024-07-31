@@ -16,6 +16,12 @@ public class CreateRoomModel extends AbstractModel implements SelectableHotel {
     private Hotel selectedHotel;
     private boolean fromCreateHotel;
 
+    /**
+     * The Constructor for Create Room Model
+     * @param centralModel the object of the Central Model
+     * @param frame the main frame of the program
+     * @param fromCreateHotel checks if the instance is called from Create Hotel
+     */
     public CreateRoomModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
         super(centralModel);
         this.fromCreateHotel = fromCreateHotel;

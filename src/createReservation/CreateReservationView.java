@@ -15,8 +15,11 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * The View for Create Reservation.
+ * @author Angela Domingo
+ */
 public class CreateReservationView extends AbstractView {
-
 
     private JTextField firstNameField;
     private JTextField lastNameField;
@@ -29,6 +32,10 @@ public class CreateReservationView extends AbstractView {
     private JButton mainMenuButton;
     private JButton createClientButton;
 
+    /**
+     * The Constructor for Change Room Type View.
+     * @param selectedHotel the selected Hotel from Choose Hotel
+     */
     public CreateReservationView(Hotel selectedHotel){
         super("/assets/LABELS/CREATE_RESERVATION.png");
 

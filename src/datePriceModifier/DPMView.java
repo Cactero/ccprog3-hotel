@@ -10,6 +10,10 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The View for Date Price Modifier.
+ * @author Angela Domingo
+ */
 public class DPMView extends AbstractView {
 
     private JTextField discountNameField;
@@ -22,6 +26,9 @@ public class DPMView extends AbstractView {
     private JButton mainMenuButton;
     private JButton addDPMButton;
 
+    /**
+     * The Constructor for DPM View.
+     */
     public DPMView() {
         super("/assets/LABELS/DATE_PRICE_MODIFIER.png");
 
@@ -81,14 +88,25 @@ public class DPMView extends AbstractView {
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
     }
 
+    /**
+     * Adds a listener to the Add Date Price Modifier button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addAddDPMButtonListener(ActionListener listener) {
         addDPMButton.addActionListener(listener);
     }
 
+    /**
+     * Adds a listener to the Cancel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener(ActionListener listener) {
         mainMenuButton.addActionListener(listener);
     }
 
+    /**
+     * Resets the input fields after a failed attempt.
+     */
     public void resetInputFields(){
         discountNameField.setText("");
         discountMultiplierField.setText("");

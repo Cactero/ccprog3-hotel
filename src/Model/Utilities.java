@@ -45,7 +45,7 @@ public class Utilities {
                     ((client.getCheckInDay() < checkInDay && checkInDay <= client.getCheckOutDay()) || // checks if current client's range of dates contains new client's check in day
                     (client.getCheckInDay() <= checkOutDay && checkOutDay < client.getCheckOutDay()) ||
                     (checkInDay < client.getCheckInDay() && client.getCheckInDay() <= checkOutDay) || // checks if current client's range of dates contains new client's check in day
-                    (checkInDay <= client.getCheckOutDay() && client.getCheckOutDay() < checkOutDay))) { // checks if new client's range of dates contains current client's check in day) {
+                    (checkInDay <= client.getCheckOutDay() && client.getCheckOutDay() < checkOutDay))) { // checks if new client's range of dates contains current client's check in day {
                 return true;
             }
         }

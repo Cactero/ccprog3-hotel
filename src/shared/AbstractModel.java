@@ -15,6 +15,10 @@ public abstract class AbstractModel {
     protected CentralModel centralModel;
     protected AbstractController controller;
 
+    /**
+     * The Constructor for Abstract Model
+     * @param centralModel the object of the Central Model
+     */
     public AbstractModel(CentralModel centralModel){
         this.centralModel = centralModel;
     }

@@ -25,6 +25,10 @@ public class CreateRoomView extends AbstractView {
     private JButton mainMenuButton;
     private JButton createRoomButton;
 
+    /**
+     * The Constructor for Create Room View.
+     * @param fromCreateHotel a check if the Create Room instance is from Create Hotel
+     */
     public CreateRoomView(boolean fromCreateHotel) {
         super("/assets/LABELS/CREATE_ROOM.png");
 

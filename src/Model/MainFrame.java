@@ -18,6 +18,9 @@ public class MainFrame extends JFrame {
 
     private JPanel contentHolder;
 
+    /**
+     * The constructor of the main JFrame of the program.
+     */
     public MainFrame(){
         CentralModel database = new CentralModel(this);
         MainMenuModel model = (MainMenuModel) database.getModel(CentralModel.MAIN_MENU);

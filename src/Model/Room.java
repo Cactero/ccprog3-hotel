@@ -16,11 +16,19 @@ public class Room {
      * @param roomFloor the floor of the Room
      * @param roomNumber the number of the Room
      * @param basePrice the base price of the Room
+     * @param type the room type
      */
-    public Room(String roomFloor, int roomNumber, float basePrice) {
+    public Room(String roomFloor, int roomNumber, float basePrice, String type) {
         this.roomFloor = roomFloor;
         this.roomNumber = roomNumber;
         this.basePrice = basePrice;
+        this.type = type;
+
+        switch (this.type) {
+            case "Standard" -> this.basePrice *= 1.0F;
+            case "Deluxe" -> this.basePrice *= 1.2F;
+            case "Executive" -> this.basePrice *= 1.35F;
+        }
     }
 
     /**
@@ -45,14 +53,6 @@ public class Room {
      */
     public String getFormattedName() {
         return roomFloor + roomNumber;
-    }
-
-    /**
-     * This is a getter for the variable hotelName
-     * @return the Hotel name the Room is associated with
-     */
-    public String getHotelName() {
-        return hotelName;
     }
 
     /**

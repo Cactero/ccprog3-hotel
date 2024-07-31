@@ -13,6 +13,9 @@ public class DatePriceModifier implements Discount {
     private float[] modifiedRates;
     private ArrayList<String> dpmNames;
 
+    /**
+     * Initializes the array of modified rates and DPM names.
+     */
     public DatePriceModifier(){
         this.dpmNames = new ArrayList<>();
         this.modifiedRates = new float[31];

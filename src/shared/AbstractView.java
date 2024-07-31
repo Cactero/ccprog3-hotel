@@ -13,6 +13,10 @@ import java.util.Objects;
 public abstract class AbstractView {
     protected JPanel contentHolder;
 
+    /**
+     * The Constructor for Abstract View
+     * @param headerImageSource the path for the header image
+     */
     public AbstractView(String headerImageSource){
         if (headerImageSource != null){
             // background image

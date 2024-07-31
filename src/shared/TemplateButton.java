@@ -7,11 +7,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- * A template for the button visuals seen in the views.'
+ * A template for the button visuals seen in the views.
  * @author Angela Domingo
  */
 public class TemplateButton extends JButton{
-    
+
+    /**
+     * The Constructor for Template Button.
+     * @param text the text shown on the button
+     */
     public TemplateButton(String text){
         setText(text);
         setFont(new Font("Sans Serif", Font.BOLD, 17));

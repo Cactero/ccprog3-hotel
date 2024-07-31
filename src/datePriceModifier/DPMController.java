@@ -8,6 +8,10 @@ import Model.MainFrame;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * The Controller for Date Price Modifier.
+ * @author Angela Domingo
+ */
 public class DPMController extends AbstractController {
 
     /**

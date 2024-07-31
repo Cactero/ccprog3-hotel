@@ -1,6 +1,5 @@
 package viewHotel;
 
-import Model.Hotel;
 import shared.AbstractView;
 import shared.*;
 
@@ -25,6 +24,9 @@ public class ViewHotelView extends AbstractView {
     private JButton viewRoom;
     private JButton viewReservation;
 
+    /**
+     * The Constructor for View Hotel View.
+     */
     public ViewHotelView(){
         super("/assets/LABELS/VIEW_HOTEL.png");
 
@@ -53,12 +55,18 @@ public class ViewHotelView extends AbstractView {
 
     }
 
+    /**
+     * Removes the low level options buttons from the view.
+     */
     public void removeLowLevelOptions(){
         contentHolder.remove(lowLevelOptionsHolder);
         contentHolder.revalidate();
         contentHolder.repaint();
     }
 
+    /**
+     * Adds the low level options buttons to the view.
+     */
     public void showLowLevelOptions(){
         contentHolder.add(lowLevelOptionsHolder, BorderLayout.CENTER);
         lowLevelOptionsHolder.setVisible(true);
@@ -66,12 +74,41 @@ public class ViewHotelView extends AbstractView {
         contentHolder.repaint();
     }
 
+    /**
+     * Adds a listener to the Show High Level button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addHighLevelButtonListener(ActionListener listener) { highLevelButton.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the Show Low Level button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addLowLevelButtonListener(ActionListener listener) { lowLevelOptionsButton.addActionListener(listener); }
 
+
+    /**
+     * Adds a listener to the View Reservation button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addViewReservationListener(ActionListener listener) { viewReservation.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the View Date button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addViewDateButtonListener(ActionListener listener) { viewDate.addActionListener(listener); }
+
+    /**
+     * Adds a listener to the View Room button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addViewRoomButtonListener(ActionListener listener) { viewRoom.addActionListener(listener); }
 
+
+    /**
+     * Adds a listener to the Cancel button.
+     * @param listener the set of actions to be done when the button is clicked
+     */
     public void addMainMenuButtonListener(ActionListener listener) { mainMenuButton.addActionListener(listener); }
 }

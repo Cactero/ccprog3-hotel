@@ -12,6 +12,11 @@ public class TemplateHeaderLabel extends JLabel {
     private ImageIcon headerImage;
     private JPanel headerHolder;
 
+    /**
+     * The Constructor for the template of the header labels found in all views except the main menu.
+     * @param headerImage the image of the header to be used
+     * @param headerHolder the container for the image
+     */
     public TemplateHeaderLabel(ImageIcon headerImage, JPanel headerHolder){
         super();
         this.headerImage = headerImage;

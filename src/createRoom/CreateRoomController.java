@@ -46,8 +46,7 @@ public class CreateRoomController extends AbstractController {
             }
 
             if (!hasConflict){
-                Room newRoom = new Room(newRoomFloor, newRoomNumber, ((CreateRoomModel) model).getSelectedHotel().getBasePrice());
-                newRoom.setRoomType(newRoomType);
+                Room newRoom = new Room(newRoomFloor, newRoomNumber, ((CreateRoomModel) model).getSelectedHotel().getBasePrice(), newRoomType);
                 ((CreateRoomModel) model).addRoom(newRoom);
                 JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
                 ((CreateRoomView) view).resetInputFields();

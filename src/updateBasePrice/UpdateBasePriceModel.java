@@ -2,6 +2,7 @@ package updateBasePrice;
 
 import Model.CentralModel;
 import Model.Hotel;
+import manageHotel.ManageHotelModel;
 import shared.AbstractModel;
 import Model.MainFrame;
 import shared.SelectableHotel;
@@ -14,16 +15,22 @@ public class UpdateBasePriceModel extends AbstractModel implements SelectableHot
 
     private Hotel selectedHotel;
 
+    /**
+     * The Constructor for Update Base Price Model
+     * @param centralModel the object of the Central Model
+     * @param frame the main frame of the program
+     */
     public UpdateBasePriceModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new UpdateBasePriceController(this, frame);
     }
 
     /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
+     * Retrieves the model associated with the key for managing hotels.
+     * @return the Model for Manage Hotel.
      */
-    public AbstractModel manageHotel(){
-        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
+    public ManageHotelModel manageHotel() {
+        return (ManageHotelModel) centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
@@ -44,6 +51,10 @@ public class UpdateBasePriceModel extends AbstractModel implements SelectableHot
         return selectedHotel;
     }
 
+    /**
+     * Sets a new base price in the Hotel.
+     * @param basePrice the new base price of the Hotel.
+     */
     public void setBasePrice(float basePrice) {
         int index = getHotels().indexOf(selectedHotel);
         getHotels().get(index).setBasePrice(basePrice);

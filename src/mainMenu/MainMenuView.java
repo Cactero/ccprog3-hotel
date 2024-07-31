@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
@@ -34,12 +35,15 @@ public class MainMenuView extends AbstractView {
     private ImageIcon logoImage;
     private JLabel logoLabel;
 
+    /**
+     * The Constructor for Main Menu View.
+     */
     public MainMenuView(){
         super(null);
 
         // background image
         try {
-            bgImage = ImageIO.read(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png"));
+            bgImage = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("/assets/WINDOW_BACKGROUND.png")));
             contentHolder = new JPanel(new GridLayout(0, 2)) {
                 @Override public void paintComponent(Graphics g) {
                     g.drawImage(bgImage, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -50,7 +54,7 @@ public class MainMenuView extends AbstractView {
         }
 
         // hotel image
-        hotelImage = new ImageIcon(this.getClass().getResource("/assets/HOTEL_GRAPHIC.png"));
+        hotelImage = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/assets/HOTEL_GRAPHIC.png")));
         hotelLabel = new JLabel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -93,7 +97,7 @@ public class MainMenuView extends AbstractView {
         rightSide.setOpaque(false);
 
         // app name image
-        logoImage = new ImageIcon(this.getClass().getResource("/assets/LABELS/MAIN_MENU.png"));
+        logoImage = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/assets/LABELS/MAIN_MENU.png")));
         logoLabel = new JLabel(logoImage) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -181,7 +185,7 @@ public class MainMenuView extends AbstractView {
     public void addCreateReservationButtonListener(ActionListener listener) {createReservationButton.addActionListener(listener);}
 
     /**
-     * Adds a listener to the Exit Button button.
+     * Adds a listener to the Exit Program button.
      * @param listener the set of actions to be done when the button is clicked
      */
     public void addExitButtonListener(ActionListener listener) {exitButton.addActionListener(listener);}

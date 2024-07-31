@@ -1,1 +1,17 @@
 unnamed package
+changeRoomType
+chooseHotel
+createReservation
+createRoom
+datePriceModifier
+enterHotelName
+mainMenu
+manageHotel
+Model
+Model.discount
+removeHotel
+removeReservation
+removeRoom
+shared
+updateBasePrice
+viewHotel

@@ -8,6 +8,9 @@ import shared.AbstractView;
  */
 public class EnterHotelNameView extends AbstractView {
 
+    /**
+     * The Constructor for Enter Hotel Name View.
+     */
     public EnterHotelNameView(){
         super("/assets/LABELS/ENTER_HOTEL_NAME.png");
     }

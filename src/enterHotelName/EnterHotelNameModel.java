@@ -2,6 +2,8 @@ package enterHotelName;
 
 import Model.*;
 import createRoom.CreateRoomModel;
+import mainMenu.MainMenuModel;
+import manageHotel.ManageHotelModel;
 import shared.AbstractModel;
 import Model.MainFrame;
 import shared.SelectableHotel;
@@ -16,6 +18,12 @@ public class EnterHotelNameModel extends AbstractModel implements SelectableHote
     private CreateRoomModel createRoomModel;
     private Hotel selectedHotel;
 
+    /**
+     * The Constructor for DPM Model
+     * @param centralModel the object of the Central Model
+     * @param frame the main frame of the program
+     * @param fromCreateHotel checks if the instance is called from Create Hotel
+     */
     public EnterHotelNameModel(CentralModel centralModel, MainFrame frame, boolean fromCreateHotel){
         super(centralModel);
         this.fromCreateHotel = fromCreateHotel;
@@ -39,6 +47,10 @@ public class EnterHotelNameModel extends AbstractModel implements SelectableHote
         centralModel.addHotel(hotel);
     }
 
+    /**
+     * Renames the selected Hotel.
+     * @param newName the new name of the selected hotel
+     */
     public void renameHotel(String newName){
         int index = centralModel.getHotels().indexOf(selectedHotel);
         centralModel.getHotels().get(index).setName(newName);
@@ -48,23 +60,24 @@ public class EnterHotelNameModel extends AbstractModel implements SelectableHote
      * The Model of Main Menu that is created when the user clicks the Cancel button
      * @return the Model of Main Menu
      */
-    public AbstractModel mainMenu(){
-        return centralModel.getModel(CentralModel.MAIN_MENU);
+    public MainMenuModel mainMenu(){
+        return (MainMenuModel) centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
     /**
      * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
      * @return the Model of Manage Hotel
      */
-    public AbstractModel manageHotel(){
-        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
+    public ManageHotelModel manageHotel(){
+        return (ManageHotelModel) centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
      * The Model of Create Room that is created when the user clicks the Create Hotel button
      * @param hotel the new Hotel created
+     * @return a Create Room Model instance
      */
-    public AbstractModel createRoom(Hotel hotel){
+    public CreateRoomModel createRoom(Hotel hotel){
         createRoomModel.setSelectedHotel(hotel);
         return createRoomModel;
     }
