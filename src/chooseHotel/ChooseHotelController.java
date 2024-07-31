@@ -18,7 +18,11 @@ import java.util.ArrayList;
  */
 public class ChooseHotelController extends AbstractController implements PopupScreen {
 
-
+    /**
+     * The Constructor for Choose Hotel Controller
+     * @param model the Model object of Choose Hotel
+     * @param frame the main frame of the program
+     */
     public ChooseHotelController(ChooseHotelModel model, MainFrame frame) {
         super(model, frame);
         this.view = new ChooseHotelView();
@@ -46,8 +50,7 @@ public class ChooseHotelController extends AbstractController implements PopupSc
             } else {
                 frame.switchView(((ChooseHotelModel) model).manageHotel());
             }
-        }
-        else {
+        } else {
 
             Hotel selectedHotel = hotels.stream()
                     .filter(hotel -> hotel.getName().equals(selectedHotelName))

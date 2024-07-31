@@ -20,7 +20,6 @@ public class CentralModel {
 
     public static final String MAIN_MENU = "Main Menu";
     public static final String CREATE_HOTEL = "Create Hotel";
-    public static final String REMOVE_HOTEL = "Remove Hotel";
     public static final String CHOOSE_HOTEL = "Choose Hotel";
     public static final String MANAGE_HOTEL = "Manage Hotel";
 

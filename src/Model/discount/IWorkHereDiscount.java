@@ -21,6 +21,7 @@ public class IWorkHereDiscount implements Discount {
      * Applies the discount to the client's final price.
      * This method calculates a 10% discount on the client's current final price and updates the final price accordingly.
      * @param client the Client where the discount will be applied to
+     * @param price the price of the reservation before the discount
      * @return the new reservation price of the Client
      */
     @Override

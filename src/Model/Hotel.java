@@ -91,31 +91,16 @@ public class Hotel {
      * @param room the Room to be removed
      */
     public void removeRoom(Room room){
-        boolean noReservations = true;
-
-        for(int i = 0; i < 31; i++){
-            if(Utilities.isRoomOccupied(this, room, i+1)){
-                noReservations = false;
-            }
-        }
-
-        if(roomCount == 1){
-            System.out.println("You cannot remove this room because it is the only room!");
-        }
-        else if (!noReservations){
-            System.out.println("You cannot remove this room because there is currently a reservation!");
-        }
-        else {
-            for (int i = 0; i < this.roomCount-1; i++) {
-                if (rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()) {
-                    for (int k = i; k < this.roomCount; k++) {
-                        rooms[k] = rooms[k + 1];
-                    }
-                    i--;
+        for (int i = 0; i < this.roomCount-1; i++) {
+            if (rooms[i].getRoomFloor().equals(room.getRoomFloor()) && rooms[i].getRoomNumber() == room.getRoomNumber()) {
+                for (int k = i; k < this.roomCount; k++) {
+                    rooms[k] = rooms[k + 1];
                 }
+                i--;
             }
-            this.roomCount--;
         }
+        rooms[roomCount] = null;
+        this.roomCount--;
     }
 
     /**

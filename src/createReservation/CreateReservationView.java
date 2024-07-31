@@ -6,6 +6,10 @@ import shared.AbstractView;
 import shared.TemplateButton;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -13,7 +17,7 @@ import java.util.Objects;
 
 public class CreateReservationView extends AbstractView {
 
-    private JPanel inputHolder;
+
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JSpinner checkInDayField;
@@ -28,16 +32,37 @@ public class CreateReservationView extends AbstractView {
     public CreateReservationView(Hotel selectedHotel){
         super("/assets/LABELS/CREATE_RESERVATION.png");
 
-        inputHolder = new JPanel();
-        inputHolder.setOpaque(false);
-        firstNameField = new JTextField(10);
-        lastNameField = new JTextField(10);
-        SpinnerNumberModel checkInDayOptions = new SpinnerNumberModel(1, 1, 30, 1);
-        checkInDayField = new JSpinner(checkInDayOptions);
-        SpinnerNumberModel checkOutDayOptions = new SpinnerNumberModel(2, 2, 31, 1);
-        checkOutDayField = new JSpinner(checkOutDayOptions);
+        JPanel inputHolder = new JPanel(new GridLayout(0, 2));
+        inputHolder.setBackground(new Color(255, 242, 217));
+        inputHolder.setBorder(new CompoundBorder(
+                new LineBorder(new Color(234, 183, 55), 10),
+                new EmptyBorder(20, 20, 20, 20)
+        ));
 
-        // Check if selectedHotel is not null before accessing its rooms
+        JLabel firstNameLabel = new JLabel("First Name");
+        firstNameField = new JTextField(10);
+        inputHolder.add(firstNameLabel);
+        inputHolder.add(firstNameField);
+
+
+        JLabel lastNameLabel = new JLabel("Last Name");
+        lastNameField = new JTextField(10);
+        inputHolder.add(lastNameLabel);
+        inputHolder.add(lastNameField);
+
+
+        JLabel checkInDayLabel = new JLabel("Check-In Day");
+        checkInDayField = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+        inputHolder.add(checkInDayLabel);
+        inputHolder.add(checkInDayField);
+
+
+        JLabel checkOutDayLabel = new JLabel("Check-Out Day");
+        checkOutDayField = new JSpinner(new SpinnerNumberModel(2, 2, 31, 1));
+        inputHolder.add(checkOutDayLabel);
+        inputHolder.add(checkOutDayField);
+
+
         String[] roomNames = {};
         if (selectedHotel != null && selectedHotel.getRooms() != null) {
             roomNames = Arrays.stream(selectedHotel.getRooms())
@@ -46,15 +71,24 @@ public class CreateReservationView extends AbstractView {
                     .toArray(String[]::new);
         }
 
+
+        JLabel roomListLabel = new JLabel("Desired Room");
         roomListField = new JComboBox<>(roomNames);
-        discountField = new JTextField(10);
-        inputHolder.add(firstNameField);
-        inputHolder.add(lastNameField);
-        inputHolder.add(checkInDayField);
-        inputHolder.add(checkOutDayField);
+        inputHolder.add(roomListLabel);
         inputHolder.add(roomListField);
+
+
+        JLabel discountLabel = new JLabel("Discount Code (optional)");
+        discountField = new JTextField(10);
+        inputHolder.add(discountLabel);
         inputHolder.add(discountField);
-        contentHolder.add(inputHolder);
+
+        JPanel centerHolder = new JPanel(new BorderLayout());
+        centerHolder.setOpaque(false);
+        centerHolder.add(inputHolder, BorderLayout.CENTER);
+        centerHolder.setBorder(new EmptyBorder(50, 200, 100, 200));
+
+        contentHolder.add(centerHolder, BorderLayout.CENTER);
 
         buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);
@@ -64,7 +98,6 @@ public class CreateReservationView extends AbstractView {
         buttonsHolder.add(createClientButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
     }
-
 
     /**
      * Adds a listener to the Main Menu button.
@@ -128,10 +161,10 @@ public class CreateReservationView extends AbstractView {
      */
     public void addCreateClientButtonListener(ActionListener listener) { createClientButton.addActionListener(listener); }
 
-    public JComboBox<String> getRoomComboBox() {
-        return roomListField;
-    }
-
+    /**
+     * Updates the list of rooms in the view.
+     * @param roomNames an array of room names in the selected Hotel
+     */
     public void updateRoomList(String[] roomNames) {
         roomListField.removeAllItems(); // Clear existing items
         for (String roomName : roomNames) {

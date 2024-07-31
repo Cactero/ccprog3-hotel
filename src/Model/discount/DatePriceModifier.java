@@ -23,14 +23,6 @@ public class DatePriceModifier implements Discount {
     }
 
     /**
-     * Returns an ArrayList of Date Price Modifier labels.
-     * @return ArrayList of Date Price Modifier labels
-     */
-    public ArrayList<String> getDPMNames(){
-        return dpmNames;
-    }
-
-    /**
      * Adds affected dates and their corresponding modified rates to the discount data.
      * This method updates the modified rate for each affected date and records the discount name.
      * @param discountName the name of the discount to be associated with the affected dates
@@ -47,14 +39,16 @@ public class DatePriceModifier implements Discount {
     /**
      * Calculates the new reservation price of the Client based on the Hotel's date price modifiers.
      * @param client the Client where the discount will be applied to
+     * @param price the price of the reservation before the discount
      * @return the new reservation price of the Client
      */
     @Override
     public float applyDiscount(Client client, float price){
         float finalPrice = 0f;
+        float pricePerDay = client.getBookedRoom().getBasePrice();
 
         for (int i = client.getCheckInDay(); i < client.getCheckOutDay(); i++) {
-            finalPrice += (price * modifiedRates[i-1]);
+            finalPrice += (pricePerDay * modifiedRates[i-1]);
         }
 
         client.addDiscountsUsed(this.dpmNames);

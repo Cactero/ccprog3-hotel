@@ -20,16 +20,20 @@ public class RemoveHotelModel extends AbstractModel implements SelectableHotel {
         controller = new RemoveHotelController(this, frame);
     }
 
-    public void removeHotel(Hotel hotel){
-        centralModel.removeHotel(hotel);
+    public void removeHotel(){
+        centralModel.removeHotel(selectedHotel);
     }
 
     public AbstractModel manageHotel(){
         return centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
+    public AbstractModel mainMenu(){
+            return centralModel.getModel(CentralModel.MAIN_MENU);
+        }
+
     public AbstractModel chooseHotel(){
-        ChooseHotelModel CHmodel = (ChooseHotelModel) centralModel.getModel(CentralModel.MANAGE_HOTEL);
+        ChooseHotelModel CHmodel = (ChooseHotelModel) centralModel.getModel(CentralModel.CHOOSE_HOTEL);
         CHmodel.setSource(ChooseHotelModel.REMOVE_HOTEL);
         return CHmodel;
     }

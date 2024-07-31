@@ -20,6 +20,7 @@ public class PaydayDiscount implements Discount {
     /**
      * Calculates a 7% discount if the client's booked dates cover (but not check out) the 15th or 30th.
      * @param client the Client where the discount will be applied to
+     * @param price the price of the reservation before the discount
      * @return the new reservation price of the Client
      */
     @Override

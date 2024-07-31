@@ -25,8 +25,9 @@ public class ManageHotelView extends AbstractView {
     public ManageHotelView(){
         super("/assets/LABELS/MANAGE_HOTEL.png");
 
-        JPanel optionsHolder = new JPanel();
+        JPanel optionsHolder = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         optionsHolder.setOpaque(false);
+
         changeHotelName = new TemplateButton("Change Hotel Name");
         addRooms = new TemplateButton("Add Rooms");
         removeRooms = new TemplateButton("Remove Rooms");
@@ -35,6 +36,7 @@ public class ManageHotelView extends AbstractView {
         removeHotel = new TemplateButton("Remove Hotel");
         changeRoomType = new TemplateButton("Change Room Type");
         datePriceModifier = new TemplateButton("Add Date Price Modifier");
+
         optionsHolder.add(changeHotelName);
         optionsHolder.add(addRooms);
         optionsHolder.add(removeRooms);
@@ -43,8 +45,8 @@ public class ManageHotelView extends AbstractView {
         optionsHolder.add(removeHotel);
         optionsHolder.add(changeRoomType);
         optionsHolder.add(datePriceModifier);
-        contentHolder.add(optionsHolder);
 
+        contentHolder.add(optionsHolder, BorderLayout.CENTER);
 
         // cancel room creation and create room buttons
         JPanel buttonsHolder = new JPanel();
@@ -52,7 +54,6 @@ public class ManageHotelView extends AbstractView {
         mainMenuButton = new TemplateButton("Cancel");
         buttonsHolder.add(mainMenuButton);
         contentHolder.add(buttonsHolder, BorderLayout.SOUTH);
-
 
     }
 

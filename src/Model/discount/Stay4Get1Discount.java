@@ -20,11 +20,13 @@ public class Stay4Get1Discount implements Discount {
     /**
      * Calculates a one-day free discount if the client books 5 days or more.
      * @param client the Client where the discount will be applied to
+     * @param price the price of the reservation before the discount
      * @return the new reservation price of the Client
      */
     @Override
     public float applyDiscount(Client client, float price) {
-        float discount = price - client.getBookedRoom().getBasePrice();
+        float pricePerDay = price / client.getNightsBooked();
+        float discount = price - pricePerDay;
         if(client.getNightsBooked() + 1 >= 5){
             return discount;
         }

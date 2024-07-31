@@ -17,6 +17,11 @@ import java.util.Objects;
  */
 public class ChangeRoomTypeController extends AbstractController implements PopupScreen {
 
+    /**
+     * The Constructor for Change Room Type Controller
+     * @param model the Model object of Change Room Type
+     * @param frame the main frame of the program
+     */
     public ChangeRoomTypeController(ChangeRoomTypeModel model, MainFrame frame) {
         super(model, frame);
         this.view = new ChangeRoomTypeView();

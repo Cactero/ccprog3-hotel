@@ -42,10 +42,8 @@ public class CreateReservationModel extends AbstractModel implements SelectableH
     }
 
     public void addClient(Client client){
-        for (Hotel hotel : centralModel.getHotels()){
-            if (hotel.equals(selectedHotel))
-                hotel.addClient(client);
-        }
+        int index = getHotels().indexOf(selectedHotel);
+        getHotels().get(index).addClient(client);
     }
 
     public AbstractModel mainMenu(){

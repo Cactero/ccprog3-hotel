@@ -4,6 +4,9 @@ import shared.AbstractView;
 import shared.TemplateButton;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -22,26 +25,52 @@ public class DPMView extends AbstractView {
     public DPMView() {
         super("/assets/LABELS/DATE_PRICE_MODIFIER.png");
 
-        JPanel inputHolder = new JPanel();
-        inputHolder.setOpaque(false);
+        JPanel inputHolder = new JPanel(new GridLayout(0, 2));
+        inputHolder.setBackground(new Color(255, 242, 217));
+        inputHolder.setBorder(new CompoundBorder(
+                new LineBorder(new Color(234, 183, 55), 10),
+                new EmptyBorder(20, 20, 20, 20)
+        ));
+
+        JLabel discountNameLabel = new JLabel("Discount Name");
         discountNameField = new JTextField(10);
+        inputHolder.add(discountNameLabel);
+        inputHolder.add(discountNameField);
+
+
         oneDayButtonField = new JRadioButton("Apply modifier to one day only");
-        oneDayButtonField.setSelected(true);
         rangeButtonField = new JRadioButton("Apply modifier to a range of dates");
         ButtonGroup bg = new ButtonGroup();
         bg.add(oneDayButtonField);
         bg.add(rangeButtonField);
-        SpinnerNumberModel ranges = new SpinnerNumberModel(1, 1, 31, 1);
-        startRangeDayField = new JSpinner(ranges);
-        endRangeDayField = new JSpinner(ranges);
-        discountMultiplierField = new JTextField(10);
-        inputHolder.add(discountNameField);
+        oneDayButtonField.setSelected(true);
         inputHolder.add(oneDayButtonField);
         inputHolder.add(rangeButtonField);
+
+
+        startRangeDayField = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
+        endRangeDayField = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
+        inputHolder.add(new JLabel("Start Day"));
         inputHolder.add(startRangeDayField);
+        inputHolder.add(new JLabel("End Day"));
         inputHolder.add(endRangeDayField);
-        inputHolder.add(discountMultiplierField);
-        contentHolder.add(inputHolder);
+
+
+        JLabel discountMultiplierLabel = new JLabel("Discount Multiplier");
+        JPanel fieldHolder = new JPanel(new BorderLayout());
+        fieldHolder.setOpaque(false);
+        discountMultiplierField = new JTextField(10);
+        fieldHolder.add(discountMultiplierField, BorderLayout.CENTER);
+        fieldHolder.add(new JLabel("X"), BorderLayout.EAST);
+        inputHolder.add(discountMultiplierLabel);
+        inputHolder.add(fieldHolder);
+
+        JPanel centerHolder = new JPanel(new BorderLayout());
+        centerHolder.setOpaque(false);
+        centerHolder.add(inputHolder, BorderLayout.CENTER);
+        centerHolder.setBorder(new EmptyBorder(50, 200, 100, 200));
+
+        contentHolder.add(centerHolder);
 
         JPanel buttonsHolder = new JPanel();
         buttonsHolder.setOpaque(false);

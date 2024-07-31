@@ -12,6 +12,11 @@ import javax.swing.*;
  */
 public class MainMenuController extends AbstractController {
 
+    /**
+     * The Constructor for Main Menu Controller
+     * @param model the Model object of Main Menu
+     * @param frame the main frame of the program
+     */
     public MainMenuController(MainMenuModel model, MainFrame frame) {
         super(model, frame);
         this.view = new MainMenuView();

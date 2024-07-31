@@ -13,6 +13,11 @@ import shared.PopupScreen;
  */
 public class EnterHotelNameController extends AbstractController implements PopupScreen {
 
+    /**
+     * The Constructor for Enter Hotel Name Controller
+     * @param model the Model object of Enter Hotel Name
+     * @param frame the main frame of the program
+     */
     public EnterHotelNameController(EnterHotelNameModel model, MainFrame frame) {
         super(model, frame);
         this.view = new EnterHotelNameView();

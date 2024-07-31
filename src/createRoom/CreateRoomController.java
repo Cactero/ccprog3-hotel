@@ -2,7 +2,6 @@ package createRoom;
 
 import Model.Room;
 import Model.Utilities;
-import createReservation.CreateReservationModel;
 import shared.AbstractController;
 import Model.MainFrame;
 
@@ -14,6 +13,11 @@ import javax.swing.*;
  */
 public class CreateRoomController extends AbstractController {
 
+    /**
+     * The Constructor for Create Room Controller
+     * @param model the Model object of Create Room
+     * @param frame the main frame of the program
+     */
     public CreateRoomController(CreateRoomModel model, MainFrame frame) {
         super(model, frame);
         this.view = new CreateRoomView(model.isFromCreateHotel());
@@ -29,7 +33,7 @@ public class CreateRoomController extends AbstractController {
         boolean hasConflict = false;
 
         try {
-            String newRoomFloor = ((CreateRoomView) view).getRoomFloor();
+            String newRoomFloor = ((CreateRoomView) view).getRoomFloor().toUpperCase();
             int newRoomNumber = Integer.parseInt(((CreateRoomView) view).getRoomNumber());
             String newRoomType = ((CreateRoomView) view).getRoomType();
 
@@ -46,7 +50,7 @@ public class CreateRoomController extends AbstractController {
                 newRoom.setRoomType(newRoomType);
                 ((CreateRoomModel) model).addRoom(newRoom);
                 JOptionPane.showMessageDialog(null, "Successfully added new room!", "New room added", JOptionPane.PLAIN_MESSAGE);
-
+                ((CreateRoomView) view).resetInputFields();
                 if (((CreateRoomModel) model).isFromCreateHotel())
                     frame.switchView(((CreateRoomModel) model).mainMenu());
                 else
@@ -57,14 +61,14 @@ public class CreateRoomController extends AbstractController {
             }
 
         } catch (NumberFormatException _){
-            JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Room number is not a number.", "Incorrect room number input", JOptionPane.PLAIN_MESSAGE, null);
         }
     }
 
     /**
-     * Brings the user back to the Main Menu screen when the Cancel button is clicked.
+     * Brings the user back to the Manage Hotel screen when the Cancel button is clicked.
      */
     public void cancel(){
-        frame.switchView(((CreateRoomModel) model).mainMenu());
+        frame.switchView(((CreateRoomModel) model).manageHotel());
     }
 }

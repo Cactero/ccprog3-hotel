@@ -8,6 +8,6 @@ import shared.AbstractView;
  */
 public class UpdateBasePriceView extends AbstractView {
     public UpdateBasePriceView(){
-        super("/assets/LABELS/ENTER_HOTEL_NAME.png");
+        super("/assets/LABELS/UPDATE_BASE_PRICE.png");
     }
 }

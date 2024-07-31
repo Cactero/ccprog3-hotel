@@ -14,6 +14,11 @@ public abstract class AbstractController {
     protected AbstractView view;
     protected MainFrame frame;
 
+    /**
+     * The Constructor for Abstract Controller
+     * @param model the Model object of Abstract Model
+     * @param frame the main frame of the program
+     */
     public AbstractController(AbstractModel model, MainFrame frame){
         this.model = model;
         this.frame = frame;

@@ -7,6 +7,8 @@ import createReservation.CreateReservationModel;
 import createRoom.CreateRoomModel;
 import datePriceModifier.DPMModel;
 import enterHotelName.EnterHotelNameModel;
+import mainMenu.MainMenuModel;
+import manageHotel.ManageHotelModel;
 import shared.AbstractModel;
 import Model.MainFrame;
 import removeHotel.RemoveHotelModel;
@@ -42,6 +44,11 @@ public class ChooseHotelModel extends AbstractModel {
 
     private HashMap<String, AbstractModel> models;
 
+    /**
+     * The Constructor for Choose Hotel Model
+     * @param centralModel the object of the Central Model
+     * @param frame the main frame of the program
+     */
     public ChooseHotelModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new ChooseHotelController(this, frame);
@@ -58,7 +65,6 @@ public class ChooseHotelModel extends AbstractModel {
 
         models.put(CREATE_RESERVATION, new CreateReservationModel(centralModel, frame));
         models.put(VIEW_HOTEL, new ViewHotelModel(centralModel, frame));
-
     }
 
     /**
@@ -78,19 +84,19 @@ public class ChooseHotelModel extends AbstractModel {
     }
 
     /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
+     * The Model of Main Menu that is retrieved when the user clicks the Cancel button
      * @return the Model of Main Menu
      */
-    public AbstractModel mainMenu(){
-        return centralModel.getModel(CentralModel.MAIN_MENU);
+    public MainMenuModel mainMenu(){
+        return (MainMenuModel) centralModel.getModel(CentralModel.MAIN_MENU);
     }
 
     /**
-     * The Model of Manage Hotel that is created when the user clicks the Choose Hotel button
+     * The Model of Manage Hotel that is retrieved when the user clicks the Choose Hotel button
      * @return the Model of Manage Hotel
      */
-    public AbstractModel manageHotel(){
-        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
+    public ManageHotelModel manageHotel(){
+        return (ManageHotelModel) centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**

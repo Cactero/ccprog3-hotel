@@ -4,6 +4,9 @@ import shared.AbstractView;
 import shared.TemplateButton;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -25,17 +28,38 @@ public class CreateRoomView extends AbstractView {
     public CreateRoomView(boolean fromCreateHotel) {
         super("/assets/LABELS/CREATE_ROOM.png");
 
-        roomInfoHolder = new JPanel(new FlowLayout());
-        roomInfoHolder.setOpaque(false);
+        roomInfoHolder = new JPanel(new GridLayout(0, 2));
+        roomInfoHolder.setBackground(new Color(255, 242, 217));
+        roomInfoHolder.setBorder(new CompoundBorder(
+                new LineBorder(new Color(234, 183, 55), 10),
+                new EmptyBorder(20, 20, 20, 20)
+        ));
+
+        // Create and add components for roomFloorField
+        JLabel roomFloorLabel = new JLabel("Room Floor");
         roomFloorField = new JTextField(10);
+        roomInfoHolder.add(roomFloorLabel);
+        roomInfoHolder.add(roomFloorField);
+
+        // Create and add components for roomNumberField
+        JLabel roomNumberLabel = new JLabel("Room Number");
         roomNumberField = new JTextField(10);
+        roomInfoHolder.add(roomNumberLabel);
+        roomInfoHolder.add(roomNumberField);
+
+        // Create and add components for roomTypeField
+        JLabel roomTypeLabel = new JLabel("Room Type");
         String[] roomTypes = new String[]{"Standard", "Deluxe", "Executive"};
         roomTypeField = new JComboBox<>(roomTypes);
-
-        roomInfoHolder.add(roomFloorField);
-        roomInfoHolder.add(roomNumberField);
+        roomInfoHolder.add(roomTypeLabel);
         roomInfoHolder.add(roomTypeField);
-        contentHolder.add(roomInfoHolder, BorderLayout.CENTER);
+
+        JPanel centerHolder = new JPanel(new BorderLayout());
+        centerHolder.setOpaque(false);
+        centerHolder.add(roomInfoHolder, BorderLayout.CENTER);
+        centerHolder.setBorder(new EmptyBorder(125, 400, 200, 400));
+
+        contentHolder.add(centerHolder, BorderLayout.CENTER);
 
         // cancel room creation and create room buttons
         buttonsHolder = new JPanel();

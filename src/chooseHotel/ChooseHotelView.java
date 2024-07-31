@@ -8,6 +8,9 @@ import shared.AbstractView;
  */
 public class ChooseHotelView extends AbstractView {
 
+    /**
+     * The Constructor for Choose Hotel View
+     */
     public ChooseHotelView(){
         super("/assets/LABELS/CHOOSE_HOTEL.png");
     }

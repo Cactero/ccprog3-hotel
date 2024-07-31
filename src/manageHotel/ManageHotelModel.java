@@ -31,8 +31,4 @@ public class ManageHotelModel extends AbstractModel {
         model.setSource(source);
         return model;
     }
-
-    public AbstractModel removeHotel(){
-        return centralModel.getModel(CentralModel.REMOVE_HOTEL);
-    }
 }

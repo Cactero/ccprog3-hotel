@@ -14,11 +14,19 @@ import java.awt.*;
  */
 public class UpdateBasePriceController extends AbstractController implements PopupScreen {
 
+    /**
+     * The Constructor for Update Base Price Controller
+     * @param model the Model object of Update Base Price
+     * @param frame the main frame of the program
+     */
     public UpdateBasePriceController(UpdateBasePriceModel model, MainFrame frame) {
         super(model, frame);
         this.view = new UpdateBasePriceView();
     }
 
+    /**
+     * The implementation of promptUser in PopupScreen for Update Base Price.
+     */
     @Override
     public void promptUser(){
         Hotel hotel = ((UpdateBasePriceModel) model).getSelectedHotel();
@@ -34,11 +42,7 @@ public class UpdateBasePriceController extends AbstractController implements Pop
         updateBasePricePanel.add(new JLabel("Update base price?"));
 
         int option = JOptionPane.showOptionDialog(null, updateBasePricePanel, "Update base price", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (option == JOptionPane.CANCEL_OPTION)
-        {
-            frame.switchView(((UpdateBasePriceModel) model).manageHotel());
-        }
-        else if (option == JOptionPane.OK_OPTION) {
+        if (option == JOptionPane.OK_OPTION) {
 
             basePriceString = JOptionPane.showInputDialog("Enter new base price:");
 
@@ -55,22 +59,20 @@ public class UpdateBasePriceController extends AbstractController implements Pop
                         ((UpdateBasePriceModel) model).setBasePrice(basePrice);
                         JOptionPane.showMessageDialog(null, "Successfully updated base price to $" + basePriceString + "!", "Hotel " + hotel.getName(), JOptionPane.PLAIN_MESSAGE);
                         frame.switchView(((UpdateBasePriceModel) model).manageHotel());
+                    } else if(basePrice < 100) {
+                        JOptionPane.showMessageDialog(null, "Base price must be at least $100.", "Invalid base price", JOptionPane.PLAIN_MESSAGE);
                     } else {
-                        if(basePrice < 100) {
-                            JOptionPane.showMessageDialog(null, "Base price must be at least $100.", "Invalid base price", JOptionPane.PLAIN_MESSAGE);
-                        }
-                        else {
-                            JOptionPane.showMessageDialog(null, "Base price is already $" + basePriceString + ".", "Invalid base price", JOptionPane.PLAIN_MESSAGE);
-                        }
-                        promptUser();
+                        JOptionPane.showMessageDialog(null, "Base price is already $" + basePriceString + ".", "Invalid base price", JOptionPane.PLAIN_MESSAGE);
                     }
+                    promptUser();
                 }
-            } catch (NumberFormatException nfe) {
+            } catch (NumberFormatException _) {
                 JOptionPane.showMessageDialog(null, "Please enter a number.", "Invalid base price", JOptionPane.PLAIN_MESSAGE);
                 frame.switchView(((UpdateBasePriceModel) model).manageHotel());
             }
 
-
+        } else {
+            frame.switchView(((UpdateBasePriceModel) model).manageHotel());
         }
     }
 }

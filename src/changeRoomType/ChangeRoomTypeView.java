@@ -7,7 +7,11 @@ import shared.AbstractView;
  * @author Ryan Gemal
  */
 public class ChangeRoomTypeView extends AbstractView {
+
+    /**
+     * The Constructor for Change Room Type View.
+     */
     public ChangeRoomTypeView(){
-        super("/assets/LABELS/ENTER_HOTEL_NAME.png");
+        super("/assets/LABELS/CHANGE_ROOM_TYPE.png");
     }
 }

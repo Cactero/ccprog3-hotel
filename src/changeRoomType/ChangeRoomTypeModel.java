@@ -3,6 +3,7 @@ package changeRoomType;
 import Model.CentralModel;
 import Model.Hotel;
 import Model.Room;
+import manageHotel.ManageHotelModel;
 import shared.AbstractModel;
 import Model.MainFrame;
 import shared.SelectableHotel;
@@ -15,16 +16,22 @@ public class ChangeRoomTypeModel extends AbstractModel implements SelectableHote
 
     private Hotel selectedHotel;
 
+    /**
+     * The Constructor for Change Room Type Model
+     * @param centralModel the object of the Central Model
+     * @param frame the main frame of the program
+     */
     public ChangeRoomTypeModel(CentralModel centralModel, MainFrame frame){
         super(centralModel);
         controller = new ChangeRoomTypeController(this, frame);
     }
 
     /**
-     * The Model of Main Menu that is created when the user clicks the Cancel button
+     * The Model of Manage Hotel that is retrieved when the user clicks the Cancel button.
+     * @return Manage Hotel Model from the Central Model
      */
-    public AbstractModel manageHotel(){
-        return centralModel.getModel(CentralModel.MANAGE_HOTEL);
+    public ManageHotelModel manageHotel(){
+        return (ManageHotelModel) centralModel.getModel(CentralModel.MANAGE_HOTEL);
     }
 
     /**
@@ -45,10 +52,16 @@ public class ChangeRoomTypeModel extends AbstractModel implements SelectableHote
         return selectedHotel;
     }
 
-    public void setRoomType(Room inputRoom, String type) {
-        for(int i  = 0; i < selectedHotel.getRoomCount(); i++){
-            if(selectedHotel.getRoom(i).getFormattedName().equals(inputRoom.getFormattedName())){
-                selectedHotel.getRoom(i).setRoomType(type);
+    /**
+     * Sets the new room type of the selected Room.
+     * @param room the Room with the type to be changed
+     * @param type the new type of the Room
+     */
+    public void setRoomType(Room room, String type) {
+        int index = getHotels().indexOf(selectedHotel);
+        for(int i  = 0; i < getHotels().get(index).getRoomCount(); i++){
+            if(getHotels().get(index).getRoom(i).getFormattedName().equals(room.getFormattedName())){
+                getHotels().get(index).getRoom(i).setRoomType(type);
             }
         }
     }

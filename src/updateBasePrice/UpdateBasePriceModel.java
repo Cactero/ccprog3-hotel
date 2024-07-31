@@ -44,7 +44,8 @@ public class UpdateBasePriceModel extends AbstractModel implements SelectableHot
         return selectedHotel;
     }
 
-    public Float getBasePrice() { return selectedHotel.getBasePrice(); }
-
-    public void setBasePrice(float basePrice) { selectedHotel.setBasePrice(basePrice); }
+    public void setBasePrice(float basePrice) {
+        int index = getHotels().indexOf(selectedHotel);
+        getHotels().get(index).setBasePrice(basePrice);
+    }
 }
